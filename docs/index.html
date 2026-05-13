@@ -1026,75 +1026,47 @@ qmd query "내 노트 중 X 관련?" -n 5
   </div>
 </section>
 
-<!-- §4 11차시 로컬 RAG + QMD + 크론잡 -->
+<!-- §4 11차시 크론잡 자동 인덱싱·임베딩 -->
 <section id="ch11">
   <span class="section-tag">§ 11차시 · 11:00 ~ 11:45 (45분)</span>
-  <h2><span class="accent">11차시</span> | 로컬 RAG + QMD + 크론잡 자동 인덱싱</h2>
+  <h2><span class="accent">11차시</span> | 크론잡 자동 인덱싱·임베딩 (설명)</h2>
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
-    <div class="goal-text"><strong>로컬 RAG 운영의 실제</strong> | 마크다운 폴더 + 임베딩 + 인덱스를 묶어 사내 자료 검색 시스템을 만들고, <strong>크론잡으로 자동 업데이트·임베딩</strong>까지 무인 운영. 외부 의존성 0, 토큰비 0.</div>
+    <div class="goal-text">9차시에 만든 인덱스를 <strong>크론잡으로 자동 업데이트·임베딩</strong>하는 방법. 본 차시는 설명 중심 — 본인 환경에 맞게 추후 적용.</div>
   </div>
 
-  <h3><span class="step-num">1</span>로컬 RAG 전체 흐름</h3>
-  <p>9차시(임베딩) + 어제 5요소(특히 Memory + Skills)를 결합한 무인 운영 패턴:</p>
+  <h3><span class="step-num">1</span>왜 자동화인가</h3>
+  <p>9차시에서 <code class="inline">qmd update</code> 한 번 실행 = 그 시점 인덱스만. 새 노트 추가 시 다시 실행해야 검색됨. <strong>크론잡으로 정기 자동 실행</strong> → 무인 운영.</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:16px 20px;border-radius:8px;font-size:13px;">[1] 자료 모음 (로컬 폴더 | 옵시디언 X 가능)
-    ├ wiki/        사내 위키 마크다운
-    ├ sessions/    Claude/Copilot 세션 로그
-    ├ designs/     기획서 · 설계 문서
-    └ raw/         원본 (PDF → MD 변환된 것)
-        ↓
-[2] QMD 인덱스 (SQLite + bge-m3 임베딩)
-    └ qmd update | 새/변경 파일만 증분 인덱싱
-        ↓
-[3] 검색
-    └ qmd search "쿼리"        키워드 (BM25)
-    └ qmd query  "쿼리"        의미 (cosine)
-    └ qmd get qmd://path       전문 조회
-        ↓
-[4] AI 활용
-    └ replay-learnings 스킬이 세션 시작 시 자동 회상
-    └ 새 작업 시 사내 자료 1차 검색 → 외부 2차</pre>
+  <h3><span class="step-num">2</span>임베딩 조건 | 언제·무엇을</h3>
 
-  <h3><span class="step-num">2</span>QMD 운영 명령</h3>
-
-  <table>
-    <thead><tr><th>명령</th><th>역할</th></tr></thead>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:18%;"><col style="width:32%;"><col style="width:50%;"></colgroup>
+    <thead><tr><th>주기</th><th>명령</th><th>의미·언제</th></tr></thead>
     <tbody>
-      <tr><td><code class="inline">qmd update</code></td><td>새/변경 파일만 증분 인덱싱 (전체 재계산 X)</td></tr>
-      <tr><td><code class="inline">qmd embed</code></td><td>임베딩만 재계산 (BM25 인덱스는 유지)</td></tr>
-      <tr><td><code class="inline">qmd search "쿼리" -n 5</code></td><td>키워드 검색 (BM25) | 상위 N개</td></tr>
-      <tr><td><code class="inline">qmd query "쿼리" -n 5</code></td><td>의미 검색 (cosine similarity) | 벡터 기반</td></tr>
-      <tr><td><code class="inline">qmd get qmd://path</code></td><td>특정 파일 전문 조회</td></tr>
-      <tr><td><code class="inline">qmd stats</code></td><td>인덱스 통계 (파일 수 · 임베딩 수 · 크기)</td></tr>
+      <tr><td><strong>매시간</strong></td><td><code class="inline">qmd update</code></td><td>새/변경 파일만 증분 인덱싱 (저비용 · 거의 즉시)</td></tr>
+      <tr><td><strong>매일 새벽</strong></td><td><code class="inline">qmd embed</code></td><td>임베딩만 재계산 (BM25 인덱스 유지)</td></tr>
+      <tr><td><strong>매주</strong></td><td><code class="inline">qmd embed --full</code></td><td>전체 재임베딩 (모델 업그레이드 후 · lint 후)</td></tr>
+      <tr><td><strong>이벤트 기반</strong></td><td><code class="inline">qmd update</code> (git hook)</td><td>git push 시 즉시 인덱싱 (CI 통합)</td></tr>
     </tbody>
   </table>
 
-  <p>실 예시 | 강사 환경에서 어제 세션 회상:</p>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">$ qmd search "POS 이상 탐지 elif chain" -n 3
-qmd://obsidian/30_Claude/01_Sessions/2026-05-13-pos-day2-handoff.md  0.93
-qmd://obsidian/30_Claude/02_Learnings/2026-05-12-day2-강의안-절대-규칙.md  0.78
-qmd://obsidian/30_Claude/04_Plans/plan-2026-05-10-rag-strategy.md   0.61</pre>
-
-  <h3><span class="step-num">3</span>크론잡 | 자동 업데이트 + 임베딩</h3>
-  <p>QMD를 무인 운영하는 핵심: <strong>크론잡</strong>으로 정기 자동 인덱싱.</p>
-
-  <div class="dual-track">
-    <div class="track instr">
-      <div class="track-h">Linux · macOS · WSL | crontab</div>
-      <pre># 매시간 새 파일 자동 인덱싱
+  <h3><span class="step-num">3</span>Linux · macOS · WSL | crontab</h3>
+  <p><code class="inline">crontab -e</code>로 편집:</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 매시간 새 파일 자동 인덱싱
 0 * * * * cd ~/notes && qmd update
 
-# 매일 새벽 3시 전체 임베딩 재계산
-0 3 * * * cd ~/notes && qmd embed --full
+# 매일 새벽 3시 임베딩 재계산
+0 3 * * * cd ~/notes && qmd embed
 
-# 매주 일요일 인덱스 통계 로그
+# 매주 일요일 9시 통계 로그
 0 9 * * 0 qmd stats &gt;&gt; ~/qmd-weekly.log</pre>
-    </div>
-    <div class="track stu">
-      <div class="track-h">Windows | 작업 스케줄러</div>
-      <pre># PowerShell | 매시간 작업 등록
+  <p style="font-size:13px;color:#555;">cron 형식: <code class="inline">분 시 일 월 요일 명령</code>. <code class="inline">*</code> = 모든 값. 위 예시 첫 줄 = 매일 매시 0분.</p>
+
+  <h3><span class="step-num">4</span>Windows | 작업 스케줄러</h3>
+  <p>PowerShell로 등록 (관리자 권한 권장):</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 매시간 qmd update 등록
 $action = New-ScheduledTaskAction `
   -Execute "qmd" -Argument "update" `
   -WorkingDirectory "$env:USERPROFILE\notes"
@@ -1103,37 +1075,19 @@ $trigger = New-ScheduledTaskTrigger `
   -RepetitionInterval (New-TimeSpan -Hours 1)
 Register-ScheduledTask -TaskName "qmd-hourly-update" `
   -Action $action -Trigger $trigger</pre>
-    </div>
-  </div>
+  <p style="font-size:13px;color:#555;">또는 GUI: 작업 스케줄러 → 작업 만들기 → 트리거(매시간) + 동작(<code class="inline">qmd update</code>).</p>
 
-  <h4 style="margin-top:20px;">임베딩 조건 | 언제·무엇을</h4>
+  <h3><span class="step-num">5</span>운영 팁</h3>
   <ul style="padding-left:22px;font-size:14.5px;">
-    <li><strong>매시간</strong> | 새 파일 증분 인덱싱 (저비용 · 거의 즉시)</li>
-    <li><strong>매일</strong> | 변경된 파일의 임베딩 재계산 (자료 수정분 반영)</li>
-    <li><strong>매주</strong> | 전체 임베딩 재계산 (모델 업그레이드 후 또는 lint 후)</li>
-    <li><strong>이벤트 기반</strong> | git push hook으로 즉시 인덱싱 (CI 통합)</li>
+    <li><strong>처음엔 수동</strong> | 익숙해진 후 크론잡 추가. 자동화 먼저 하면 디버깅 어려움.</li>
+    <li><strong>로그 남기기</strong> | <code class="inline">qmd update &gt;&gt; ~/qmd.log 2&gt;&amp;1</code>로 실패 추적</li>
+    <li><strong>임베딩 모델 변경 후</strong> | 반드시 <code class="inline">qmd embed --full</code> 한 번 실행</li>
+    <li><strong>PC 끄면 X</strong> | 크론잡은 PC 켜진 시간에만. 항상 켜진 서버라면 안정적.</li>
   </ul>
 
   <div class="reference">
-    <p><strong>실 운영 예시</strong> | 강사 환경 | 옵시디언 볼트 988개 마크다운 파일을 시간당 크론잡으로 자동 인덱싱. 새 세션 시작 시 <code class="inline">replay-learnings</code> 스킬이 QMD에서 자동 회상. 토큰비 0원 · 외부 API 호출 0건.</p>
+    <p><strong>본 차시는 설명 중심</strong> | 실제 크론잡 등록은 본인 환경 보고 추후. 9차시에 만든 인덱스는 <code class="inline">qmd update</code> 수동 호출만으로도 충분히 운영 가능. 자동화는 노트가 일정 규모(100+ 파일) 넘어가면 검토.</p>
   </div>
-
-  <h3><span class="step-num">4</span>옵시디언 없이 | 로컬 폴더만으로</h3>
-  <p>옵시디언을 안 써도 QMD는 그냥 마크다운 폴더 위에서 작동합니다. 환경변수만 본인 폴더로 지정:</p>
-
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 본인 로컬 폴더 구조 (옵시디언 X)
-~/notes/
-├ wiki/         사내 위키
-├ sessions/     세션 로그
-├ designs/      기획서
-└ raw/          원본 자료
-
-# QMD가 이 폴더 전체를 인덱싱
-cd ~/notes
-qmd update
-qmd search "키워드" -n 5</pre>
-
-  <p>세션 메모 자동 저장은 <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank"><strong>claude-session-memory-kit</strong></a> (4 스킬 | session-handoff · replay-learnings · learn-rule · retro). <code class="inline">SESSION_MEMORY_PATH</code> 환경변수로 본인 로컬 폴더 지정.</p>
 </section>
 
 <!-- §5 12차시 모든 문서 마크다운화 + obsidian-cli + defuddle -->
@@ -1143,123 +1097,80 @@ qmd search "키워드" -n 5</pre>
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
-    <div class="goal-text"><strong>PDF · HWP · DOCX · 웹페이지 등 모든 자료를 마크다운</strong>으로 변환해 RAG·임베딩의 균질한 입력 단위로 만드는 방법. <strong>obsidian-cli</strong> + <strong>defuddle</strong> + 비LLM AI 전처리 (OCR · 텍스트 마이닝) 조합.</div>
+    <div class="goal-text">웹페이지 1개를 <strong>마크다운으로 변환</strong> → 9차시에 만든 본인 인덱스에 <strong>합류</strong> → <code class="inline">qmd search</code>에서 <strong>검색되는지 직접 확인</strong>. Day 3 한 사이클 산출물 완성.</div>
   </div>
 
-  <h3><span class="step-num">1</span>왜 모든 문서를 마크다운으로?</h3>
-  <p>RAG·LLM 위키·QMD의 입력 단위는 마크다운입니다. 균질한 형식이어야 청킹·임베딩·검색이 일관됩니다.</p>
+  <h3><span class="step-num">1</span>왜 마크다운인가</h3>
+  <p>QMD·RAG·임베딩의 입력 단위는 마크다운. PDF·웹페이지·HWP를 그대로 넣으면 레이아웃 손실·노이즈·표 깨짐. <strong>마크다운으로 균질화</strong>하면 청킹·임베딩·검색이 일관.</p>
 
-  <table>
-    <thead><tr><th>원본</th><th>그대로 RAG에 넣으면</th><th>마크다운으로 변환하면</th></tr></thead>
+  <h3><span class="step-num">2</span>자료 유형 → 도구 매트릭스</h3>
+
+  <table style="font-size:13px;">
+    <colgroup><col style="width:22%;"><col style="width:48%;"><col style="width:30%;"></colgroup>
+    <thead><tr><th>원본</th><th>도구</th><th>품질</th></tr></thead>
     <tbody>
-      <tr><td>PDF</td><td>레이아웃 정보 손실 + 표 깨짐</td><td>헤더·표·코드 블록 보존</td></tr>
-      <tr><td>웹페이지</td><td>광고·메뉴·푸터 노이즈</td><td>본문만 깨끗하게 추출 (defuddle)</td></tr>
-      <tr><td>HWP/DOCX</td><td>전용 파서 필요</td><td>표준 도구 체인 사용 가능</td></tr>
-      <tr><td>이미지·스캔본</td><td>임베딩 불가</td><td>OCR → 텍스트 → 마크다운</td></tr>
+      <tr><td><strong>웹페이지</strong></td><td><code class="inline">defuddle</code> | 광고·메뉴 제거</td><td>★★★★★</td></tr>
+      <tr><td><strong>PDF (텍스트)</strong></td><td><code class="inline">marker</code> · <code class="inline">pymupdf4llm</code></td><td>★★★★</td></tr>
+      <tr><td><strong>PDF (스캔)</strong></td><td>PaddleOCR · Surya (한국어)</td><td>★★★</td></tr>
+      <tr><td><strong>HWP / HWPX</strong></td><td><code class="inline">hwp-analyzer</code> · <code class="inline">pyhwp</code></td><td>★★★</td></tr>
+      <tr><td><strong>DOCX / PPTX</strong></td><td><code class="inline">pandoc</code></td><td>★★★★</td></tr>
+      <tr><td><strong>YouTube</strong></td><td><code class="inline">youtube-collector</code> (자막)</td><td>★★★★</td></tr>
     </tbody>
   </table>
 
-  <h3><span class="step-num">2</span>자료 유형 → 마크다운 도구 매트릭스</h3>
+  <h3><span class="step-num">3</span>실습 ① | 웹페이지 → 마크다운 (defuddle)</h3>
+  <p>본인이 관심 있는 웹페이지 URL 하나 골라서 변환. 외부 자료 → 본인 인덱스 합류의 첫 단계.</p>
 
-  <table>
-    <thead><tr><th>원본 유형</th><th>도구</th><th>출력 품질</th></tr></thead>
-    <tbody>
-      <tr><td><strong>웹페이지</strong></td><td><code class="inline">defuddle</code> (CLI · MCP) | 광고·메뉴 제거</td><td>★★★★★ 본문만 깔끔</td></tr>
-      <tr><td><strong>PDF (텍스트)</strong></td><td><code class="inline">marker</code> · <code class="inline">pdfminer</code> · <code class="inline">pymupdf4llm</code></td><td>★★★★ 표·코드 블록 보존</td></tr>
-      <tr><td><strong>PDF (스캔 이미지)</strong></td><td>OCR | Tesseract · PaddleOCR · Surya</td><td>★★★ 한국어는 PaddleOCR/Surya</td></tr>
-      <tr><td><strong>HWP / HWPX</strong></td><td><code class="inline">hwp-analyzer</code> · <code class="inline">pyhwp</code></td><td>★★★ 한국어 공문서</td></tr>
-      <tr><td><strong>DOCX / PPTX / XLSX</strong></td><td><code class="inline">pandoc</code> · <code class="inline">python-docx</code></td><td>★★★★ 표준 변환</td></tr>
-      <tr><td><strong>YouTube</strong></td><td><code class="inline">youtube-collector</code> | 자막·자동 transcript</td><td>★★★★</td></tr>
-      <tr><td><strong>이미지 (다이어그램)</strong></td><td>Claude Vision · GPT-4V → 마크다운 설명</td><td>★★★ LLM 전처리</td></tr>
-    </tbody>
-  </table>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># defuddle 설치 (npm 또는 자연어)
+npm install -g defuddle-cli
 
-  <h3><span class="step-num">3</span>defuddle | 웹페이지 정제의 결정판</h3>
-  <p>URL을 던지면 광고·메뉴·푸터를 제거하고 <strong>본문만 깨끗한 마크다운</strong>으로 추출. WebFetch 대비 토큰 절약 효과 큼.</p>
+# 또는 Claude Code/Copilot에 자연어
+"defuddle로 https://example.com/article 본문만 마크다운으로 추출해서
+ ~/notes/raw/article.md로 저장해줘"
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># CLI 직접 호출
-defuddle https://example.com/article
+# CLI 직접
+defuddle https://example.com/article &gt; ~/notes/raw/article.md</pre>
 
-# 또는 Claude Code MCP 스킬로
-"defuddle로 https://example.com/article 본문만 가져와줘"
-
-# 출력 예시
----
+  <p>출력 예시 (frontmatter + 본문만):</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">---
 title: "기사 제목"
 author: "작성자"
 date: "2026-05-14"
 ---
-본문 마크다운만... (메뉴·광고·푸터 제거)</pre>
+본문 마크다운... (메뉴·광고·푸터 제거됨)</pre>
 
-  <p><strong>활용 패턴</strong>: 외부 자료 리서치 시 defuddle로 본문 추출 → 로컬 <code class="inline">raw/</code> 폴더 저장 → QMD가 자동 인덱싱. 사내 자료처럼 검색 가능해짐.</p>
+  <h3><span class="step-num">4</span>실습 ② | 변환된 파일을 본인 인덱스에 합류</h3>
+  <p>9차시에서 만든 QMD 인덱스에 위 파일이 자동 인덱싱되도록 <code class="inline">qmd update</code> 호출.</p>
 
-  <h3><span class="step-num">4</span>obsidian-cli | 옵시디언 볼트 자동 조작</h3>
-  <p>옵시디언을 GUI 없이 CLI/AI로 조작. 자료 임포트 + 메타데이터 관리에 강함.</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">cd ~/notes
+qmd update           # 새 파일 (raw/article.md) 자동 감지·인덱싱
 
-  <table>
-    <thead><tr><th>명령</th><th>역할</th></tr></thead>
-    <tbody>
-      <tr><td><code class="inline">obsidian-cli vault list</code></td><td>등록된 볼트 목록</td></tr>
-      <tr><td><code class="inline">obsidian-cli note create</code></td><td>새 노트 생성 (frontmatter 포함)</td></tr>
-      <tr><td><code class="inline">obsidian-cli note search</code></td><td>볼트 내 노트 검색</td></tr>
-      <tr><td><code class="inline">obsidian-cli tag</code></td><td>태그 관리 (추가·삭제·rename)</td></tr>
-      <tr><td><code class="inline">obsidian-cli link</code></td><td>위키 링크 자동 정합</td></tr>
-    </tbody>
-  </table>
+qmd stats            # 파일 수 1개 증가 확인</pre>
 
-  <p><strong>defuddle + obsidian-cli 콤보</strong> | 외부 자료 자동 수집·저장 파이프라인:</p>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 웹페이지 본문 추출
-defuddle https://example.com/article &gt; /tmp/article.md
+  <h3><span class="step-num">5</span>실습 ③ | qmd-search에서 검색 확인 (산출물)</h3>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색
+qmd search "방금 가져온 글의 핵심 키워드" -n 5
 
-# 2. 옵시디언 볼트에 저장 (frontmatter + 태그)
-obsidian-cli note create \
-  --vault MyVault \
-  --folder "10_Raw/01_Articles" \
-  --tags "AI,교육소재" \
-  --content-file /tmp/article.md
+# 의미 검색
+qmd query "방금 글이 다룬 주제는?" -n 5
 
-# 3. QMD 인덱싱 (다음 크론잡에서 자동)
-# → 새 세션에서 qmd search로 회상</pre>
+# 결과에 raw/article.md가 상위에 나오면 → Day 3 산출물 완성</pre>
 
-  <h3><span class="step-num">5</span>비LLM AI 전처리 | OCR · 텍스트 마이닝</h3>
-  <p>마크다운화 전 단계 보조 도구. LLM 호출 없이 빠르게 전처리:</p>
-
-  <ul style="padding-left:22px;font-size:14.5px;">
-    <li><strong>OCR</strong> | Tesseract(영문) · PaddleOCR(한국어 강) · Surya(레이아웃 보존) · Donut(end-to-end)</li>
-    <li><strong>표·차트 추출</strong> | Camelot · Tabula · Microsoft Table Transformer</li>
-    <li><strong>수식 추출</strong> | pix2tex · MathPix (LaTeX 변환)</li>
-    <li><strong>텍스트 마이닝</strong> | KoNLPy(한국어 형태소) · spaCy · keyBERT(키워드) · BERTopic(토픽)</li>
-    <li><strong>감성 분석</strong> | KoBERT · 한국어 sentiment model (huggingface)</li>
-  </ul>
-
-  <p><strong>조합 패턴</strong> | 비LLM 전처리 + LLM 후처리:</p>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">[원본 PDF (스캔본)]
-   ↓ PaddleOCR (비LLM)
-[텍스트 + 레이아웃]
-   ↓ Camelot (비LLM)
-[표 데이터 별도 추출]
-   ↓ LLM 후처리 (구조화 · 요약)
-[깔끔한 마크다운] → 임베딩 → QMD</pre>
-
-  <div class="reference">
-    <p><strong>왜 비LLM 전처리?</strong> 토큰비 0 · 빠름 · 결정적 (deterministic). LLM은 마지막 요약·구조화 단계에만 쓰면 비용 효율 ↑. 회사 환경처럼 대량 자료 처리 시 필수 패턴.</p>
-  </div>
+  <p><strong>외부 자료가 본인 검색 시스템의 일부가 되는 순간</strong>. PDF·DOCX·YouTube 자막도 같은 패턴 — 도구만 다르고 흐름은 동일 (변환 → raw 폴더 → qmd update → 검색).</p>
 
   <h3><span class="step-num">6</span>Day 3 마무리 | 회사 적용 단계</h3>
-  <table>
+  <table style="font-size:13px;">
     <thead><tr><th>단계</th><th>액션</th></tr></thead>
     <tbody>
-      <tr><td><strong>1주차</strong></td><td>QMD 설치 + 본인 노트 폴더 인덱싱 시작</td></tr>
-      <tr><td><strong>2주차</strong></td><td>defuddle로 외부 자료 → 로컬 raw 폴더 자동 저장</td></tr>
-      <tr><td><strong>3주차</strong></td><td>크론잡 등록 | 매시간 자동 업데이트</td></tr>
-      <tr><td><strong>4주차</strong></td><td>session-memory-kit 4 스킬 추가 | 세션 자동 회상</td></tr>
-      <tr><td><strong>2개월</strong></td><td>PDF·HWP·DOCX 변환 파이프라인 + 비LLM 전처리</td></tr>
-      <tr><td><strong>3개월</strong></td><td>로컬 RAG → GraphRAG 단계적 도입 (필요 시)</td></tr>
+      <tr><td><strong>1주차</strong></td><td>QMD + 본인 노트 폴더 인덱싱 (9차시 산출물 유지)</td></tr>
+      <tr><td><strong>2주차</strong></td><td>defuddle로 외부 자료 변환 → raw 폴더 자동 합류</td></tr>
+      <tr><td><strong>3주차</strong></td><td>크론잡 등록 (11차시 안내 참조)</td></tr>
+      <tr><td><strong>4주차+</strong></td><td>PDF·HWP·DOCX 변환 파이프라인 확장</td></tr>
     </tbody>
   </table>
 
   <div class="field-case">
-    오늘 만든 사이트는 라이브로 남아 있습니다. <strong>회사 적용 1단계는 QMD 설치 + 본인 노트 폴더 인덱싱</strong>부터. 옵시디언 없이도 일반 마크다운 폴더만 있으면 됩니다. Day 1~3 자료가 시간이 지나도 검색 가능한 자기 자산이 됩니다.
+    Day 3 산출물 | <strong>본인 PC에 외부 자료를 마크다운으로 변환·인덱싱·검색하는 한 사이클</strong>. 사이트는 라이브로 남아 있으니 일하시면서 필요할 때 다시 보세요.
   </div>
 </section>
 
