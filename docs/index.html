@@ -940,8 +940,9 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
     <div class="track stu">
       <div class="track-h">터미널 직접 (Windows PowerShell)</div>
       <pre># 한 줄 설치 (관리자 권장)
-irm https://raw.githubusercontent.com/doraemonkeys/qmd-windows/main/install.ps1 `
-  | iex
+$base = "https://raw.githubusercontent.com"
+$repo = "doraemonkeys/qmd-windows/main"
+irm "$base/$repo/install.ps1" | iex
 
 # 확인
 qmd --version
@@ -949,7 +950,7 @@ qmd --help</pre>
     </div>
   </div>
 
-  <p style="font-size:13px;color:#555;">Linux · macOS · WSL 환경: <code class="inline">curl -fsSL https://bun.sh/install | bash</code> 후 <code class="inline">bun install -g https://github.com/tobi/qmd</code>. 임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬). 모델은 <code class="inline">~/.cache/qmd/models/</code>에 자동 다운로드 (최초 1회).</p>
+  <p style="font-size:13px;color:#555;">QMD는 Bun 런타임 기반. Windows installer는 <strong>Bun이 없으면 자동 설치</strong>(학습자가 따로 깔 필요 X). Linux · macOS · WSL 환경: <code class="inline">curl -fsSL https://bun.sh/install | bash</code> 후 <code class="inline">bun install -g https://github.com/tobi/qmd</code>. 임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬). 모델은 <code class="inline">~/.cache/qmd/models/</code>에 자동 다운로드 (최초 1회).</p>
 
   <h3><span class="step-num">3</span>실습 | 본인 폴더 → 컬렉션 등록 + 인덱싱</h3>
   <p>QMD는 <strong>컬렉션 단위</strong>로 폴더 관리. 본인 폴더를 컬렉션으로 등록 후 인덱싱.</p>
