@@ -220,7 +220,7 @@
     overflow-x: auto;
   }
 
-  /* 5도구 그리드 — settings.json 추가 */
+  /* 5도구 그리드 · settings.json 추가 */
   .five-tools {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 14px; margin: 14px 0 20px;
@@ -335,7 +335,7 @@
   .hook-use ul { padding-left: 22px; margin: 6px 0 0; }
   .hook-use li { margin-bottom: 4px; }
 
-  /* 실패 사례 박스 — 강사 정직 회수 */
+  /* 실패 사례 박스 · 강사 정직 회수 */
   .failure-case {
     background: var(--fail-bg);
     border-left: 5px solid var(--fail-border);
@@ -410,7 +410,7 @@
     .instructor-cases { grid-template-columns: 1fr; }
   }
 
-  /* 만화 4장 갤러리 (5대 요소) — 세로 1열 풀 너비 */
+  /* 만화 4장 갤러리 (5대 요소) · 세로 1열 풀 너비 */
   .comic-gallery {
     display: flex; flex-direction: column;
     gap: 22px; margin: 18px 0 26px;
@@ -564,14 +564,14 @@
     <div class="day-row">
       <span class="day-time">10:00 – 10:30 (30분)</span>
       <div class="day-info">
-        <div class="ttl">9차시 | 임베딩 시스템 — 로컬에서 직접 구축</div>
+        <div class="ttl">9차시 | 임베딩 시스템 · 로컬에서 직접 구축</div>
         <div class="desc">300개 문서 로컬 임베딩 운영 경험 · 코드·PDF·DB별 청킹 전략 · 임베딩 품질 검증과 모델 교체 시 재구축 비용. <a href="#ch9">이동 →</a></div>
       </div>
     </div>
     <div class="day-row">
       <span class="day-time">10:30 – 11:00 (30분)</span>
       <div class="day-info">
-        <div class="ttl">10차시 | GraphRAG — 지식그래프 기반 검색 엔진</div>
+        <div class="ttl">10차시 | GraphRAG · 지식그래프 기반 검색 엔진</div>
         <div class="desc">논문 → 텍스트 → 벡터+그래프 → 채팅 플랫폼 · RAG vs GraphRAG 구조 차이와 선택 기준 · 검색 품질·환각·유지보수 한계. <a href="#ch10">이동 →</a></div>
       </div>
     </div>
@@ -600,10 +600,10 @@
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
-    <div class="goal-text">본인 주제에 <strong>gstack 카테고리별로 한 사이클</strong>을 직접 운영 — <strong>plan → design → review → qa → security → ship → retro</strong> 각 단계에서 핵심 스킬 1개씩 적용. 이어서 <strong>부록 도구 매핑 → Caveman + RTK 토큰 전략 → claude-session-memory-kit 4 스킬 다운로드·실습</strong>까지.</div>
+    <div class="goal-text">본인 주제에 <strong>gstack 카테고리별로 한 사이클</strong>을 직접 운영 · <strong>plan → design → review → qa → security → ship → retro</strong> 각 단계에서 핵심 스킬 1개씩 적용. 이어서 <strong>부록 도구 매핑 → Caveman + RTK 토큰 전략 → claude-session-memory-kit 4 스킬 다운로드·실습</strong>까지.</div>
   </div>
 
-  <h3><span class="step-num">1</span>gstack 설치 — Copilot CLI · Claude Code 양쪽</h3>
+  <h3><span class="step-num">1</span>gstack 설치 · Copilot CLI · Claude Code 양쪽</h3>
   <p>설치 명령 단 2줄. 환경별 동일:</p>
 
   <div class="dual-track">
@@ -631,19 +631,19 @@ git clone https://github.com/garrytan/gstack `
     <p><strong>호환성</strong> | Claude Code ✅ · Copilot CLI(Claude 선택) ✅ · GPT · Gemini ❌. gstack은 Claude 기반으로 만들어져 다른 모델에선 스킬이 인식되지 않습니다.</p>
   </div>
 
-  <h3><span class="step-num">2</span>gstack 47 스킬 — 12 카테고리 전체 정리</h3>
+  <h3><span class="step-num">2</span>gstack 47 스킬 · 12 카테고리 전체 정리</h3>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">📋</span>
       <div><div class="plugin-name">기획 / 리뷰 (7)</div><div class="plugin-meta">계획 수립 · 다관점 검토</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">office-hours</code></td><td>회의 형식 멘토링 — 코드/설계 질의응답</td></tr>
+      <tr><td><code class="inline">office-hours</code></td><td>회의 형식 멘토링 · 코드/설계 질의응답</td></tr>
       <tr><td><code class="inline">autoplan</code></td><td>아이디어 → 자동 계획 수립 (4관점 합의)</td></tr>
-      <tr><td><code class="inline">plan-ceo-review</code></td><td>비즈니스 시각 — ROI · 우선순위</td></tr>
-      <tr><td><code class="inline">plan-eng-review</code></td><td>엔지니어 시각 — 실행 가능성 · 위험</td></tr>
-      <tr><td><code class="inline">plan-design-review</code></td><td>디자인 시각 — UX · 일관성</td></tr>
-      <tr><td><code class="inline">plan-devex-review</code></td><td>개발자 경험 시각 — 도구 · 마찰</td></tr>
+      <tr><td><code class="inline">plan-ceo-review</code></td><td>비즈니스 시각 · ROI · 우선순위</td></tr>
+      <tr><td><code class="inline">plan-eng-review</code></td><td>엔지니어 시각 · 실행 가능성 · 위험</td></tr>
+      <tr><td><code class="inline">plan-design-review</code></td><td>디자인 시각 · UX · 일관성</td></tr>
+      <tr><td><code class="inline">plan-devex-review</code></td><td>개발자 경험 시각 · 도구 · 마찰</td></tr>
       <tr><td><code class="inline">plan-tune</code></td><td>리뷰 결과 반영 계획 조정</td></tr>
     </tbody></table>
   </div>
@@ -656,7 +656,7 @@ git clone https://github.com/garrytan/gstack `
       <tr><td><code class="inline">design-consultation</code></td><td>디자인 요구사항 인터뷰 → 시안 도출</td></tr>
       <tr><td><code class="inline">design-shotgun</code></td><td>여러 디자인안 동시 생성 (병렬)</td></tr>
       <tr><td><code class="inline">design-html</code></td><td>HTML/CSS 디자인 즉시 시안화</td></tr>
-      <tr><td><code class="inline">design-review</code></td><td>디자이너 시선 — 시각적 일관성·계층</td></tr>
+      <tr><td><code class="inline">design-review</code></td><td>디자이너 시선 · 시각적 일관성·계층</td></tr>
     </tbody></table>
   </div>
 
@@ -665,10 +665,10 @@ git clone https://github.com/garrytan/gstack `
       <div><div class="plugin-name">코딩 (6)</div><div class="plugin-meta">실행 · 검토 · 외부 AI 협업</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">review</code></td><td>PR 코드 리뷰 — 변경 사항 종합 검토</td></tr>
+      <tr><td><code class="inline">review</code></td><td>PR 코드 리뷰 · 변경 사항 종합 검토</td></tr>
       <tr><td><code class="inline">ship</code></td><td>배포 흐름 자동화 (검증 → 배포)</td></tr>
       <tr><td><code class="inline">land-and-deploy</code></td><td>머지 + 배포 통합 워크플로우</td></tr>
-      <tr><td><code class="inline">codex</code></td><td>OpenAI Codex 호출 (3 모드 — review/challenge/consult)</td></tr>
+      <tr><td><code class="inline">codex</code></td><td>OpenAI Codex 호출 (3 모드 · review/challenge/consult)</td></tr>
       <tr><td><code class="inline">careful</code></td><td>위험 명령 자동 차단 (rm -rf · DROP · force-push)</td></tr>
       <tr><td><code class="inline">claude</code></td><td>Claude 내부 호출 (다른 환경에서 Claude 실행)</td></tr>
     </tbody></table>
@@ -679,8 +679,8 @@ git clone https://github.com/garrytan/gstack `
       <div><div class="plugin-name">QA / 테스트 (5)</div><div class="plugin-meta">기능 검증 · 성능 측정</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">qa</code></td><td>대화형 QA 시나리오 실행 — 발견 시 자동 fix-verify 루프</td></tr>
-      <tr><td><code class="inline">qa-only</code></td><td>QA 보고만 — 코드 수정 없음</td></tr>
+      <tr><td><code class="inline">qa</code></td><td>대화형 QA 시나리오 실행 · 발견 시 자동 fix-verify 루프</td></tr>
+      <tr><td><code class="inline">qa-only</code></td><td>QA 보고만 · 코드 수정 없음</td></tr>
       <tr><td><code class="inline">canary</code></td><td>점진적 배포 검증 (소규모 트래픽 시뮬)</td></tr>
       <tr><td><code class="inline">benchmark</code></td><td>성능 벤치마크 실행</td></tr>
       <tr><td><code class="inline">benchmark-models</code></td><td>AI 모델 간 성능 비교</td></tr>
@@ -692,8 +692,8 @@ git clone https://github.com/garrytan/gstack `
       <div><div class="plugin-name">브라우저 (5)</div><div class="plugin-meta">헤드리스/가시 자동화 · 캡처</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">browse</code></td><td>헤드리스 QA — 자동 클릭 · 폼 입력 · 스크린샷</td></tr>
-      <tr><td><code class="inline">connect-chrome</code></td><td>가시적 Chromium 실행 — 실시간 인터랙션</td></tr>
+      <tr><td><code class="inline">browse</code></td><td>헤드리스 QA · 자동 클릭 · 폼 입력 · 스크린샷</td></tr>
+      <tr><td><code class="inline">connect-chrome</code></td><td>가시적 Chromium 실행 · 실시간 인터랙션</td></tr>
       <tr><td><code class="inline">open-gstack-browser</code></td><td>gstack 전용 브라우저 런처</td></tr>
       <tr><td><code class="inline">setup-browser-cookies</code></td><td>로그인 세션 저장 + 복제 (인증 후 작업 지속)</td></tr>
       <tr><td><code class="inline">scrape</code></td><td>웹 페이지 데이터 수집 (구조화)</td></tr>
@@ -705,7 +705,7 @@ git clone https://github.com/garrytan/gstack `
       <div><div class="plugin-name">보안 / 감사 (2)</div><div class="plugin-meta">취약점 점검 · 시스템 건전성</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">cso</code></td><td>보안 감사 — 인증·권한·입력 검증·의존성 CVE 종합</td></tr>
+      <tr><td><code class="inline">cso</code></td><td>보안 감사 · 인증·권한·입력 검증·의존성 CVE 종합</td></tr>
       <tr><td><code class="inline">health</code></td><td>시스템·repo 건전성 종합 진단</td></tr>
     </tbody></table>
   </div>
@@ -747,9 +747,9 @@ git clone https://github.com/garrytan/gstack `
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
       <tr><td><code class="inline">setup-gbrain</code></td><td>gbrain (개인 지식 그래프) 초기 세팅</td></tr>
-      <tr><td><code class="inline">sync-gbrain</code></td><td>gbrain 동기화 — 새 노트 인덱싱</td></tr>
+      <tr><td><code class="inline">sync-gbrain</code></td><td>gbrain 동기화 · 새 노트 인덱싱</td></tr>
       <tr><td><code class="inline">context-save</code></td><td>현재 세션 컨텍스트 저장</td></tr>
-      <tr><td><code class="inline">context-restore</code></td><td>저장된 컨텍스트 복원 — 세션 이어가기</td></tr>
+      <tr><td><code class="inline">context-restore</code></td><td>저장된 컨텍스트 복원 · 세션 이어가기</td></tr>
     </tbody></table>
   </div>
 
@@ -758,7 +758,7 @@ git clone https://github.com/garrytan/gstack `
       <div><div class="plugin-name">제어 (3)</div><div class="plugin-meta">작업 범위 · 안전 가드</div></div>
     </div>
     <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
-      <tr><td><code class="inline">freeze</code></td><td>작업 디렉토리 범위 제한 — 다른 폴더 수정 금지</td></tr>
+      <tr><td><code class="inline">freeze</code></td><td>작업 디렉토리 범위 제한 · 다른 폴더 수정 금지</td></tr>
       <tr><td><code class="inline">unfreeze</code></td><td>freeze 해제</td></tr>
       <tr><td><code class="inline">guard</code></td><td>careful + freeze 통합 안전 모드</td></tr>
     </tbody></table>
@@ -775,7 +775,7 @@ git clone https://github.com/garrytan/gstack `
     </tbody></table>
   </div>
 
-  <h3><span class="step-num">3</span>본인 주제 사이클 실습 (25분) — 각 카테고리 1개씩</h3>
+  <h3><span class="step-num">3</span>본인 주제 사이클 실습 (25분) · 각 카테고리 1개씩</h3>
   <p class="lead">Day 2 끝에 정한 본인 주제로 gstack 카테고리를 순서대로 한 번씩 통과. 각 단계에서 핵심 스킬 1개를 직접 호출해보고, 산출물을 다음 단계로 넘기는 흐름.</p>
 
   <table>
@@ -785,52 +785,52 @@ git clone https://github.com/garrytan/gstack `
       <tr><td><strong>② DESIGN</strong></td><td>디자인</td><td><code class="inline">design-consultation</code></td><td>UI·구조 설계 인터뷰 → 시안 도출</td></tr>
       <tr><td><strong>③ REVIEW</strong></td><td>코딩</td><td><code class="inline">review</code> 또는 <code class="inline">codex</code></td><td>코드·PR 리뷰 (codex는 다른 AI 시각)</td></tr>
       <tr><td><strong>④ QA</strong></td><td>QA·브라우저</td><td><code class="inline">qa</code> + <code class="inline">browse</code> + <code class="inline">setup-browser-cookies</code></td><td>로그인 필요 페이지까지 자동 QA</td></tr>
-      <tr><td><strong>⑤ SECURITY</strong></td><td>보안/감사</td><td><code class="inline">cso</code> + <code class="inline">health</code></td><td>OWASP Top 10 · 의존성 CVE · 건전성 종합 — Day 2 미완료 보안 실습</td></tr>
+      <tr><td><strong>⑤ SECURITY</strong></td><td>보안/감사</td><td><code class="inline">cso</code> + <code class="inline">health</code></td><td>OWASP Top 10 · 의존성 CVE · 건전성 종합 · Day 2 미완료 보안 실습</td></tr>
       <tr><td><strong>⑥ SHIP</strong></td><td>배포</td><td><code class="inline">ship</code> 또는 <code class="inline">land-and-deploy</code></td><td>검증 → 배포 자동화</td></tr>
       <tr><td><strong>⑦ RETRO</strong></td><td>회고</td><td><code class="inline">retro</code> + <code class="inline">learn</code></td><td>이번 사이클 패턴 추출 → 1줄 룰로 저장</td></tr>
     </tbody>
   </table>
 
-  <p style="font-size:13px;color:#555;">각 단계 ~3분. 본인 주제가 작아도 OK — 카테고리 흐름을 한 사이클 체험하는 게 목적. 깊이는 다음 차시부터.</p>
+  <p style="font-size:13px;color:#555;">각 단계 ~3분. 본인 주제가 작아도 OK · 카테고리 흐름을 한 사이클 체험하는 게 목적. 깊이는 다음 차시부터.</p>
 
-  <h4 style="margin-top:20px;">도구 작동 시연 — <code class="inline">browse</code> 명령이 어떻게 흘러가는지 (QA 표준 데모 사이트)</h4>
+  <h4 style="margin-top:20px;">도구 작동 시연 · <code class="inline">browse</code> 명령이 어떻게 흘러가는지 (QA 표준 데모 사이트)</h4>
   <p style="font-size:13px;color:#555;"><strong>이건 실습 주제가 아니라 도구 작동 학습용입니다.</strong> 공개 QA 표준 데모(<a href="https://the-internet.herokuapp.com/login" target="_blank">the-internet.herokuapp.com</a>) + 가짜 자격증명(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>)으로 <code class="inline">browse</code> 5단계 흐름이 어떻게 작동하는지 한 번 따라보세요. 나중에 본인 주제(또는 회사 사이트)에 적용 시 URL과 셀렉터만 교체.</p>
 
-  <p><strong>5단계 흐름</strong> — 각 명령이 하는 일:</p>
+  <p><strong>5단계 흐름</strong> · 각 명령이 하는 일:</p>
   <ul style="padding-left:22px;font-size:14.5px;">
-    <li><code class="inline">goto URL</code> — 헤드리스 브라우저로 페이지 이동</li>
-    <li><code class="inline">snapshot -i</code> — 페이지의 모든 인터랙티브 요소를 <code class="inline">@e1</code>, <code class="inline">@e2</code>... 식별자로 자동 탐지·매핑</li>
-    <li><code class="inline">fill @id "값"</code> — 식별자에 해당하는 input·textarea에 값 입력</li>
-    <li><code class="inline">click @id</code> — 버튼·링크 클릭 + 페이지 전환 자동 대기</li>
-    <li><code class="inline">screenshot path</code> — 현재 화면 캡처 (검증·증거 보존)</li>
+    <li><code class="inline">goto URL</code> · 헤드리스 브라우저로 페이지 이동</li>
+    <li><code class="inline">snapshot -i</code> · 페이지의 모든 인터랙티브 요소를 <code class="inline">@e1</code>, <code class="inline">@e2</code>... 식별자로 자동 탐지·매핑</li>
+    <li><code class="inline">fill @id "값"</code> · 식별자에 해당하는 input·textarea에 값 입력</li>
+    <li><code class="inline">click @id</code> · 버튼·링크 클릭 + 페이지 전환 자동 대기</li>
+    <li><code class="inline">screenshot path</code> · 현재 화면 캡처 (검증·증거 보존)</li>
   </ul>
 
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">B="$HOME/.copilot/skills/gstack/browse/dist/browse"
 
-# 1. 사이트 이동 — 헤드리스 브라우저 페이지 로드
+# 1. 사이트 이동 · 헤드리스 브라우저 페이지 로드
 $B goto https://the-internet.herokuapp.com/login
 
-# 2. 페이지 스냅샷 — 로그인 폼 요소 자동 탐지 (@username · @password · @submit 매핑)
+# 2. 페이지 스냅샷 · 로그인 폼 요소 자동 탐지 (@username · @password · @submit 매핑)
 $B snapshot -i
 
-# 3. 폼 입력 — 식별자로 input에 값 채우기
+# 3. 폼 입력 · 식별자로 input에 값 채우기
 $B fill @username "tomsmith"
 $B fill @password "SuperSecretPassword!"
 
-# 4. 버튼 클릭 — 페이지 전환 자동 대기 (네트워크 idle까지)
+# 4. 버튼 클릭 · 페이지 전환 자동 대기 (네트워크 idle까지)
 $B click @submit
 
-# 5. 캡처 — 결과 페이지 스크린샷 (검증 증거)
+# 5. 캡처 · 결과 페이지 스크린샷 (검증 증거)
 $B screenshot /tmp/login-success.png
 
 # 결과: ✅ /login → /secure 정상 이동
 #       ✅ "You logged into a secure area!" 메시지 확인</pre>
 
   <div class="reference">
-    <p><strong>본인 주제에 적용 시</strong> — 위 5단계 흐름은 그대로 두고 URL(<code class="inline">goto ...</code>) + 셀렉터 이름(<code class="inline">@username</code> 등)만 본인 환경에 맞게 교체. <code class="inline">snapshot -i</code>는 어떤 사이트에서든 자동으로 식별자를 만들어주니, 처음 한 번 출력 확인해서 어떤 id가 어떤 요소인지 파악하면 됩니다.</p>
+    <p><strong>본인 주제에 적용 시</strong> · 위 5단계 흐름은 그대로 두고 URL(<code class="inline">goto ...</code>) + 셀렉터 이름(<code class="inline">@username</code> 등)만 본인 환경에 맞게 교체. <code class="inline">snapshot -i</code>는 어떤 사이트에서든 자동으로 식별자를 만들어주니, 처음 한 번 출력 확인해서 어떤 id가 어떤 요소인지 파악하면 됩니다.</p>
   </div>
 
-  <h4 style="margin-top:18px;">실 시연 — ⑤ 보안 감사 (Day 2 미완료)</h4>
+  <h4 style="margin-top:18px;">실 시연 · ⑤ 보안 감사 (Day 2 미완료)</h4>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /cso
 # 또는 자연어
 "gstack cso로 이 코드 보안 감사해줘"
@@ -846,24 +846,24 @@ $B screenshot /tmp/login-success.png
 copilot skill gstack /health</pre>
 
   <div class="reference">
-    <p><strong>회사 적용</strong> | 본인 회사 시스템·repo에 같은 사이클을 적용. 작은 PR 1개에도 plan~retro 7단계를 짧게 돌려보면 흐름 체득. <strong>주의</strong> — 실 운영 데이터는 사내 git private + 사내 호스팅에서만. 외부 마켓 접근 제한 시 SKILL.md를 <code class="inline">.github/skills/</code> 또는 <code class="inline">.claude/skills/</code>에 직접 복사.</p>
+    <p><strong>회사 적용</strong> | 본인 회사 시스템·repo에 같은 사이클을 적용. 작은 PR 1개에도 plan~retro 7단계를 짧게 돌려보면 흐름 체득. <strong>주의</strong> · 실 운영 데이터는 사내 git private + 사내 호스팅에서만. 외부 마켓 접근 제한 시 SKILL.md를 <code class="inline">.github/skills/</code> 또는 <code class="inline">.claude/skills/</code>에 직접 복사.</p>
   </div>
 
   <h3><span class="step-num">5</span>부록 도구 빠른 안내 (10분)</h3>
-  <p>gstack 외에 본인 주제에 도움이 될 도구들 — <strong>§ 부록 도구함</strong>에서 자세히 다룹니다. 여기서는 빠르게 무엇이 있는지만.</p>
+  <p>gstack 외에 본인 주제에 도움이 될 도구들 · <strong>§ 부록 도구함</strong>에서 자세히 다룹니다. 여기서는 빠르게 무엇이 있는지만.</p>
 
   <table>
     <thead><tr><th>도구</th><th>역할</th><th>호환</th></tr></thead>
     <tbody>
-      <tr><td>🌀 <a href="#meta"><strong>Ouroboros</strong></a></td><td>Agent OS — 4단계 진화 루프 (Interview→Seed→Execute→Evaluate)로 모호한 요구 정련</td><td>Claude · Copilot</td></tr>
-      <tr><td>📚 <a href="#meta"><strong>OpenKB</strong></a></td><td>Karpathy LLM Wiki CLI 구현 — 옵시디언 없이 폴더 + CLI로 LLM Wiki 운영</td><td>독립 CLI (양쪽)</td></tr>
-      <tr><td>✨ <a href="#meta"><strong>Impeccable</strong></a></td><td>AI 디자인 lint — AI 슬롭 패턴 자동 감지</td><td>독립 CLI</td></tr>
+      <tr><td>🌀 <a href="#meta"><strong>Ouroboros</strong></a></td><td>Agent OS · 4단계 진화 루프 (Interview→Seed→Execute→Evaluate)로 모호한 요구 정련</td><td>Claude · Copilot</td></tr>
+      <tr><td>📚 <a href="#meta"><strong>OpenKB</strong></a></td><td>Karpathy LLM Wiki CLI 구현 · 옵시디언 없이 폴더 + CLI로 LLM Wiki 운영</td><td>독립 CLI (양쪽)</td></tr>
+      <tr><td>✨ <a href="#meta"><strong>Impeccable</strong></a></td><td>AI 디자인 lint · AI 슬롭 패턴 자동 감지</td><td>독립 CLI</td></tr>
       <tr><td>🧠 <a href="#meta"><strong>agentmemory</strong></a></td><td>4-tier 메모리 + 12 hooks + 51 MCP tools (본격적인 메모리 시스템)</td><td>Claude 직접 / Copilot 우회</td></tr>
     </tbody>
   </table>
   <p style="font-size:13px;color:#555;">→ § 부록 도구함에서 각 도구별 정의·설치·예시 자세히. 본 sub-section은 "이런 게 있다" 빠른 매핑.</p>
 
-  <h3><span class="step-num">6</span>토큰 전략 실습 (10분) — Caveman + RTK</h3>
+  <h3><span class="step-num">6</span>토큰 전략 실습 (10분) · Caveman + RTK</h3>
   <p>매일 AI 작업에서 토큰비 70%↓ 누적 절감. 두 도구는 <strong>방향이 다르므로 보완</strong>:</p>
 
   <table>
@@ -886,7 +886,7 @@ copilot skill gstack /health</pre>
 
   <p><strong>Caveman 4 레벨</strong>: <code class="inline">lite</code> (~30%) · <code class="inline">full</code> (~65%) · <code class="inline">ultra</code> (~75%) · <code class="inline">wenyan</code> (~87%, 고전 한문).</p>
 
-  <p><strong>예시 — 같은 질문에 Caveman 적용 전후</strong>:</p>
+  <p><strong>예시 · 같은 질문에 Caveman 적용 전후</strong>:</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># BEFORE (기본)
 "이 코드의 핵심 함수는 데이터 로딩을 담당하며,
  UTF-8 BOM을 처리하고, 9개 컬럼을 파싱한 후
@@ -899,7 +899,7 @@ copilot skill gstack /health</pre>
 "載 CSV. BOM 解. 九列 析. 對象 列 返."</pre>
 
   <h3><span class="step-num">7</span>메모리 키트 다운로드·실습 (15분)</h3>
-  <p>세션이 끝나도 작업·교훈·결정이 사라지지 않게 — <strong>claude-session-memory-kit</strong> 4 스킬 설치하고 본인 노트 폴더에 연결.</p>
+  <p>세션이 끝나도 작업·교훈·결정이 사라지지 않게 · <strong>claude-session-memory-kit</strong> 4 스킬 설치하고 본인 노트 폴더에 연결.</p>
 
   <table>
     <thead><tr><th>스킬</th><th>역할</th><th>호출</th></tr></thead>
@@ -911,10 +911,10 @@ copilot skill gstack /health</pre>
     </tbody>
   </table>
 
-  <p><strong>설치 — 옵시디언 없이 로컬 폴더만</strong>:</p>
+  <p><strong>설치 · 옵시디언 없이 로컬 폴더만</strong>:</p>
   <div class="dual-track">
     <div class="track instr">
-      <div class="track-h">1단계 — 환경변수 설정 (본인 로컬 폴더)</div>
+      <div class="track-h">1단계 · 환경변수 설정 (본인 로컬 폴더)</div>
       <pre># Linux · macOS · WSL
 export SESSION_MEMORY_PATH="$HOME/.claude/memory"
 
@@ -926,7 +926,7 @@ $env:SESSION_MEMORY_PATH = `
 # sessions/    learnings/    retros/</pre>
     </div>
     <div class="track stu">
-      <div class="track-h">2단계 — 4 스킬 설치 (Claude Code · Copilot)</div>
+      <div class="track-h">2단계 · 4 스킬 설치 (Claude Code · Copilot)</div>
       <pre># repo 클론
 git clone https://github.com/\
 daniel8824-del/claude-session-memory-kit \
@@ -942,11 +942,11 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
     </div>
   </div>
 
-  <p><strong>3단계 — 첫 사용 테스트</strong>:</p>
+  <p><strong>3단계 · 첫 사용 테스트</strong>:</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># 이번 세션 종료 시 핸드오프 저장
 "/session-handoff"
 
-# 다음 세션 시작 시 자동 회상 — 직접 호출 불필요
+# 다음 세션 시작 시 자동 회상 · 직접 호출 불필요
 # (SessionStart hook이 replay-learnings 자동 실행)
 
 # 실수했을 때 룰로 기록
@@ -956,27 +956,27 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
 "/retro"</pre>
 
   <div class="reference">
-    <p><strong>옵시디언 사용 중이면</strong> — <code class="inline">SESSION_MEMORY_PATH</code>를 옵시디언 볼트 안 폴더로 지정. 그러면 회상·교훈이 옵시디언에도 자동 누적. <strong>옵시디언 X 사용자</strong>는 일반 로컬 폴더로 OK. 둘 다 똑같이 작동.</p>
+    <p><strong>옵시디언 사용 중이면</strong> · <code class="inline">SESSION_MEMORY_PATH</code>를 옵시디언 볼트 안 폴더로 지정. 그러면 회상·교훈이 옵시디언에도 자동 누적. <strong>옵시디언 X 사용자</strong>는 일반 로컬 폴더로 OK. 둘 다 똑같이 작동.</p>
   </div>
 </section>
 
 <!-- §2 9차시 임베딩 시스템 -->
 <section id="ch9">
   <span class="section-tag">§ 9차시 · 10:00 ~ 10:30 (30분)</span>
-  <h2><span class="accent">9차시</span> | 임베딩 시스템 — 로컬에서 직접 구축</h2>
+  <h2><span class="accent">9차시</span> | 임베딩 시스템 · 로컬에서 직접 구축</h2>
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
     <div class="goal-text"><strong>임베딩의 개념</strong>(의미를 숫자 벡터로) + <strong>로컬 임베딩 vs 클라우드 API</strong> 트레이드오프 + <strong>코드·PDF·DB별 청킹 전략</strong> + <strong>품질 검증·모델 교체 비용</strong>을 강사 300개 문서 실 운영 경험으로 정리.</div>
   </div>
 
-  <h3><span class="step-num">1</span>임베딩이란? — 의미를 숫자 벡터로</h3>
+  <h3><span class="step-num">1</span>임베딩이란? · 의미를 숫자 벡터로</h3>
   <p>임베딩(Embedding)은 텍스트·이미지·코드를 <strong>고정 길이 숫자 벡터</strong>로 변환하는 모델입니다. 의미가 비슷한 문장은 벡터 공간에서 가까이, 다른 의미는 멀리 위치합니다. RAG의 검색 레이어가 이걸 사용합니다.</p>
 
   <table>
     <thead><tr><th>입력</th><th>출력 (예: bge-m3 · 1024차원)</th><th>코사인 유사도</th></tr></thead>
     <tbody>
-      <tr><td>"POS 거래 이상 탐지"</td><td>[0.023, -0.156, 0.781, ...] (1024개)</td><td>—</td></tr>
+      <tr><td>"POS 거래 이상 탐지"</td><td>[0.023, -0.156, 0.781, ...] (1024개)</td><td>·</td></tr>
       <tr><td>"매장 결제 이상 패턴"</td><td>[0.041, -0.143, 0.755, ...]</td><td>0.91 (가까움)</td></tr>
       <tr><td>"오늘 점심 메뉴"</td><td>[-0.412, 0.587, 0.022, ...]</td><td>0.12 (먼)</td></tr>
     </tbody>
@@ -1000,14 +1000,14 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
 
   <p><strong>회사 환경 권장</strong>: <strong>사내 자료 = 로컬 임베딩</strong> (보안·비용 0). 외부 일반 자료는 클라우드 OK. QMD가 로컬 bge-m3 사용.</p>
 
-  <h3><span class="step-num">3</span>청킹 전략 — 자료 유형별</h3>
+  <h3><span class="step-num">3</span>청킹 전략 · 자료 유형별</h3>
   <p>임베딩의 입력 단위는 <strong>chunk</strong>(조각). 자료 유형별로 최적 청킹 방식이 다릅니다.</p>
 
   <table>
     <thead><tr><th>자료 유형</th><th>청킹 전략</th><th>이유</th></tr></thead>
     <tbody>
       <tr><td><strong>마크다운·기획서</strong></td><td>헤더 단위 (## 섹션) + 토큰 한도 (≈500토큰)</td><td>의미 단위 보존</td></tr>
-      <tr><td><strong>코드</strong></td><td>함수·클래스 단위 (AST 기반)</td><td>로직 단위 보존 — 임의 분할 시 의미 깨짐</td></tr>
+      <tr><td><strong>코드</strong></td><td>함수·클래스 단위 (AST 기반)</td><td>로직 단위 보존 · 임의 분할 시 의미 깨짐</td></tr>
       <tr><td><strong>PDF (문서)</strong></td><td>페이지 단위 + 표는 별도 chunk</td><td>레이아웃 보존 · 표 의미 별도 보존</td></tr>
       <tr><td><strong>DB (테이블)</strong></td><td>행 단위 + 컬럼 메타데이터</td><td>관계형 의미 보존</td></tr>
       <tr><td><strong>긴 글 (논문·책)</strong></td><td>슬라이딩 윈도우 + 오버랩 (50~100토큰)</td><td>경계 정보 손실 방지</td></tr>
@@ -1020,15 +1020,15 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
   <p>임베딩이 "잘 됐는지" 검증하는 표준 방법:</p>
 
   <ol style="padding-left:22px;font-size:14.5px;">
-    <li><strong>R@K (Recall at K)</strong> — 정답 문서가 상위 K개 결과 안에 들어오는 비율. 보통 R@5 · R@10 측정.</li>
-    <li><strong>MRR (Mean Reciprocal Rank)</strong> — 정답이 몇 번째에 나왔는지의 역수 평균. 1위에 가까울수록 높음.</li>
-    <li><strong>NDCG (Normalized DCG)</strong> — 순위별 가중 평가. 상위에 좋은 결과가 있으면 점수 ↑.</li>
-    <li><strong>골든셋(Goldset) 구축</strong> — 사내 자료에서 질의-정답 쌍 50~100개 직접 작성 → 모델 비교 기준.</li>
+    <li><strong>R@K (Recall at K)</strong> · 정답 문서가 상위 K개 결과 안에 들어오는 비율. 보통 R@5 · R@10 측정.</li>
+    <li><strong>MRR (Mean Reciprocal Rank)</strong> · 정답이 몇 번째에 나왔는지의 역수 평균. 1위에 가까울수록 높음.</li>
+    <li><strong>NDCG (Normalized DCG)</strong> · 순위별 가중 평가. 상위에 좋은 결과가 있으면 점수 ↑.</li>
+    <li><strong>골든셋(Goldset) 구축</strong> · 사내 자료에서 질의-정답 쌍 50~100개 직접 작성 → 모델 비교 기준.</li>
   </ol>
 
   <p><strong>실 운영 팁</strong>: 한국어 자료 + 오픈 모델 조합은 영어 벤치마크 수치를 그대로 믿으면 안 됨. <strong>본인 도메인 골든셋</strong>으로 직접 측정. bge-m3는 한국어 강함.</p>
 
-  <h3><span class="step-num">5</span>모델 교체 비용 — 운영 시 가장 큰 함정</h3>
+  <h3><span class="step-num">5</span>모델 교체 비용 · 운영 시 가장 큰 함정</h3>
   <p>임베딩 모델은 한 번 정하면 <strong>전체 인덱스가 그 모델에 lock-in</strong>됩니다. 모델 변경 시:</p>
 
   <ul style="padding-left:22px;font-size:14.5px;">
@@ -1042,7 +1042,7 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
     <p><strong>실 운영 추천</strong> | 초기 PoC는 가벼운 모델 (예: <code class="inline">multilingual-e5-small</code> · 384차원)로 시작 → 패턴 확정 후 본격 모델 (<code class="inline">bge-m3</code> · 1024차원)로 마이그레이션. 한 번에 큰 모델 시작 시 운영 부담 ↑.</p>
   </div>
 
-  <h3><span class="step-num">6</span>실 운영 예시 — 강사 환경 (300개 문서)</h3>
+  <h3><span class="step-num">6</span>실 운영 예시 · 강사 환경 (300개 문서)</h3>
 
   <table>
     <thead><tr><th>항목</th><th>값</th></tr></thead>
@@ -1050,7 +1050,7 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
       <tr><td>대상</td><td>강사 사내 위키 + 세션 로그 + 기획서 (300개 마크다운)</td></tr>
       <tr><td>모델</td><td>bge-m3 (1024차원, multilingual)</td></tr>
       <tr><td>저장소</td><td>QMD 로컬 인덱스 (SQLite)</td></tr>
-      <tr><td>인덱싱 시간</td><td>증분 인덱싱 — 새 파일만 (~수 초)</td></tr>
+      <tr><td>인덱싱 시간</td><td>증분 인덱싱 · 새 파일만 (~수 초)</td></tr>
       <tr><td>검색 응답</td><td>~1초 (300개 단위)</td></tr>
       <tr><td>토큰비</td><td>0원 (로컬 처리)</td></tr>
       <tr><td>외부 API</td><td>0건 (보안 ✓)</td></tr>
@@ -1063,14 +1063,14 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
 <!-- §3 10차시 GraphRAG -->
 <section id="ch10">
   <span class="section-tag">§ 10차시 · 10:30 ~ 11:00 (30분)</span>
-  <h2><span class="accent">10차시</span> | GraphRAG — 지식그래프 기반 검색 엔진</h2>
+  <h2><span class="accent">10차시</span> | GraphRAG · 지식그래프 기반 검색 엔진</h2>
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
     <div class="goal-text"><strong>RAG vs GraphRAG 구조 차이</strong> 이해 + <strong>논문 → 텍스트 → 벡터+그래프 → 채팅 플랫폼</strong> 흐름 + <strong>운영 한계</strong>(검색 품질·환각·유지보수)를 강사 경험으로 안내.</div>
   </div>
 
-  <h3><span class="step-num">1</span>RAG vs GraphRAG — 구조 차이</h3>
+  <h3><span class="step-num">1</span>RAG vs GraphRAG · 구조 차이</h3>
 
   <table>
     <thead><tr><th>구분</th><th>일반 RAG</th><th>GraphRAG</th></tr></thead>
@@ -1095,12 +1095,12 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
     + 엔티티 추출 (사람·개념·도구 등)
     + 관계 추출 ("A가 B를 사용한다", "C가 D에 영향")
        ↓
-[4] 채팅 플랫폼 — 질문 시:
+[4] 채팅 플랫폼 · 질문 시:
     - 벡터 검색 (의미 가까운 chunk K개)
     - 그래프 traversal (관련 엔티티 N hop 확장)
     - 두 결과 합쳐 LLM 답변 생성</pre>
 
-  <h3><span class="step-num">3</span>선택 기준 — 언제 RAG · 언제 GraphRAG</h3>
+  <h3><span class="step-num">3</span>선택 기준 · 언제 RAG · 언제 GraphRAG</h3>
 
   <table>
     <thead><tr><th>상황</th><th>추천</th></tr></thead>
@@ -1116,14 +1116,14 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
 
   <p><strong>실 운영 가이드</strong>: 대부분 시작은 RAG. 검색 품질이 한계에 부딪힐 때 (관계 질의 빈도 ↑) GraphRAG 도입. 처음부터 GraphRAG는 운영 부담 큼.</p>
 
-  <h3><span class="step-num">4</span>운영 한계 — 실제로 부딪힌 문제</h3>
+  <h3><span class="step-num">4</span>운영 한계 · 실제로 부딪힌 문제</h3>
 
   <ul style="padding-left:22px;font-size:14.5px;">
-    <li><strong>검색 품질</strong> — 한국어 자료는 영어 벤치마크처럼 안 됨. 골든셋 직접 측정 필수.</li>
-    <li><strong>환각</strong> — GraphRAG가 관계를 잘못 추출하면 LLM이 그걸 사실로 인용. 그래프 lint 필요.</li>
-    <li><strong>유지보수</strong> — 새 자료 추가 시 그래프 재구성 비용 ↑. 증분 업데이트 어려움.</li>
-    <li><strong>LLM 호출 비용</strong> — 그래프 빌드 = 엔티티·관계 추출 LLM 호출 다수. 대규모 코퍼스에서 부담.</li>
-    <li><strong>한국어 엔티티 추출</strong> — 영어 모델은 한국어 엔티티를 자주 놓침. 사전·NER 모델 보정 필요.</li>
+    <li><strong>검색 품질</strong> · 한국어 자료는 영어 벤치마크처럼 안 됨. 골든셋 직접 측정 필수.</li>
+    <li><strong>환각</strong> · GraphRAG가 관계를 잘못 추출하면 LLM이 그걸 사실로 인용. 그래프 lint 필요.</li>
+    <li><strong>유지보수</strong> · 새 자료 추가 시 그래프 재구성 비용 ↑. 증분 업데이트 어려움.</li>
+    <li><strong>LLM 호출 비용</strong> · 그래프 빌드 = 엔티티·관계 추출 LLM 호출 다수. 대규모 코퍼스에서 부담.</li>
+    <li><strong>한국어 엔티티 추출</strong> · 영어 모델은 한국어 엔티티를 자주 놓침. 사전·NER 모델 보정 필요.</li>
   </ul>
 
   <h3><span class="step-num">5</span>무료 GraphRAG 도구</h3>
@@ -1134,7 +1134,7 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
       <tr><td><strong>Microsoft GraphRAG</strong> (microsoft/graphrag)</td><td>공식 · 가장 성숙. community summary 패턴</td><td>OpenAI API 또는 로컬 모델 (Ollama)</td></tr>
       <tr><td><strong>LightRAG</strong> (HKUDS/LightRAG)</td><td>경량 RAG + 그래프. 빠른 빌드</td><td>Ollama 로컬 가능</td></tr>
       <tr><td><strong>cognee</strong> (topoteretes/cognee)</td><td>코드베이스·도메인 지식 그래프 특화</td><td>LLM 호출 필요</td></tr>
-      <tr><td><strong>Kùzu + 자체 빌드</strong></td><td>임베디드 그래프 DB만 — 빌드 직접</td><td>무료 (DB) + LLM 별도</td></tr>
+      <tr><td><strong>Kùzu + 자체 빌드</strong></td><td>임베디드 그래프 DB만 · 빌드 직접</td><td>무료 (DB) + LLM 별도</td></tr>
     </tbody>
   </table>
 
@@ -1150,20 +1150,20 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
-    <div class="goal-text"><strong>로컬 RAG 운영의 실제</strong> — 마크다운 폴더 + 임베딩 + 인덱스를 묶어 사내 자료 검색 시스템을 만들고, <strong>크론잡으로 자동 업데이트·임베딩</strong>까지 무인 운영. 외부 의존성 0, 토큰비 0.</div>
+    <div class="goal-text"><strong>로컬 RAG 운영의 실제</strong> · 마크다운 폴더 + 임베딩 + 인덱스를 묶어 사내 자료 검색 시스템을 만들고, <strong>크론잡으로 자동 업데이트·임베딩</strong>까지 무인 운영. 외부 의존성 0, 토큰비 0.</div>
   </div>
 
   <h3><span class="step-num">1</span>로컬 RAG 전체 흐름</h3>
   <p>9차시(임베딩) + 어제 5요소(특히 Memory + Skills)를 결합한 무인 운영 패턴:</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:16px 20px;border-radius:8px;font-size:13px;">[1] 자료 모음 (로컬 폴더 — 옵시디언 X 가능)
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:16px 20px;border-radius:8px;font-size:13px;">[1] 자료 모음 (로컬 폴더 · 옵시디언 X 가능)
     ├ wiki/        사내 위키 마크다운
     ├ sessions/    Claude/Copilot 세션 로그
     ├ designs/     기획서 · 설계 문서
     └ raw/         원본 (PDF → MD 변환된 것)
         ↓
 [2] QMD 인덱스 (SQLite + bge-m3 임베딩)
-    └ qmd update — 새/변경 파일만 증분 인덱싱
+    └ qmd update · 새/변경 파일만 증분 인덱싱
         ↓
 [3] 검색
     └ qmd search "쿼리"        키워드 (BM25)
@@ -1181,25 +1181,25 @@ cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
     <tbody>
       <tr><td><code class="inline">qmd update</code></td><td>새/변경 파일만 증분 인덱싱 (전체 재계산 X)</td></tr>
       <tr><td><code class="inline">qmd embed</code></td><td>임베딩만 재계산 (BM25 인덱스는 유지)</td></tr>
-      <tr><td><code class="inline">qmd search "쿼리" -n 5</code></td><td>키워드 검색 (BM25) — 상위 N개</td></tr>
-      <tr><td><code class="inline">qmd query "쿼리" -n 5</code></td><td>의미 검색 (cosine similarity) — 벡터 기반</td></tr>
+      <tr><td><code class="inline">qmd search "쿼리" -n 5</code></td><td>키워드 검색 (BM25) · 상위 N개</td></tr>
+      <tr><td><code class="inline">qmd query "쿼리" -n 5</code></td><td>의미 검색 (cosine similarity) · 벡터 기반</td></tr>
       <tr><td><code class="inline">qmd get qmd://path</code></td><td>특정 파일 전문 조회</td></tr>
       <tr><td><code class="inline">qmd stats</code></td><td>인덱스 통계 (파일 수 · 임베딩 수 · 크기)</td></tr>
     </tbody>
   </table>
 
-  <p>실 예시 — 강사 환경에서 어제 세션 회상:</p>
+  <p>실 예시 · 강사 환경에서 어제 세션 회상:</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">$ qmd search "POS 이상 탐지 elif chain" -n 3
 qmd://obsidian/30_Claude/01_Sessions/2026-05-13-pos-day2-handoff.md  0.93
 qmd://obsidian/30_Claude/02_Learnings/2026-05-12-day2-강의안-절대-규칙.md  0.78
 qmd://obsidian/30_Claude/04_Plans/plan-2026-05-10-rag-strategy.md   0.61</pre>
 
-  <h3><span class="step-num">3</span>크론잡 — 자동 업데이트 + 임베딩</h3>
+  <h3><span class="step-num">3</span>크론잡 · 자동 업데이트 + 임베딩</h3>
   <p>QMD를 무인 운영하는 핵심: <strong>크론잡</strong>으로 정기 자동 인덱싱.</p>
 
   <div class="dual-track">
     <div class="track instr">
-      <div class="track-h">Linux · macOS · WSL — crontab</div>
+      <div class="track-h">Linux · macOS · WSL · crontab</div>
       <pre># 매시간 새 파일 자동 인덱싱
 0 * * * * cd ~/notes && qmd update
 
@@ -1210,8 +1210,8 @@ qmd://obsidian/30_Claude/04_Plans/plan-2026-05-10-rag-strategy.md   0.61</pre>
 0 9 * * 0 qmd stats &gt;&gt; ~/qmd-weekly.log</pre>
     </div>
     <div class="track stu">
-      <div class="track-h">Windows — 작업 스케줄러</div>
-      <pre># PowerShell — 매시간 작업 등록
+      <div class="track-h">Windows · 작업 스케줄러</div>
+      <pre># PowerShell · 매시간 작업 등록
 $action = New-ScheduledTaskAction `
   -Execute "qmd" -Argument "update" `
   -WorkingDirectory "$env:USERPROFILE\notes"
@@ -1223,19 +1223,19 @@ Register-ScheduledTask -TaskName "qmd-hourly-update" `
     </div>
   </div>
 
-  <h4 style="margin-top:20px;">임베딩 조건 — 언제·무엇을</h4>
+  <h4 style="margin-top:20px;">임베딩 조건 · 언제·무엇을</h4>
   <ul style="padding-left:22px;font-size:14.5px;">
-    <li><strong>매시간</strong> — 새 파일 증분 인덱싱 (저비용 · 거의 즉시)</li>
-    <li><strong>매일</strong> — 변경된 파일의 임베딩 재계산 (자료 수정분 반영)</li>
-    <li><strong>매주</strong> — 전체 임베딩 재계산 (모델 업그레이드 후 또는 lint 후)</li>
-    <li><strong>이벤트 기반</strong> — git push hook으로 즉시 인덱싱 (CI 통합)</li>
+    <li><strong>매시간</strong> · 새 파일 증분 인덱싱 (저비용 · 거의 즉시)</li>
+    <li><strong>매일</strong> · 변경된 파일의 임베딩 재계산 (자료 수정분 반영)</li>
+    <li><strong>매주</strong> · 전체 임베딩 재계산 (모델 업그레이드 후 또는 lint 후)</li>
+    <li><strong>이벤트 기반</strong> · git push hook으로 즉시 인덱싱 (CI 통합)</li>
   </ul>
 
   <div class="reference">
-    <p><strong>실 운영 예시</strong> | 강사 환경 — 옵시디언 볼트 988개 마크다운 파일을 시간당 크론잡으로 자동 인덱싱. 새 세션 시작 시 <code class="inline">replay-learnings</code> 스킬이 QMD에서 자동 회상. 토큰비 0원 · 외부 API 호출 0건.</p>
+    <p><strong>실 운영 예시</strong> | 강사 환경 · 옵시디언 볼트 988개 마크다운 파일을 시간당 크론잡으로 자동 인덱싱. 새 세션 시작 시 <code class="inline">replay-learnings</code> 스킬이 QMD에서 자동 회상. 토큰비 0원 · 외부 API 호출 0건.</p>
   </div>
 
-  <h3><span class="step-num">4</span>옵시디언 없이 — 로컬 폴더만으로</h3>
+  <h3><span class="step-num">4</span>옵시디언 없이 · 로컬 폴더만으로</h3>
   <p>옵시디언을 안 써도 QMD는 그냥 마크다운 폴더 위에서 작동합니다. 환경변수만 본인 폴더로 지정:</p>
 
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 본인 로컬 폴더 구조 (옵시디언 X)
@@ -1250,7 +1250,7 @@ cd ~/notes
 qmd update
 qmd search "키워드" -n 5</pre>
 
-  <p>세션 메모 자동 저장은 <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank"><strong>claude-session-memory-kit</strong></a> (4 스킬 — session-handoff · replay-learnings · learn-rule · retro). <code class="inline">SESSION_MEMORY_PATH</code> 환경변수로 본인 로컬 폴더 지정.</p>
+  <p>세션 메모 자동 저장은 <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank"><strong>claude-session-memory-kit</strong></a> (4 스킬 · session-handoff · replay-learnings · learn-rule · retro). <code class="inline">SESSION_MEMORY_PATH</code> 환경변수로 본인 로컬 폴더 지정.</p>
 </section>
 
 <!-- §5 12차시 모든 문서 마크다운화 + obsidian-cli + defuddle -->
@@ -1281,17 +1281,17 @@ qmd search "키워드" -n 5</pre>
   <table>
     <thead><tr><th>원본 유형</th><th>도구</th><th>출력 품질</th></tr></thead>
     <tbody>
-      <tr><td><strong>웹페이지</strong></td><td><code class="inline">defuddle</code> (CLI · MCP) — 광고·메뉴 제거</td><td>★★★★★ 본문만 깔끔</td></tr>
+      <tr><td><strong>웹페이지</strong></td><td><code class="inline">defuddle</code> (CLI · MCP) · 광고·메뉴 제거</td><td>★★★★★ 본문만 깔끔</td></tr>
       <tr><td><strong>PDF (텍스트)</strong></td><td><code class="inline">marker</code> · <code class="inline">pdfminer</code> · <code class="inline">pymupdf4llm</code></td><td>★★★★ 표·코드 블록 보존</td></tr>
-      <tr><td><strong>PDF (스캔 이미지)</strong></td><td>OCR — Tesseract · PaddleOCR · Surya</td><td>★★★ 한국어는 PaddleOCR/Surya</td></tr>
+      <tr><td><strong>PDF (스캔 이미지)</strong></td><td>OCR · Tesseract · PaddleOCR · Surya</td><td>★★★ 한국어는 PaddleOCR/Surya</td></tr>
       <tr><td><strong>HWP / HWPX</strong></td><td><code class="inline">hwp-analyzer</code> · <code class="inline">pyhwp</code></td><td>★★★ 한국어 공문서</td></tr>
       <tr><td><strong>DOCX / PPTX / XLSX</strong></td><td><code class="inline">pandoc</code> · <code class="inline">python-docx</code></td><td>★★★★ 표준 변환</td></tr>
-      <tr><td><strong>YouTube</strong></td><td><code class="inline">youtube-collector</code> — 자막·자동 transcript</td><td>★★★★</td></tr>
+      <tr><td><strong>YouTube</strong></td><td><code class="inline">youtube-collector</code> · 자막·자동 transcript</td><td>★★★★</td></tr>
       <tr><td><strong>이미지 (다이어그램)</strong></td><td>Claude Vision · GPT-4V → 마크다운 설명</td><td>★★★ LLM 전처리</td></tr>
     </tbody>
   </table>
 
-  <h3><span class="step-num">3</span>defuddle — 웹페이지 정제의 결정판</h3>
+  <h3><span class="step-num">3</span>defuddle · 웹페이지 정제의 결정판</h3>
   <p>URL을 던지면 광고·메뉴·푸터를 제거하고 <strong>본문만 깨끗한 마크다운</strong>으로 추출. WebFetch 대비 토큰 절약 효과 큼.</p>
 
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># CLI 직접 호출
@@ -1310,7 +1310,7 @@ date: "2026-05-14"
 
   <p><strong>활용 패턴</strong>: 외부 자료 리서치 시 defuddle로 본문 추출 → 로컬 <code class="inline">raw/</code> 폴더 저장 → QMD가 자동 인덱싱. 사내 자료처럼 검색 가능해짐.</p>
 
-  <h3><span class="step-num">4</span>obsidian-cli — 옵시디언 볼트 자동 조작</h3>
+  <h3><span class="step-num">4</span>obsidian-cli · 옵시디언 볼트 자동 조작</h3>
   <p>옵시디언을 GUI 없이 CLI/AI로 조작. 자료 임포트 + 메타데이터 관리에 강함.</p>
 
   <table>
@@ -1324,7 +1324,7 @@ date: "2026-05-14"
     </tbody>
   </table>
 
-  <p><strong>defuddle + obsidian-cli 콤보</strong> — 외부 자료 자동 수집·저장 파이프라인:</p>
+  <p><strong>defuddle + obsidian-cli 콤보</strong> · 외부 자료 자동 수집·저장 파이프라인:</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 웹페이지 본문 추출
 defuddle https://example.com/article &gt; /tmp/article.md
 
@@ -1338,18 +1338,18 @@ obsidian-cli note create \
 # 3. QMD 인덱싱 (다음 크론잡에서 자동)
 # → 새 세션에서 qmd search로 회상</pre>
 
-  <h3><span class="step-num">5</span>비LLM AI 전처리 — OCR · 텍스트 마이닝</h3>
+  <h3><span class="step-num">5</span>비LLM AI 전처리 · OCR · 텍스트 마이닝</h3>
   <p>마크다운화 전 단계 보조 도구. LLM 호출 없이 빠르게 전처리:</p>
 
   <ul style="padding-left:22px;font-size:14.5px;">
-    <li><strong>OCR</strong> — Tesseract(영문) · PaddleOCR(한국어 강) · Surya(레이아웃 보존) · Donut(end-to-end)</li>
-    <li><strong>표·차트 추출</strong> — Camelot · Tabula · Microsoft Table Transformer</li>
-    <li><strong>수식 추출</strong> — pix2tex · MathPix (LaTeX 변환)</li>
-    <li><strong>텍스트 마이닝</strong> — KoNLPy(한국어 형태소) · spaCy · keyBERT(키워드) · BERTopic(토픽)</li>
-    <li><strong>감성 분석</strong> — KoBERT · 한국어 sentiment model (huggingface)</li>
+    <li><strong>OCR</strong> · Tesseract(영문) · PaddleOCR(한국어 강) · Surya(레이아웃 보존) · Donut(end-to-end)</li>
+    <li><strong>표·차트 추출</strong> · Camelot · Tabula · Microsoft Table Transformer</li>
+    <li><strong>수식 추출</strong> · pix2tex · MathPix (LaTeX 변환)</li>
+    <li><strong>텍스트 마이닝</strong> · KoNLPy(한국어 형태소) · spaCy · keyBERT(키워드) · BERTopic(토픽)</li>
+    <li><strong>감성 분석</strong> · KoBERT · 한국어 sentiment model (huggingface)</li>
   </ul>
 
-  <p><strong>조합 패턴</strong> — 비LLM 전처리 + LLM 후처리:</p>
+  <p><strong>조합 패턴</strong> · 비LLM 전처리 + LLM 후처리:</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">[원본 PDF (스캔본)]
    ↓ PaddleOCR (비LLM)
 [텍스트 + 레이아웃]
@@ -1362,14 +1362,14 @@ obsidian-cli note create \
     <p><strong>왜 비LLM 전처리?</strong> 토큰비 0 · 빠름 · 결정적 (deterministic). LLM은 마지막 요약·구조화 단계에만 쓰면 비용 효율 ↑. 회사 환경처럼 대량 자료 처리 시 필수 패턴.</p>
   </div>
 
-  <h3><span class="step-num">6</span>Day 3 마무리 — 회사 적용 단계</h3>
+  <h3><span class="step-num">6</span>Day 3 마무리 · 회사 적용 단계</h3>
   <table>
     <thead><tr><th>단계</th><th>액션</th></tr></thead>
     <tbody>
       <tr><td><strong>1주차</strong></td><td>QMD 설치 + 본인 노트 폴더 인덱싱 시작</td></tr>
       <tr><td><strong>2주차</strong></td><td>defuddle로 외부 자료 → 로컬 raw 폴더 자동 저장</td></tr>
-      <tr><td><strong>3주차</strong></td><td>크론잡 등록 — 매시간 자동 업데이트</td></tr>
-      <tr><td><strong>4주차</strong></td><td>session-memory-kit 4 스킬 추가 — 세션 자동 회상</td></tr>
+      <tr><td><strong>3주차</strong></td><td>크론잡 등록 · 매시간 자동 업데이트</td></tr>
+      <tr><td><strong>4주차</strong></td><td>session-memory-kit 4 스킬 추가 · 세션 자동 회상</td></tr>
       <tr><td><strong>2개월</strong></td><td>PDF·HWP·DOCX 변환 파이프라인 + 비LLM 전처리</td></tr>
       <tr><td><strong>3개월</strong></td><td>로컬 RAG → GraphRAG 단계적 도입 (필요 시)</td></tr>
     </tbody>
@@ -1380,24 +1380,24 @@ obsidian-cli note create \
   </div>
 </section>
 
-<!-- §부록 메타 — 도구함 -->
+<!-- §부록 메타 · 도구함 -->
 <section id="meta">
   <span class="section-tag">§ 부록 · 추가 도구함</span>
-  <h2>로컬 RAG · 메모리 · 자율 반복 — <span class="accent">참고 도구함</span></h2>
+  <h2>로컬 RAG · 메모리 · 자율 반복 · <span class="accent">참고 도구함</span></h2>
   <p class="lead">강의 본 흐름 외 참고 도구. 본인 환경에 하나씩 도입해 보세요. 모두 오픈소스 · 무료.</p>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🌀</span>
-      <div><div class="plugin-name">Ouroboros (우로보로스)</div><div class="plugin-meta">Q00/ouroboros · Agent OS — 자기-진화 루프 · 한국어 README</div></div>
+      <div><div class="plugin-name">Ouroboros (우로보로스)</div><div class="plugin-meta">Q00/ouroboros · Agent OS · 자기-진화 루프 · 한국어 README</div></div>
     </div>
-    <p><strong>"프롬프트하지 말고 명세하라"</strong> — 4단계 진화 루프로 모호한 요구사항을 정확한 명세로 변환.</p>
+    <p><strong>"프롬프트하지 말고 명세하라"</strong> · 4단계 진화 루프로 모호한 요구사항을 정확한 명세로 변환.</p>
     <table>
       <thead><tr><th>단계</th><th>역할</th></tr></thead>
       <tbody>
-        <tr><td><strong>① Interview</strong></td><td>Socratic Clarity — 모호함 ≤ 0.2까지 질문 반복. AI가 "이건 무슨 뜻인지" 묻고 사용자가 답하며 명세를 정련</td></tr>
-        <tr><td><strong>② Seed</strong></td><td>Ontological Precision — 인터뷰 결과로 근본 문제(symptom X · root cause) 정의. 명세의 seed 생성</td></tr>
-        <tr><td><strong>③ Execute</strong></td><td>seed 기반 구현 — 코드 작성 · 시스템 구축. 명세가 정확할수록 산출물 정확</td></tr>
-        <tr><td><strong>④ Evaluate</strong></td><td>실행 결과를 평가해 다음 사이클 명세에 피드백 — 진화 루프 형성. 매 사이클이 단순 반복이 아닌 진화</td></tr>
+        <tr><td><strong>① Interview</strong></td><td>Socratic Clarity · 모호함 ≤ 0.2까지 질문 반복. AI가 "이건 무슨 뜻인지" 묻고 사용자가 답하며 명세를 정련</td></tr>
+        <tr><td><strong>② Seed</strong></td><td>Ontological Precision · 인터뷰 결과로 근본 문제(symptom X · root cause) 정의. 명세의 seed 생성</td></tr>
+        <tr><td><strong>③ Execute</strong></td><td>seed 기반 구현 · 코드 작성 · 시스템 구축. 명세가 정확할수록 산출물 정확</td></tr>
+        <tr><td><strong>④ Evaluate</strong></td><td>실행 결과를 평가해 다음 사이클 명세에 피드백 · 진화 루프 형성. 매 사이클이 단순 반복이 아닌 진화</td></tr>
       </tbody>
     </table>
     <p style="font-size:13px;color:#555;">MCP 서버 자동 발견 (<code class="inline">~/.ouroboros/mcp_servers.yaml</code>). 본 강의 외 본인 프로젝트 설계 시 활용 추천.</p>
@@ -1418,17 +1418,17 @@ openkb query "내 노트 중 X 관련?"</pre>
     <table>
       <thead><tr><th>항목</th><th>설명</th></tr></thead>
       <tbody>
-        <tr><td><strong>Copilot CLI 호환</strong></td><td>✅ — OpenKB는 독립 Python CLI. Claude/Copilot 무관하게 작동. 어떤 환경에서든 <code class="inline">openkb</code> 명령 직접 실행</td></tr>
+        <tr><td><strong>Copilot CLI 호환</strong></td><td>✅ · OpenKB는 독립 Python CLI. Claude/Copilot 무관하게 작동. 어떤 환경에서든 <code class="inline">openkb</code> 명령 직접 실행</td></tr>
         <tr><td><strong>LLM 백엔드 필요</strong></td><td>임베딩·요약·페이지 생성 시 호출 필요</td></tr>
-        <tr><td><strong>옵션 1 — Ollama (로컬·무료)</strong></td><td>회사 데이터 보안 ✓ · 토큰비 0원 · 추천</td></tr>
-        <tr><td><strong>옵션 2 — OpenRouter · OpenAI · Anthropic</strong></td><td>API 키 + 토큰 과금</td></tr>
+        <tr><td><strong>옵션 1 · Ollama (로컬·무료)</strong></td><td>회사 데이터 보안 ✓ · 토큰비 0원 · 추천</td></tr>
+        <tr><td><strong>옵션 2 · OpenRouter · OpenAI · Anthropic</strong></td><td>API 키 + 토큰 과금</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🪨</span>
-      <div><div class="plugin-name">Caveman vs RTK — 토큰 절감 도구 비교</div><div class="plugin-meta">서로 보완 — 출력 vs 입력</div></div>
+      <div><div class="plugin-name">Caveman vs RTK · 토큰 절감 도구 비교</div><div class="plugin-meta">서로 보완 · 출력 vs 입력</div></div>
     </div>
 
     <table>
@@ -1451,47 +1451,47 @@ openkb query "내 노트 중 X 관련?"</pre>
 
     <p style="margin-top:8px;"><strong>Caveman 4 레벨</strong> (출력 절감 강도):</p>
     <ul style="padding-left:22px;font-size:14.5px;">
-      <li><code class="inline">lite</code> — 필러만 제거 (자연어 유지) · ~30%</li>
-      <li><code class="inline">full</code> — 기본 caveman 톤 · ~65%</li>
-      <li><code class="inline">ultra</code> — 전보 스타일 (telegraphic) · ~75%</li>
-      <li><code class="inline">wenyan</code> — 고전 한문 스타일 · ~87%</li>
+      <li><code class="inline">lite</code> · 필러만 제거 (자연어 유지) · ~30%</li>
+      <li><code class="inline">full</code> · 기본 caveman 톤 · ~65%</li>
+      <li><code class="inline">ultra</code> · 전보 스타일 (telegraphic) · ~75%</li>
+      <li><code class="inline">wenyan</code> · 고전 한문 스타일 · ~87%</li>
     </ul>
 
     <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># Caveman 설치 (Claude Code · Codex)
 npx skills add JuliusBrussee/caveman
 
-# RTK는 Claude Code hook 기반 — 별도 설치 후 자동 작동</pre>
+# RTK는 Claude Code hook 기반 · 별도 설치 후 자동 작동</pre>
 
-    <p style="font-size:13px;color:#555;"><strong>둘 다 쓰면 누적 효과</strong> — RTK가 입력 측 60~90%↓ + Caveman이 출력 측 65~75%↓. Claude Code 환경에서 토큰 비용 평균 70% 절감 가능.</p>
+    <p style="font-size:13px;color:#555;"><strong>둘 다 쓰면 누적 효과</strong> · RTK가 입력 측 60~90%↓ + Caveman이 출력 측 65~75%↓. Claude Code 환경에서 토큰 비용 평균 70% 절감 가능.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">✨</span>
       <div><div class="plugin-name">Impeccable</div><div class="plugin-meta">pbakaus/impeccable · AI 하네스를 더 좋은 디자이너로</div></div>
     </div>
-    <p>AI가 생성한 디자인의 품질을 lint 보고서로 평가. AI 슬롭 패턴 자동 감지 — 일관성·계층·간격·과잉 그림자/gradient 등. <a href="https://github.com/pbakaus/impeccable" target="_blank">impeccable on GitHub</a>.</p>
+    <p>AI가 생성한 디자인의 품질을 lint 보고서로 평가. AI 슬롭 패턴 자동 감지 · 일관성·계층·간격·과잉 그림자/gradient 등. <a href="https://github.com/pbakaus/impeccable" target="_blank">impeccable on GitHub</a>.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🧠</span>
       <div><div class="plugin-name">agentmemory (본인 테스트 추천)</div><div class="plugin-meta">rohitg00/agentmemory · 4-tier 메모리 + 12 hooks + 51 MCP tools</div></div>
     </div>
-    <p>인간 뇌 처리 영감 (Working · Episodic · Semantic · Procedural) + BM25 + 벡터 + 그래프 RRF 검색. <strong>95.2% R@5 (LongMemEval-S)</strong>. SQLite 저장 — 외부 의존성 0.</p>
+    <p>인간 뇌 처리 영감 (Working · Episodic · Semantic · Procedural) + BM25 + 벡터 + 그래프 RRF 검색. <strong>95.2% R@5 (LongMemEval-S)</strong>. SQLite 저장 · 외부 의존성 0.</p>
     <table style="font-size:13px;">
       <thead><tr><th>환경</th><th>호환성</th><th>설치 난이도</th></tr></thead>
       <tbody>
-        <tr><td>Claude Code · Cursor · Gemini CLI</td><td>✅ 직접 지원</td><td>쉬움 — <code class="inline">npx @agentmemory/agentmemory</code></td></tr>
-        <tr><td>Copilot CLI</td><td>❌ 직접 X · REST API 우회</td><td>어려움 — <code class="inline">curl POST /agentmemory/observe</code></td></tr>
+        <tr><td>Claude Code · Cursor · Gemini CLI</td><td>✅ 직접 지원</td><td>쉬움 · <code class="inline">npx @agentmemory/agentmemory</code></td></tr>
+        <tr><td>Copilot CLI</td><td>❌ 직접 X · REST API 우회</td><td>어려움 · <code class="inline">curl POST /agentmemory/observe</code></td></tr>
       </tbody>
     </table>
-    <p style="font-size:13px;color:#555;margin-top:8px;"><strong>본인 테스트 추천</strong> — Claude Code 환경에서 한 줄 설치 후 일주일 사용. 자동 캡처(12 hooks)된 메모리가 어떻게 회상되는지 직접 체험. Copilot 사용자는 우로보로스 + OpenKB + claude-session-memory-kit 조합 대안.</p>
+    <p style="font-size:13px;color:#555;margin-top:8px;"><strong>본인 테스트 추천</strong> · Claude Code 환경에서 한 줄 설치 후 일주일 사용. 자동 캡처(12 hooks)된 메모리가 어떻게 회상되는지 직접 체험. Copilot 사용자는 우로보로스 + OpenKB + claude-session-memory-kit 조합 대안.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">💾</span>
-      <div><div class="plugin-name">claude-session-memory-kit</div><div class="plugin-meta">daniel8824-del · 4 스킬 — 옵시디언 없이 로컬 폴더</div></div>
+      <div><div class="plugin-name">claude-session-memory-kit</div><div class="plugin-meta">daniel8824-del · 4 스킬 · 옵시디언 없이 로컬 폴더</div></div>
     </div>
-    <p><strong>session-handoff · replay-learnings · learn-rule · retro</strong> — Claude Code 세션을 가로질러 저장하고 이어가는 핵심 도구.</p>
+    <p><strong>session-handoff · replay-learnings · learn-rule · retro</strong> · Claude Code 세션을 가로질러 저장하고 이어가는 핵심 도구.</p>
     <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># 환경변수만 본인 로컬 폴더로 (옵시디언 X)
 export SESSION_MEMORY_PATH="$HOME/.claude/memory"
 
@@ -1512,17 +1512,17 @@ $SESSION_MEMORY_PATH/
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🤝</span>
-      <div><div class="plugin-name">pro-workflow (LAYER 6 — Memory 보정)</div><div class="plugin-meta">rohitg00/pro-workflow · ★ 2K</div></div>
+      <div><div class="plugin-name">pro-workflow (LAYER 6 · Memory 보정)</div><div class="plugin-meta">rohitg00/pro-workflow · ★ 2K</div></div>
     </div>
-    <p><strong>session-handoff · replay-learnings · learn-rule · vault-save</strong> — 세션 간 학습·교훈 누적 패턴. claude-session-memory-kit이 이 패턴의 로컬 폴더 버전.</p>
+    <p><strong>session-handoff · replay-learnings · learn-rule · vault-save</strong> · 세션 간 학습·교훈 누적 패턴. claude-session-memory-kit이 이 패턴의 로컬 폴더 버전.</p>
   </div>
 
   <div class="reference">
     <p><strong>Day 1~3 강의 자료 허브</strong><br>
-      • <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 — 하네스 카탈로그</a><br>
-      • <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 — 하네스 5요소 + Superpowers</a><br>
-      • <a href="https://daniel8824-del.github.io/claude-skill-catalog/" target="_blank">claude-skill-catalog — 134 스킬</a><br>
-      • <a href="https://daniel8824-del.github.io/claude-wiki-verbs/" target="_blank">claude-wiki-verbs — 9-verb 위키 패턴</a></p>
+      • <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 · 하네스 카탈로그</a><br>
+      • <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 · 하네스 5요소 + Superpowers</a><br>
+      • <a href="https://daniel8824-del.github.io/claude-skill-catalog/" target="_blank">claude-skill-catalog · 134 스킬</a><br>
+      • <a href="https://daniel8824-del.github.io/claude-wiki-verbs/" target="_blank">claude-wiki-verbs · 9-verb 위키 패턴</a></p>
   </div>
 </section>
 
@@ -1547,8 +1547,8 @@ $SESSION_MEMORY_PATH/
     </p>
     <p class="muted">
       Repo: <a href="https://github.com/daniel8824-del/rag-day3" target="_blank">github.com/daniel8824-del/rag-day3</a> ·
-      어제: <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 — 하네스 5요소 + Superpowers</a> ·
-      그제: <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 — 하네스 카탈로그</a><br>
+      어제: <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 · 하네스 5요소 + Superpowers</a> ·
+      그제: <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 · 하네스 카탈로그</a><br>
       외부 출처: <a href="https://github.com/garrytan/gstack" target="_blank">gstack</a> · <a href="https://github.com/Q00/ouroboros" target="_blank">Q00/ouroboros</a> · <a href="https://github.com/VectifyAI/OpenKB" target="_blank">VectifyAI/OpenKB</a> · <a href="https://github.com/JuliusBrussee/caveman" target="_blank">JuliusBrussee/caveman</a> · <a href="https://github.com/pbakaus/impeccable" target="_blank">pbakaus/impeccable</a> · <a href="https://github.com/rohitg00/agentmemory" target="_blank">rohitg00/agentmemory</a> · <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank">claude-session-memory-kit</a>
     </p>
   </div>
