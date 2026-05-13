@@ -840,7 +840,7 @@ $B screenshot /tmp/login-success.png
   </div>
 
 
-  <h3><span class="step-num">5</span>부록 도구 | Ouroboros 스킬 안내 (10분)</h3>
+  <h3><span class="step-num">5</span>부록 도구 | Ouroboros 스킬 안내</h3>
   <p><strong>Q00/ouroboros</strong> · Agent OS · 한국어 README 제공. 4단계 진화 루프 (Interview → Seed → Execute → Evaluate)를 따라가는 <strong>20개 명령</strong>. gstack 표처럼 단계별 매핑:</p>
 
   <table style="font-size:13px;">
@@ -861,9 +861,8 @@ $B screenshot /tmp/login-success.png
     </tbody>
   </table>
 
-  <p style="font-size:13px;color:#555;">다른 부록 도구 (<strong>OpenKB · Caveman · RTK · Impeccable · agentmemory · session-memory-kit</strong>)는 <a href="#meta">§ 부록 도구함</a>에서 자세히.</p>
 
-  <h3><span class="step-num">6</span>토큰 전략 실습 (10분) | Caveman + RTK</h3>
+  <h3><span class="step-num">6</span>부록 도구 | Caveman + RTK</h3>
   <p>매일 AI 작업 토큰비 ~70%↓. 두 도구는 <strong>방향이 다름</strong>:</p>
 
   <table style="font-size:13px;">
@@ -875,10 +874,8 @@ $B screenshot /tmp/login-success.png
     </tbody>
   </table>
 
-  <p style="font-size:13px;color:#555;">설치·4 레벨·BEFORE/AFTER 예시는 <a href="#meta">§ 부록 도구함</a>에서 자세히.</p>
-
   <h3><span class="step-num">7</span>메모리 키트 (15분)</h3>
-  <p>세션 간 작업·교훈 누적 — 4 스킬:</p>
+  <p>세션 간 작업·교훈 누적 — 3 스킬 (retro는 gstack에 이미 있음 | §3 ⑦ 단계 참조):</p>
 
   <table style="font-size:13px;">
     <colgroup><col style="width:24%;"><col style="width:54%;"><col style="width:22%;"></colgroup>
@@ -887,19 +884,18 @@ $B screenshot /tmp/login-success.png
       <tr><td><code class="inline">session-handoff</code></td><td>세션 종료 시 다음 세션용 핸드오프 메모 저장</td><td><code class="inline">/session-handoff</code></td></tr>
       <tr><td><code class="inline">replay-learnings</code></td><td>새 세션 시작 시 자동 회상</td><td>자동 (hook)</td></tr>
       <tr><td><code class="inline">learn-rule</code></td><td>실수·교훈 1줄 룰로 저장</td><td><code class="inline">/learn-rule</code></td></tr>
-      <tr><td><code class="inline">retro</code></td><td>주간 회고</td><td><code class="inline">/retro</code></td></tr>
     </tbody>
   </table>
 
   <p><strong>설치</strong> (Copilot CLI · Claude Code 동등):</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">git clone https://github.com/daniel8824-del/claude-session-memory-kit ~/tmp/csmk
-cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} ~/.copilot/skills/
+cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule} ~/.copilot/skills/
 
 # (선택) 본인 로컬 폴더로 메모리 경로 지정
 export SESSION_MEMORY_PATH="$HOME/.claude/memory"</pre>
 
   <div class="reference">
-    <p><strong>원본 출처</strong> | session-handoff · replay-learnings · learn-rule 3종은 <a href="https://github.com/rohitg00/pro-workflow" target="_blank">rohitg00/pro-workflow</a> (★ 2k), retro는 <a href="https://github.com/garrytan/gstack" target="_blank">garrytan/gstack</a> (★ 82k · 원본 그대로). 위 클론 repo는 한국어 본문 + 옵시디언 통합 변형.</p>
+    <p><strong>원본 출처</strong> | 3 스킬 모두 <a href="https://github.com/rohitg00/pro-workflow" target="_blank">rohitg00/pro-workflow</a> (★ 2k). 위 클론 repo는 한국어 본문 + 옵시디언 통합 변형.</p>
   </div>
 </section>
 
