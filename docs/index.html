@@ -877,65 +877,29 @@ $B screenshot /tmp/login-success.png
 
   <p style="font-size:13px;color:#555;">설치·4 레벨·BEFORE/AFTER 예시는 <a href="#meta">§ 부록 도구함</a>에서 자세히.</p>
 
-  <h3><span class="step-num">7</span>메모리 키트 다운로드·실습 (15분)</h3>
-  <p>세션이 끝나도 작업·교훈·결정이 사라지지 않게 | <strong>claude-session-memory-kit</strong> 4 스킬 설치하고 본인 노트 폴더에 연결.</p>
+  <h3><span class="step-num">7</span>메모리 키트 (15분)</h3>
+  <p>세션 간 작업·교훈 누적 — 4 스킬:</p>
 
-  <table>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:24%;"><col style="width:54%;"><col style="width:22%;"></colgroup>
     <thead><tr><th>스킬</th><th>역할</th><th>호출</th></tr></thead>
     <tbody>
-      <tr><td><code class="inline">session-handoff</code></td><td>지금까지 한 일을 다음 세션용 메모로 저장</td><td><code class="inline">/session-handoff</code></td></tr>
-      <tr><td><code class="inline">replay-learnings</code></td><td>새 세션 시작 시 지난 작업·교훈 자동 회상</td><td>자동 (SessionStart hook)</td></tr>
-      <tr><td><code class="inline">learn-rule</code></td><td>실수·교훈을 1줄 룰로 영구 박지</td><td><code class="inline">/learn-rule</code></td></tr>
-      <tr><td><code class="inline">retro</code></td><td>주간 엔지니어링 회고 + 트렌드 분석</td><td><code class="inline">/retro</code></td></tr>
+      <tr><td><code class="inline">session-handoff</code></td><td>세션 종료 시 다음 세션용 핸드오프 메모 저장</td><td><code class="inline">/session-handoff</code></td></tr>
+      <tr><td><code class="inline">replay-learnings</code></td><td>새 세션 시작 시 자동 회상</td><td>자동 (hook)</td></tr>
+      <tr><td><code class="inline">learn-rule</code></td><td>실수·교훈 1줄 룰로 저장</td><td><code class="inline">/learn-rule</code></td></tr>
+      <tr><td><code class="inline">retro</code></td><td>주간 회고</td><td><code class="inline">/retro</code></td></tr>
     </tbody>
   </table>
 
-  <p><strong>설치 | 옵시디언 없이 로컬 폴더만</strong>:</p>
-  <div class="dual-track">
-    <div class="track instr">
-      <div class="track-h">1단계 | 환경변수 설정 (본인 로컬 폴더)</div>
-      <pre># Linux · macOS · WSL
-export SESSION_MEMORY_PATH="$HOME/.claude/memory"
+  <p><strong>설치</strong> (Copilot CLI · Claude Code 동등):</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">git clone https://github.com/daniel8824-del/claude-session-memory-kit ~/tmp/csmk
+cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} ~/.copilot/skills/
 
-# Windows PowerShell
-$env:SESSION_MEMORY_PATH = `
-  "$env:USERPROFILE\.claude\memory"
-
-# 폴더 자동 생성:
-# sessions/    learnings/    retros/</pre>
-    </div>
-    <div class="track stu">
-      <div class="track-h">2단계 | 4 스킬 설치 (Claude Code · Copilot)</div>
-      <pre># repo 클론
-git clone https://github.com/\
-daniel8824-del/claude-session-memory-kit \
-~/tmp/csmk
-
-# Claude Code 글로벌 설치
-cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
-  ~/.claude/skills/
-
-# Copilot CLI 설치 (동등)
-cp -r ~/tmp/csmk/{session-handoff,replay-learnings,learn-rule,retro} \
-  ~/.copilot/skills/</pre>
-    </div>
-  </div>
-
-  <p><strong>3단계 | 첫 사용 테스트</strong>:</p>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># 이번 세션 종료 시 핸드오프 저장
-"/session-handoff"
-
-# 다음 세션 시작 시 자동 회상 | 직접 호출 불필요
-# (SessionStart hook이 replay-learnings 자동 실행)
-
-# 실수했을 때 룰로 기록
-"/learn-rule '회사 데이터는 절대 GitHub public 금지'"
-
-# 주간 회고
-"/retro"</pre>
+# (선택) 본인 로컬 폴더로 메모리 경로 지정
+export SESSION_MEMORY_PATH="$HOME/.claude/memory"</pre>
 
   <div class="reference">
-    <p><strong>옵시디언 사용 중이면</strong> | <code class="inline">SESSION_MEMORY_PATH</code>를 옵시디언 볼트 안 폴더로 지정. 그러면 회상·교훈이 옵시디언에도 자동 누적. <strong>옵시디언 X 사용자</strong>는 일반 로컬 폴더로 OK. 둘 다 똑같이 작동.</p>
+    <p><strong>원본 출처</strong> | session-handoff · replay-learnings · learn-rule 3종은 <a href="https://github.com/rohitg00/pro-workflow" target="_blank">rohitg00/pro-workflow</a> (★ 2k), retro는 <a href="https://github.com/garrytan/gstack" target="_blank">garrytan/gstack</a> (★ 82k · 원본 그대로). 위 클론 repo는 한국어 본문 + 옵시디언 통합 변형.</p>
   </div>
 </section>
 
