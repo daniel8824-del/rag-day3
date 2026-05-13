@@ -1256,43 +1256,95 @@ obsidian-cli note create \
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🌀</span>
-      <div><div class="plugin-name">Ouroboros (우로보로스)</div><div class="plugin-meta">Q00/ouroboros · Agent OS — 자기-진화 루프</div></div>
+      <div><div class="plugin-name">Ouroboros (우로보로스)</div><div class="plugin-meta">Q00/ouroboros · Agent OS — 자기-진화 루프 · 한국어 README</div></div>
     </div>
-    <p><strong>Interview → Seed → Execute → Evaluate → 진화 루프</strong>. 매 사이클이 다음 사이클의 입력이 되어 시스템이 본인이 만드는 걸 점점 정확히 이해. Socratic Clarity (모호함 ≤ 0.2까지 질문) · Ontological Precision (증상 X · 근본 문제). MCP 서버 자동 발견 (<code class="inline">~/.ouroboros/mcp_servers.yaml</code>). 한국어 README 제공.</p>
+    <p><strong>"프롬프트하지 말고 명세하라"</strong> — 4단계 진화 루프로 모호한 요구사항을 정확한 명세로 변환.</p>
+    <table>
+      <thead><tr><th>단계</th><th>역할</th></tr></thead>
+      <tbody>
+        <tr><td><strong>① Interview</strong></td><td>Socratic Clarity — 모호함 ≤ 0.2까지 질문 반복. AI가 "이건 무슨 뜻인지" 묻고 사용자가 답하며 명세를 정련</td></tr>
+        <tr><td><strong>② Seed</strong></td><td>Ontological Precision — 인터뷰 결과로 근본 문제(symptom X · root cause) 정의. 명세의 seed 생성</td></tr>
+        <tr><td><strong>③ Execute</strong></td><td>seed 기반 구현 — 코드 작성 · 시스템 구축. 명세가 정확할수록 산출물 정확</td></tr>
+        <tr><td><strong>④ Evaluate</strong></td><td>실행 결과를 평가해 다음 사이클 명세에 피드백 — 진화 루프 형성. 매 사이클이 단순 반복이 아닌 진화</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#555;">MCP 서버 자동 발견 (<code class="inline">~/.ouroboros/mcp_servers.yaml</code>). 본 강의 외 본인 프로젝트 설계 시 활용 추천.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">📚</span>
-      <div><div class="plugin-name">OpenKB</div><div class="plugin-meta">VectifyAI/OpenKB · Karpathy LLM Wiki CLI 구현 (★ 1.2k)</div></div>
+      <div><div class="plugin-name">OpenKB</div><div class="plugin-meta">VectifyAI/OpenKB · Karpathy LLM Wiki CLI 구현 (★ 1.2k · Apache-2.0)</div></div>
     </div>
     <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">mkdir my-kb && cd my-kb
 openkb init
 openkb add paper.pdf
 openkb add ~/papers/    # 폴더 전체 추가
 openkb query "내 노트 중 X 관련?"</pre>
-    <p style="font-size:13px;color:#555;margin-top:8px;">Apache-2.0 · Python · Karpathy의 "LLM Wiki" 트윗을 CLI로 구현. 옵시디언 없이 그냥 폴더 + CLI 만으로 LLM Wiki 운영.</p>
+    <p style="font-size:13px;color:#555;margin-top:8px;">Karpathy의 "LLM Wiki" 트윗을 CLI로 구현. 옵시디언 없이 그냥 폴더 + CLI 만으로 LLM Wiki 운영.</p>
+
+    <p style="margin-top:12px;"><strong>호환성 · LLM 백엔드</strong>:</p>
+    <table>
+      <thead><tr><th>항목</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Copilot CLI 호환</strong></td><td>✅ — OpenKB는 독립 Python CLI. Claude/Copilot 무관하게 작동. 어떤 환경에서든 <code class="inline">openkb</code> 명령 직접 실행</td></tr>
+        <tr><td><strong>LLM 백엔드 필요</strong></td><td>임베딩·요약·페이지 생성 시 호출 필요</td></tr>
+        <tr><td><strong>옵션 1 — Ollama (로컬·무료)</strong></td><td>회사 데이터 보안 ✓ · 토큰비 0원 · 추천</td></tr>
+        <tr><td><strong>옵션 2 — OpenRouter · OpenAI · Anthropic</strong></td><td>API 키 + 토큰 과금</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🪨</span>
-      <div><div class="plugin-name">Caveman</div><div class="plugin-meta">JuliusBrussee/caveman · 토큰 65~75% 절감 (Claude Code 스킬)</div></div>
+      <div><div class="plugin-name">Caveman vs RTK — 토큰 절감 도구 비교</div><div class="plugin-meta">서로 보완 — 출력 vs 입력</div></div>
     </div>
-    <p>"동굴인처럼 말하기" — AI 출력을 짧고 핵심만으로 강제. 같은 기술적 정확도 유지하면서 토큰 비용 ↓. <strong>Levels</strong>: lite (필러만 제거) · full (기본 caveman) · ultra (전보 스타일) · wenyan (고전 한문 — 가장 짧음).</p>
-    <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">npx skills add JuliusBrussee/caveman</pre>
+
+    <table>
+      <thead><tr><th>도구</th><th>절감 방향</th><th>방식</th><th>호환</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Caveman</strong><br><span style="font-size:12px;color:#666;">JuliusBrussee/caveman</span></td>
+          <td><strong>출력</strong> 토큰 65~75%↓</td>
+          <td>AI 답변을 짧고 핵심만으로 강제 ("동굴인처럼 말하기"). 의미적 제약 엔진.</td>
+          <td>Claude Code · Codex</td>
+        </tr>
+        <tr>
+          <td><strong>RTK</strong> (Rust Token Killer)<br><span style="font-size:12px;color:#666;">rust-token-killer</span></td>
+          <td><strong>입력</strong> 토큰 60~90%↓</td>
+          <td>dev 명령(<code class="inline">git diff</code>·<code class="inline">npm test</code> 등) 결과를 hook으로 자동 압축</td>
+          <td><strong>Claude Code 전용</strong> (hook 기반)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:8px;"><strong>Caveman 4 레벨</strong> (출력 절감 강도):</p>
+    <ul style="padding-left:22px;font-size:14.5px;">
+      <li><code class="inline">lite</code> — 필러만 제거 (자연어 유지) · ~30%</li>
+      <li><code class="inline">full</code> — 기본 caveman 톤 · ~65%</li>
+      <li><code class="inline">ultra</code> — 전보 스타일 (telegraphic) · ~75%</li>
+      <li><code class="inline">wenyan</code> — 고전 한문 스타일 · ~87%</li>
+    </ul>
+
+    <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># Caveman 설치 (Claude Code · Codex)
+npx skills add JuliusBrussee/caveman
+
+# RTK는 Claude Code hook 기반 — 별도 설치 후 자동 작동</pre>
+
+    <p style="font-size:13px;color:#555;"><strong>둘 다 쓰면 누적 효과</strong> — RTK가 입력 측 60~90%↓ + Caveman이 출력 측 65~75%↓. Claude Code 환경에서 토큰 비용 평균 70% 절감 가능.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">✨</span>
       <div><div class="plugin-name">Impeccable</div><div class="plugin-meta">pbakaus/impeccable · AI 하네스를 더 좋은 디자이너로</div></div>
     </div>
-    <p>AI가 생성한 디자인의 품질을 lint 보고서로 평가. AI 슬롭 패턴 자동 감지 — 일관성·계층·간격 등. <a href="https://github.com/pbakaus/impeccable" target="_blank">impeccable on GitHub</a>.</p>
+    <p>AI가 생성한 디자인의 품질을 lint 보고서로 평가. AI 슬롭 패턴 자동 감지 — 일관성·계층·간격·과잉 그림자/gradient 등. <a href="https://github.com/pbakaus/impeccable" target="_blank">impeccable on GitHub</a>.</p>
   </div>
 
   <div class="plugin-card">
     <div class="plugin-h"><span class="plugin-icon">🧠</span>
-      <div><div class="plugin-name">agentmemory</div><div class="plugin-meta">rohitg00/agentmemory · 4-tier 메모리 + 12 hooks + 51 MCP tools</div></div>
+      <div><div class="plugin-name">agentmemory (본인 테스트 추천)</div><div class="plugin-meta">rohitg00/agentmemory · 4-tier 메모리 + 12 hooks + 51 MCP tools</div></div>
     </div>
-    <p>인간 뇌 처리 영감 (Working · Episodic · Semantic · Procedural) + BM25 + 벡터 + 그래프 RRF 검색. <strong>95.2% R@5 (LongMemEval-S)</strong>.</p>
+    <p>인간 뇌 처리 영감 (Working · Episodic · Semantic · Procedural) + BM25 + 벡터 + 그래프 RRF 검색. <strong>95.2% R@5 (LongMemEval-S)</strong>. SQLite 저장 — 외부 의존성 0.</p>
     <table style="font-size:13px;">
       <thead><tr><th>환경</th><th>호환성</th><th>설치 난이도</th></tr></thead>
       <tbody>
@@ -1300,7 +1352,7 @@ openkb query "내 노트 중 X 관련?"</pre>
         <tr><td>Copilot CLI</td><td>❌ 직접 X · REST API 우회</td><td>어려움 — <code class="inline">curl POST /agentmemory/observe</code></td></tr>
       </tbody>
     </table>
-    <p style="font-size:13px;color:#555;">→ <strong>Copilot 사용자는 우로보로스 + OpenKB 조합 대안 권장</strong>. 본격 메모리는 Claude Code 환경.</p>
+    <p style="font-size:13px;color:#555;margin-top:8px;"><strong>본인 테스트 추천</strong> — Claude Code 환경에서 한 줄 설치 후 일주일 사용. 자동 캡처(12 hooks)된 메모리가 어떻게 회상되는지 직접 체험. Copilot 사용자는 우로보로스 + OpenKB + claude-session-memory-kit 조합 대안.</p>
   </div>
 
   <div class="plugin-card">
