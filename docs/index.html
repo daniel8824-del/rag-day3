@@ -793,25 +793,26 @@ git clone https://github.com/garrytan/gstack `
 
   <p style="font-size:13px;color:#555;">각 단계 ~3분. 본인 주제가 작아도 OK — 카테고리 흐름을 한 사이클 체험하는 게 목적. 깊이는 다음 차시부터.</p>
 
-  <h4 style="margin-top:20px;">실 시연 — Yurisma 학원 SaaS (강사 운영 사이트로 ④ QA 단계 시연)</h4>
+  <h4 style="margin-top:20px;">실 시연 — 공개 데모 사이트로 ④ QA 단계 (the-internet 표준 QA 데모)</h4>
+  <p style="font-size:13px;color:#555;">QA 테스트 표준 공개 데모. 가짜 자격증명 제공(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>). 본인 회사 사이트로 바꾸려면 URL과 폼 셀렉터만 교체.</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">B="$HOME/.copilot/skills/gstack/browse/dist/browse"
 
 # 1. 사이트 이동
-$B goto https://yurisma-school.vercel.app/
+$B goto https://the-internet.herokuapp.com/login
 
 # 2. 로그인 폼 요소 자동 탐지
 $B snapshot -i
 
 # 3. 로그인 정보 입력 + 클릭
-$B fill @phone "010-3201-8824"
-$B fill @password "1234"
-$B click @login-btn
+$B fill @username "tomsmith"
+$B fill @password "SuperSecretPassword!"
+$B click @submit
 
 # 4. 로그인 후 스크린샷
-$B screenshot /tmp/mypage.png
+$B screenshot /tmp/login-success.png
 
-# 결과: ✅ /login → /mypage 정상 이동
-#       ✅ 이성오님 로그인 + 사용자 정보 정상 로딩</pre>
+# 결과: ✅ /login → /secure 정상 이동
+#       ✅ "You logged into a secure area!" 메시지 확인</pre>
 
   <h4 style="margin-top:18px;">실 시연 — ⑤ 보안 감사 (Day 2 미완료)</h4>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /cso
