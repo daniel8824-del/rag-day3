@@ -905,41 +905,64 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
   <h3><span class="step-num">1</span>임베딩 한 줄</h3>
   <p>임베딩 = 텍스트를 <strong>의미가 비슷하면 가까운 숫자 벡터</strong>로. 본인 노트 N개 미리 임베딩 → 질문도 임베딩 → 가장 가까운 노트 찾기. 끝.</p>
 
-  <h3><span class="step-num">2</span>QMD 설치 재확인</h3>
-  <p>어제 8차시에서 설치한 QMD가 작동하는지 확인. 임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬 추론).</p>
+  <h3><span class="step-num">2</span>QMD 설치 (tobi/qmd · Bun 기반)</h3>
+  <p>QMD는 Tobias Lütke의 오픈소스 도구. SQLite + 로컬 임베딩 + BM25/벡터/하이브리드 검색. 자세히는 <a href="https://github.com/tobi/qmd" target="_blank">github.com/tobi/qmd</a>.</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 설치 확인
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">Linux · macOS · WSL</div>
+      <pre># 1. Bun 설치 (이미 있으면 건너뜀)
+curl -fsSL https://bun.sh/install | bash
+
+# 2. QMD 글로벌 설치
+bun install -g https://github.com/tobi/qmd
+
+# 3. 설치 확인
 qmd --version
-qmd status                # 인덱스 + 컬렉션 건전성
-
-# 사용 가능 명령 전체
 qmd --help</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">Windows (PowerShell · 관리자 권장)</div>
+      <pre># 한 줄 설치 (Bun + qmd.exe wrapper 자동)
+irm https://raw.githubusercontent.com/doraemonkeys/qmd-windows/main/install.ps1 | iex
 
-  <h3><span class="step-num">3</span>실습 | 본인 폴더(또는 샘플) 인덱싱</h3>
-  <p>본인 노트 폴더가 있으면 바로 사용. 없으면 <a href="#dl">§ 실습 자료</a>에서 샘플 마크다운 묶음(<code class="inline">sample-notes.zip</code>) 받아 압축 해제.</p>
+# 확인
+qmd --version</pre>
+    </div>
+  </div>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 본인 폴더로 이동
-cd ~/notes            # 또는 압축 해제한 sample-notes/
+  <p style="font-size:13px;color:#555;">임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬 추론). 모델은 <code class="inline">~/.cache/qmd/models/</code>에 자동 다운로드 (최초 1회만).</p>
 
-# 인덱싱 (증분 자동 — 변경분만)
+  <h3><span class="step-num">3</span>실습 | 본인 폴더 → 컬렉션 등록 + 인덱싱</h3>
+  <p>QMD는 <strong>컬렉션 단위</strong>로 폴더 관리. 본인 폴더를 컬렉션으로 등록 후 인덱싱.</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 본인 폴더를 컬렉션으로 등록
+qmd collection add my-notes ~/notes
+#   ↑ 컬렉션 이름     ↑ 본인 노트 폴더 경로
+
+# 2. 등록된 컬렉션 확인
+qmd collection list
+
+# 3. 인덱싱 (등록된 모든 컬렉션 자동)
 qmd update
 
-# 상태 확인
-qmd status            # 인덱스 + 컬렉션 건전성
-
-# 인덱스된 파일 보기
-qmd ls</pre>
+# 4. 상태 + 인덱스된 파일 보기
+qmd status
+qmd ls my-notes</pre>
 
   <h3><span class="step-num">4</span>검색 테스트</h3>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색 (BM25)
-qmd search "검색어" -n 5
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색 (BM25) | 본인 컬렉션만
+qmd search "검색어" -c my-notes
 
-# 의미 검색 (코사인 유사도)
-qmd query "내 노트 중 X 관련?" -n 5
+# 하이브리드 검색 (BM25 + 벡터 + 자동 reranking)
+qmd query "내 노트 중 X 관련?" -c my-notes
+
+# 벡터만
+qmd vsearch "유사 개념" -c my-notes
 
 # 결과 예:
-# qmd://path/to/note.md  0.93   (유사도 점수)
-# qmd://path/to/other.md 0.78</pre>
+# qmd://my-notes/path/to/note.md  0.93   (점수)
+# qmd://my-notes/path/to/other.md 0.78</pre>
 
   <p>여기까지 작동하면 <strong>본인 PC에 로컬 임베딩 인덱스 1개 완성</strong>. 다음 차시는 이 인덱스 위에 그래프 옵션을 얹을지 결정 (RAG vs GraphRAG).</p>
 
