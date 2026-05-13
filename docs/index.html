@@ -840,54 +840,42 @@ $B screenshot /tmp/login-success.png
   </div>
 
 
-  <h3><span class="step-num">5</span>부록 도구 빠른 안내 (10분)</h3>
-  <p>gstack 외에 본인 주제에 도움이 될 도구들 | <strong>§ 부록 도구함</strong>에서 자세히 다룹니다. 여기서는 빠르게 무엇이 있는지만.</p>
+  <h3><span class="step-num">5</span>부록 도구 | Ouroboros 스킬 안내 (10분)</h3>
+  <p><strong>Q00/ouroboros</strong> · Agent OS · 한국어 README 제공. 4단계 진화 루프 (Interview → Seed → Execute → Evaluate)를 따라가는 <strong>20개 명령</strong>. gstack 표처럼 단계별 매핑:</p>
 
-  <table>
-    <thead><tr><th>도구</th><th>역할</th><th>호환</th></tr></thead>
+  <table style="font-size:13px;">
+    <colgroup>
+      <col style="width:18%;">
+      <col style="width:34%;">
+      <col style="width:48%;">
+    </colgroup>
+    <thead><tr><th>단계</th><th>핵심 명령</th><th>역할</th></tr></thead>
     <tbody>
-      <tr><td>🌀 <a href="#meta"><strong>Ouroboros</strong></a></td><td>Agent OS | 4단계 진화 루프 (Interview→Seed→Execute→Evaluate)로 모호한 요구 정련</td><td>Claude · Copilot</td></tr>
-      <tr><td>📚 <a href="#meta"><strong>OpenKB</strong></a></td><td>Karpathy LLM Wiki CLI 구현 | 옵시디언 없이 폴더 + CLI로 LLM Wiki 운영</td><td>독립 CLI (양쪽)</td></tr>
-      <tr><td>✨ <a href="#meta"><strong>Impeccable</strong></a></td><td>AI 디자인 lint | AI 슬롭 패턴 자동 감지</td><td>독립 CLI</td></tr>
-      <tr><td>🧠 <a href="#meta"><strong>agentmemory</strong></a></td><td>4-tier 메모리 + 12 hooks + 51 MCP tools (본격적인 메모리 시스템)</td><td>Claude 직접 / Copilot 우회</td></tr>
+      <tr><td><strong>설정 (초기)</strong></td><td><code class="inline">setup</code> · <code class="inline">welcome</code> · <code class="inline">tutorial</code></td><td>초기 셋업 + 첫 사용 가이드</td></tr>
+      <tr><td><strong>① Interview</strong></td><td><code class="inline">interview</code></td><td>Socratic 질문 반복 (모호함 ≤ 0.2까지 정련)</td></tr>
+      <tr><td><strong>② Seed</strong></td><td><code class="inline">seed</code> · <code class="inline">publish</code></td><td>명세 생성 · Seed → GitHub Issue 자동 변환</td></tr>
+      <tr><td><strong>③ Execute</strong></td><td><code class="inline">run</code> · <code class="inline">auto</code> · <code class="inline">ralph</code> · <code class="inline">brownfield</code></td><td>실행 (auto=자율 / ralph=무한 루프 / brownfield=기존 코드 진입)</td></tr>
+      <tr><td><strong>④ Evaluate</strong></td><td><code class="inline">evaluate</code> · <code class="inline">qa</code> · <code class="inline">pm</code></td><td>평가 + QA + 프로젝트 매니저 시각 검토</td></tr>
+      <tr><td><strong>진화 루프</strong></td><td><code class="inline">evolve</code></td><td>다음 사이클 명세로 평가 결과 피드백</td></tr>
+      <tr><td><strong>운영</strong></td><td><code class="inline">status</code> · <code class="inline">unstuck</code> · <code class="inline">resume-session</code> · <code class="inline">cancel</code> · <code class="inline">update</code> · <code class="inline">help</code></td><td>상태·막힘 해소·세션 이어가기·취소·업데이트·도움말</td></tr>
     </tbody>
   </table>
-  <p style="font-size:13px;color:#555;">→ § 부록 도구함에서 각 도구별 정의·설치·예시 자세히. 본 sub-section은 "이런 게 있다" 빠른 매핑.</p>
+
+  <p style="font-size:13px;color:#555;">다른 부록 도구 (<strong>OpenKB · Caveman · RTK · Impeccable · agentmemory · session-memory-kit</strong>)는 <a href="#meta">§ 부록 도구함</a>에서 자세히.</p>
 
   <h3><span class="step-num">6</span>토큰 전략 실습 (10분) | Caveman + RTK</h3>
-  <p>매일 AI 작업에서 토큰비 70%↓ 누적 절감. 두 도구는 <strong>방향이 다르므로 보완</strong>:</p>
+  <p>매일 AI 작업 토큰비 ~70%↓. 두 도구는 <strong>방향이 다름</strong>:</p>
 
-  <table>
-    <thead><tr><th>도구</th><th>절감 방향</th><th>설치</th><th>호환</th></tr></thead>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:22%;"><col style="width:50%;"><col style="width:28%;"></colgroup>
+    <thead><tr><th>도구</th><th>절감 방향</th><th>호환</th></tr></thead>
     <tbody>
-      <tr>
-        <td>🪨 <strong>Caveman</strong></td>
-        <td><strong>출력</strong> 토큰 65~75%↓ (AI 답변을 짧고 핵심만)</td>
-        <td><code class="inline">npx skills add JuliusBrussee/caveman</code></td>
-        <td>Claude Code · Codex</td>
-      </tr>
-      <tr>
-        <td>⚡ <strong>RTK</strong> (Rust Token Killer)</td>
-        <td><strong>입력</strong> 토큰 60~90%↓ (dev 명령 결과 hook으로 자동 압축)</td>
-        <td>별도 hook 설치 · 자동 작동</td>
-        <td><strong>Claude Code 전용</strong></td>
-      </tr>
+      <tr><td>🪨 <strong>Caveman</strong></td><td><strong>출력</strong> 토큰 65~75%↓ (AI 답변을 짧게)</td><td>Claude Code · Codex</td></tr>
+      <tr><td>⚡ <strong>RTK</strong></td><td><strong>입력</strong> 토큰 60~90%↓ (dev 명령 결과 hook 자동 압축)</td><td>Claude Code 전용</td></tr>
     </tbody>
   </table>
 
-  <p><strong>Caveman 4 레벨</strong>: <code class="inline">lite</code> (~30%) · <code class="inline">full</code> (~65%) · <code class="inline">ultra</code> (~75%) · <code class="inline">wenyan</code> (~87%, 고전 한문).</p>
-
-  <p><strong>예시 | 같은 질문에 Caveman 적용 전후</strong>:</p>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># BEFORE (기본)
-"이 코드의 핵심 함수는 데이터 로딩을 담당하며,
- UTF-8 BOM을 처리하고, 9개 컬럼을 파싱한 후
- 객체 배열로 변환합니다."
-
-# AFTER (Caveman full)
-"load_csv: UTF-8 BOM 처리. 9컬럼 파싱. 객체 배열 반환."
-
-# AFTER (wenyan)
-"載 CSV. BOM 解. 九列 析. 對象 列 返."</pre>
+  <p style="font-size:13px;color:#555;">설치·4 레벨·BEFORE/AFTER 예시는 <a href="#meta">§ 부록 도구함</a>에서 자세히.</p>
 
   <h3><span class="step-num">7</span>메모리 키트 다운로드·실습 (15분)</h3>
   <p>세션이 끝나도 작업·교훈·결정이 사라지지 않게 | <strong>claude-session-memory-kit</strong> 4 스킬 설치하고 본인 노트 폴더에 연결.</p>
