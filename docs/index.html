@@ -385,6 +385,12 @@
     background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 3px;
     font-size: 12.5px; border: 1px solid rgba(0,0,0,0.08);
   }
+  .dual-track .track .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    color: #555; margin: 10px 0 4px;
+  }
+  .dual-track .track .step-label:first-of-type { margin-top: 4px; }
   .dual-track .track pre {
     display: block; padding: 8px 10px; margin-top: 6px; overflow-x: auto;
   }
@@ -611,19 +617,19 @@
   <div class="dual-track">
     <div class="track instr">
       <div class="track-h">Copilot CLI (Linux · macOS · WSL)</div>
-      <pre>mkdir -p ~/.copilot/skills
-git clone https://github.com/garrytan/gstack \
-  ~/.copilot/skills/gstack
-
-# 자동 인식 (재시작 불필요)
-copilot skill gstack /qa</pre>
+      <div class="step-label">① 스킬 폴더 생성</div>
+      <pre>mkdir -p ~/.copilot/skills</pre>
+      <div class="step-label">② gstack clone</div>
+      <pre>git clone https://github.com/garrytan/gstack ~/.copilot/skills/gstack</pre>
+      <div class="step-label">③ 자동 인식 확인 (재시작 불필요)</div>
+      <pre>copilot skill gstack /qa</pre>
     </div>
     <div class="track stu">
       <div class="track-h">Windows 네이티브 (PowerShell)</div>
-      <pre>New-Item -ItemType Directory `
-  -Path "$env:USERPROFILE\.copilot\skills" -Force
-git clone https://github.com/garrytan/gstack `
-  "$env:USERPROFILE\.copilot\skills\gstack"</pre>
+      <div class="step-label">① 스킬 폴더 생성</div>
+      <pre>New-Item -ItemType Directory -Path "$env:USERPROFILE\.copilot\skills" -Force</pre>
+      <div class="step-label">② gstack clone</div>
+      <pre>git clone https://github.com/garrytan/gstack "$env:USERPROFILE\.copilot\skills\gstack"</pre>
     </div>
   </div>
 
@@ -777,7 +783,7 @@ git clone https://github.com/garrytan/gstack `
     </tbody></table>
   </div>
 
-  <h3><span class="step-num">3</span>본인 주제 사이클 실습 (25분) | 각 카테고리 1개씩</h3>
+  <h3><span class="step-num">3</span>본인 주제 사이클 실습 | 각 카테고리 1개씩</h3>
   <p class="lead">Day 2 끝에 정한 본인 주제로 gstack 카테고리를 순서대로 한 번씩 통과. 각 단계에서 핵심 스킬 1개를 직접 호출해보고, 산출물을 다음 단계로 넘기는 흐름.</p>
 
   <table style="font-size:13px;">
@@ -802,7 +808,12 @@ git clone https://github.com/garrytan/gstack `
   <p style="font-size:13px;color:#555;">각 단계 ~3분. 본인 주제가 작아도 OK | 카테고리 흐름을 한 사이클 체험하는 게 목적. 깊이는 다음 차시부터.</p>
 
   <h4 style="margin-top:20px;">도구 작동 시연 | <code class="inline">browse</code> 명령이 어떻게 흘러가는지 (QA 표준 데모 사이트)</h4>
-  <p style="font-size:13px;color:#555;"><strong>이건 실습 주제가 아니라 도구 작동 학습용입니다.</strong> 공개 QA 표준 데모(<a href="https://the-internet.herokuapp.com/login" target="_blank">the-internet.herokuapp.com</a>) + 가짜 자격증명(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>)으로 <code class="inline">browse</code> 5단계 흐름이 어떻게 작동하는지 한 번 따라보세요. 나중에 본인 주제(또는 회사 사이트)에 적용 시 URL과 셀렉터만 교체.</p>
+  <p style="font-size:13px;color:#555;"><strong>이건 실습 주제가 아니라 도구 작동 학습용입니다.</strong> 공개 QA 표준 데모(<a href="https://the-internet.herokuapp.com/login" target="_blank">the-internet.herokuapp.com</a>) + 가짜 자격증명(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>)으로 <code class="inline">browse</code> 5단계 흐름이 어떻게 작동하는지 한 번 따라보세요.</p>
+
+  <p><strong>자연어 프롬프트 예시</strong> (Copilot CLI · 권장):</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">"the-internet.herokuapp.com/login 페이지에서
+tomsmith / SuperSecretPassword! 로 로그인하고
+결과 페이지를 /tmp/login-success.png에 캡처해줘"</pre>
 
   <p><strong>5단계 흐름</strong> | 각 명령이 하는 일:</p>
   <ul style="padding-left:22px;font-size:14.5px;">
@@ -873,7 +884,7 @@ $B screenshot /tmp/login-success.png
     </tbody>
   </table>
 
-  <h3><span class="step-num">7</span>메모리 키트 (15분)</h3>
+  <h3><span class="step-num">7</span>메모리 키트</h3>
   <p>세션 간 작업·교훈 누적 | 2 스킬 (retro는 gstack에 이미 있음 | §3 ⑦ 단계 참조):</p>
 
   <table style="font-size:13px;">
@@ -899,7 +910,7 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
 
   <div class="goal">
     <div class="goal-label">학습 목표</div>
-    <div class="goal-text">어제 설치한 QMD 재확인 + 임베딩 모델(bge-m3) 세팅 + 본인 폴더(또는 샘플 폴더)에 <strong>인덱스 1개 직접 만들기</strong>. 끝나면 <code class="inline">qmd search</code> · <code class="inline">qmd query</code>로 검색 동작 확인.</div>
+    <div class="goal-text">어제 설치한 QMD 재확인 + 임베딩 모델(bge-m3) 세팅 + 본인 폴더에 <strong>인덱스 1개 직접 만들기</strong>. 끝나면 <code class="inline">qmd search</code> · <code class="inline">qmd query</code>로 검색 동작 확인. (본인 폴더가 없으면 즉석에서 빈 폴더 하나 만들어 시연)</div>
   </div>
 
   <h3><span class="step-num">1</span>임베딩 한 줄</h3>
@@ -1192,7 +1203,7 @@ Register-ScheduledTask -TaskName "qmd-hourly-update" `
     <div class="track stu">
       <div class="track-h">터미널 직접 (PowerShell)</div>
       <pre># defuddle 설치 (1회)
-npm install -g defuddle-cli
+npm install -g defuddle
 
 # URL → 마크다운 파일 저장
 defuddle https://example.com/article `
