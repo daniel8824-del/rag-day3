@@ -920,6 +920,11 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
   <h3><span class="step-num">1</span>임베딩 한 줄</h3>
   <p>임베딩 = 텍스트를 <strong>의미가 비슷하면 가까운 숫자 벡터</strong>로. 본인 노트 N개 미리 임베딩 → 질문도 임베딩 → 가장 가까운 노트 찾기. 끝.</p>
 
+  <figure class="comic">
+    <img src="images/embedding-flow.png" alt="임베딩 흐름 | 데이터 → 벡터 DB → 검색·AI 모델">
+    <figcaption><strong>이미지</strong> | 데이터 (텍스트·이미지·관계) → 벡터 DB (숫자 벡터) → 검색 엔진·AI 모델</figcaption>
+  </figure>
+
   <h3><span class="step-num">2</span>QMD 설치 (tobi/qmd · Bun 기반)</h3>
   <p>QMD는 Tobias Lütke의 오픈소스 도구. SQLite + 로컬 임베딩 + BM25/벡터/하이브리드 검색. 자세히는 <a href="https://github.com/tobi/qmd" target="_blank">github.com/tobi/qmd</a>.</p>
 
