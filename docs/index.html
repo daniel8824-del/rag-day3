@@ -839,24 +839,6 @@ $B screenshot /tmp/login-success.png
     <p><strong>본인 주제에 적용 시</strong> | 위 5단계 흐름은 그대로 두고 URL(<code class="inline">goto ...</code>) + 셀렉터 이름(<code class="inline">@username</code> 등)만 본인 환경에 맞게 교체. <code class="inline">snapshot -i</code>는 어떤 사이트에서든 자동으로 식별자를 만들어주니, 처음 한 번 출력 확인해서 어떤 id가 어떤 요소인지 파악하면 됩니다.</p>
   </div>
 
-  <h4 style="margin-top:18px;">실 시연 | ⑤ 보안 감사 (Day 2 미완료)</h4>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /cso
-# 또는 자연어
-"gstack cso로 이 코드 보안 감사해줘"
-
-# 자동 검사 항목:
-# - 인증·권한 처리 (JWT · 세션 · ACL)
-# - 입력 검증 (XSS · SQL injection · path traversal)
-# - 의존성 CVE (package.json · requirements.txt)
-# - 시크릿 노출 (env · hardcoded keys)
-# - OWASP Top 10 종합
-
-# 건전성 종합
-copilot skill gstack /health</pre>
-
-  <div class="reference">
-    <p><strong>회사 적용</strong> | 본인 회사 시스템·repo에 같은 사이클을 적용. 작은 PR 1개에도 plan~retro 7단계를 짧게 돌려보면 흐름 체득. <strong>주의</strong> | 실 운영 데이터는 사내 git private + 사내 호스팅에서만. 외부 마켓 접근 제한 시 SKILL.md를 <code class="inline">.github/skills/</code> 또는 <code class="inline">.claude/skills/</code>에 직접 복사.</p>
-  </div>
 
   <h3><span class="step-num">5</span>부록 도구 빠른 안내 (10분)</h3>
   <p>gstack 외에 본인 주제에 도움이 될 도구들 | <strong>§ 부록 도구함</strong>에서 자세히 다룹니다. 여기서는 빠르게 무엇이 있는지만.</p>
