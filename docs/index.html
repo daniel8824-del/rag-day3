@@ -905,17 +905,15 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
   <h3><span class="step-num">1</span>임베딩 한 줄</h3>
   <p>임베딩 = 텍스트를 <strong>의미가 비슷하면 가까운 숫자 벡터</strong>로. 본인 노트 N개 미리 임베딩 → 질문도 임베딩 → 가장 가까운 노트 찾기. 끝.</p>
 
-  <h3><span class="step-num">2</span>QMD 설치 재확인 + 임베딩 모델 세팅</h3>
-  <p>어제 8차시에서 설치한 QMD가 작동하는지 확인. 임베딩 모델은 <code class="inline">bge-m3</code> (1024차원, 한국어 강함, 로컬 추론).</p>
+  <h3><span class="step-num">2</span>QMD 설치 재확인</h3>
+  <p>어제 8차시에서 설치한 QMD가 작동하는지 확인. 임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬 추론).</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 설치 확인
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 설치 확인
 qmd --version
-qmd stats
+qmd status                # 인덱스 + 컬렉션 건전성
 
-# 2. 임베딩 모델 확인 (bge-m3 다운로드 자동)
-qmd config show          # 현재 설정 확인
-# 모델 미설정 시:
-qmd config set model bge-m3</pre>
+# 사용 가능 명령 전체
+qmd --help</pre>
 
   <h3><span class="step-num">3</span>실습 | 본인 폴더(또는 샘플) 인덱싱</h3>
   <p>본인 노트 폴더가 있으면 바로 사용. 없으면 <a href="#dl">§ 실습 자료</a>에서 샘플 마크다운 묶음(<code class="inline">sample-notes.zip</code>) 받아 압축 해제.</p>
@@ -926,8 +924,11 @@ cd ~/notes            # 또는 압축 해제한 sample-notes/
 # 인덱싱 (증분 자동 — 변경분만)
 qmd update
 
-# 통계 확인
-qmd stats             # 파일 수 · 임베딩 수 · 크기</pre>
+# 상태 확인
+qmd status            # 인덱스 + 컬렉션 건전성
+
+# 인덱스된 파일 보기
+qmd ls</pre>
 
   <h3><span class="step-num">4</span>검색 테스트</h3>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색 (BM25)
@@ -1046,7 +1047,7 @@ qmd query "내 노트 중 X 관련?" -n 5
     <tbody>
       <tr><td><strong>매시간</strong></td><td><code class="inline">qmd update</code></td><td>새/변경 파일만 증분 인덱싱 (저비용 · 거의 즉시)</td></tr>
       <tr><td><strong>매일 새벽</strong></td><td><code class="inline">qmd embed</code></td><td>임베딩만 재계산 (BM25 인덱스 유지)</td></tr>
-      <tr><td><strong>매주</strong></td><td><code class="inline">qmd embed --full</code></td><td>전체 재임베딩 (모델 업그레이드 후 · lint 후)</td></tr>
+      <tr><td><strong>매주</strong></td><td><code class="inline">qmd embed -f</code></td><td>전체 재임베딩 강제 (모델 업그레이드 후 · cleanup 후)</td></tr>
       <tr><td><strong>이벤트 기반</strong></td><td><code class="inline">qmd update</code> (git hook)</td><td>git push 시 즉시 인덱싱 (CI 통합)</td></tr>
     </tbody>
   </table>
@@ -1060,7 +1061,7 @@ qmd query "내 노트 중 X 관련?" -n 5
 0 3 * * * cd ~/notes && qmd embed
 
 # 매주 일요일 9시 통계 로그
-0 9 * * 0 qmd stats &gt;&gt; ~/qmd-weekly.log</pre>
+0 9 * * 0 qmd status &gt;&gt; ~/qmd-weekly.log</pre>
   <p style="font-size:13px;color:#555;">cron 형식: <code class="inline">분 시 일 월 요일 명령</code>. <code class="inline">*</code> = 모든 값. 위 예시 첫 줄 = 매일 매시 0분.</p>
 
   <h3><span class="step-num">4</span>Windows | 작업 스케줄러</h3>
@@ -1080,7 +1081,7 @@ Register-ScheduledTask -TaskName "qmd-hourly-update" `
   <ul style="padding-left:22px;font-size:14.5px;">
     <li><strong>처음엔 수동</strong> | 익숙해진 후 크론잡 추가. 자동화 먼저 하면 디버깅 어려움.</li>
     <li><strong>로그 남기기</strong> | <code class="inline">qmd update &gt;&gt; ~/qmd.log 2&gt;&amp;1</code>로 실패 추적</li>
-    <li><strong>임베딩 모델 변경 후</strong> | 반드시 <code class="inline">qmd embed --full</code> 한 번 실행</li>
+    <li><strong>임베딩 모델 변경 후</strong> | 반드시 <code class="inline">qmd embed -f</code> 한 번 실행 (강제 재임베딩)</li>
     <li><strong>PC 끄면 X</strong> | 크론잡은 PC 켜진 시간에만. 항상 켜진 서버라면 안정적.</li>
   </ul>
 
