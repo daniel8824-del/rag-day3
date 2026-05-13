@@ -928,6 +928,21 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
   <h3><span class="step-num">2</span>QMD 설치 (tobi/qmd · Bun 기반)</h3>
   <p>QMD는 Tobias Lütke의 오픈소스 도구. SQLite + 로컬 임베딩 + BM25/벡터/하이브리드 검색. 자세히는 <a href="https://github.com/tobi/qmd" target="_blank">github.com/tobi/qmd</a>.</p>
 
+  <p><strong>QMD vs 일반 리트리버</strong> (LangChain · LlamaIndex 등):</p>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:24%;"><col style="width:38%;"><col style="width:38%;"></colgroup>
+    <thead><tr><th>항목</th><th>일반 리트리버</th><th>QMD</th></tr></thead>
+    <tbody>
+      <tr><td><strong>임베딩 모델</strong></td><td>OpenAI · HuggingFace · 로컬 직접 wire</td><td>bge-m3 로컬 <strong>기본 내장</strong></td></tr>
+      <tr><td><strong>벡터 DB</strong></td><td>Chroma · Qdrant · Pinecone 별도 구성</td><td>SQLite 단일 파일</td></tr>
+      <tr><td><strong>하이브리드 검색</strong></td><td>retriever 클래스 직접 조립 + reranker wire</td><td><code class="inline">qmd query</code> 1줄</td></tr>
+      <tr><td><strong>외부 API · 비용</strong></td><td>임베딩 호출비 + 벡터 DB 호스팅비</td><td><strong>0건 · 0원</strong> (전부 로컬)</td></tr>
+      <tr><td><strong>주 용도</strong></td><td>RAG 앱 빌드용 범용 인프라</td><td>본인 노트 · 로컬 vault 검색</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px;color:#555;">→ <strong>RAG 앱을 만든다면 일반 리트리버 부품 조립</strong> | <strong>본인 노트만 검색한다면 QMD 1개로 끝</strong>. QMD는 일반 프레임워크가 제공하는 하이브리드 리트리버 + 자동 reranker + 로컬 임베딩을 박스 밖 1줄로 묶어 놓음 (강의 시연용 선택 이유).</p>
+
   <div class="dual-track">
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
