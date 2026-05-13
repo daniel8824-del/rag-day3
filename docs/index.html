@@ -910,59 +910,81 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
 
   <div class="dual-track">
     <div class="track instr">
-      <div class="track-h">Linux · macOS · WSL</div>
-      <pre># 1. Bun 설치 (이미 있으면 건너뜀)
-curl -fsSL https://bun.sh/install | bash
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre>"https://github.com/tobi/qmd
+이 QMD 설치해줘. Windows 환경이야."
 
-# 2. QMD 글로벌 설치
-bun install -g https://github.com/tobi/qmd
-
-# 3. 설치 확인
-qmd --version
-qmd --help</pre>
+# Copilot이 자동으로 적절한 설치 명령 실행
+# → Bun + qmd.exe wrapper 한 번에</pre>
     </div>
     <div class="track stu">
-      <div class="track-h">Windows (PowerShell · 관리자 권장)</div>
-      <pre># 한 줄 설치 (Bun + qmd.exe wrapper 자동)
+      <div class="track-h">터미널 직접 (Windows PowerShell)</div>
+      <pre># 한 줄 설치 (관리자 권장)
 irm https://raw.githubusercontent.com/doraemonkeys/qmd-windows/main/install.ps1 | iex
 
 # 확인
-qmd --version</pre>
+qmd --version
+qmd --help</pre>
     </div>
   </div>
 
-  <p style="font-size:13px;color:#555;">임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬 추론). 모델은 <code class="inline">~/.cache/qmd/models/</code>에 자동 다운로드 (최초 1회만).</p>
+  <p style="font-size:13px;color:#555;">Linux · macOS · WSL 환경: <code class="inline">curl -fsSL https://bun.sh/install | bash</code> 후 <code class="inline">bun install -g https://github.com/tobi/qmd</code>. 임베딩 모델은 QMD 기본값(bge-m3 계열, 로컬). 모델은 <code class="inline">~/.cache/qmd/models/</code>에 자동 다운로드 (최초 1회).</p>
 
   <h3><span class="step-num">3</span>실습 | 본인 폴더 → 컬렉션 등록 + 인덱싱</h3>
   <p>QMD는 <strong>컬렉션 단위</strong>로 폴더 관리. 본인 폴더를 컬렉션으로 등록 후 인덱싱.</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 본인 폴더를 컬렉션으로 등록
-qmd collection add my-notes ~/notes
-#   ↑ 컬렉션 이름     ↑ 본인 노트 폴더 경로
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre>"내 폴더 C:\Users\내이름\notes 를
+my-notes 컬렉션으로 등록하고 인덱싱해줘"
 
-# 2. 등록된 컬렉션 확인
+# Copilot이 자동 실행:
+# qmd collection add my-notes <경로>
+# qmd update
+# qmd status</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">터미널 직접 (PowerShell)</div>
+      <pre># 1. 본인 폴더 컬렉션 등록
+qmd collection add my-notes $env:USERPROFILE\notes
+
+# 2. 컬렉션 확인
 qmd collection list
 
 # 3. 인덱싱 (등록된 모든 컬렉션 자동)
 qmd update
 
-# 4. 상태 + 인덱스된 파일 보기
+# 4. 상태 + 인덱스 파일
 qmd status
 qmd ls my-notes</pre>
+    </div>
+  </div>
 
   <h3><span class="step-num">4</span>검색 테스트</h3>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색 (BM25) | 본인 컬렉션만
+
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre>"my-notes 컬렉션에서 'X 관련' 검색해줘"
+
+# 또는 더 단순히
+"내 노트 중 X 관련 찾아줘"
+
+# Copilot이 qmd query 자동 호출</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">터미널 직접</div>
+      <pre># 키워드 검색 (BM25)
 qmd search "검색어" -c my-notes
 
-# 하이브리드 검색 (BM25 + 벡터 + 자동 reranking)
+# 하이브리드 (BM25 + 벡터 + 자동 reranking · 권장)
 qmd query "내 노트 중 X 관련?" -c my-notes
 
 # 벡터만
-qmd vsearch "유사 개념" -c my-notes
-
-# 결과 예:
-# qmd://my-notes/path/to/note.md  0.93   (점수)
-# qmd://my-notes/path/to/other.md 0.78</pre>
+qmd vsearch "유사 개념" -c my-notes</pre>
+    </div>
+  </div>
 
   <p>여기까지 작동하면 <strong>본인 PC에 로컬 임베딩 인덱스 1개 완성</strong>. 다음 차시는 이 인덱스 위에 그래프 옵션을 얹을지 결정 (RAG vs GraphRAG).</p>
 
@@ -1123,6 +1145,17 @@ Register-ScheduledTask -TaskName "qmd-hourly-update" `
     <div class="goal-text">웹페이지 1개를 <strong>마크다운으로 변환</strong> → 9차시에 만든 본인 인덱스에 <strong>합류</strong> → <code class="inline">qmd search</code>에서 <strong>검색되는지 직접 확인</strong>. Day 3 한 사이클 산출물 완성.</div>
   </div>
 
+  <div class="video-frame">
+    <video controls preload="metadata">
+      <source src="videos/video4-ingest-flow-1min.mp4" type="video/mp4">
+      브라우저가 영상을 지원하지 않습니다.
+    </video>
+    <div class="video-meta">
+      <span class="label">영상 ④ · 60초</span>
+      <strong>raw → wiki ingest 흐름 (외부 자료 → 인덱스 합류)</strong>
+    </div>
+  </div>
+
   <h3><span class="step-num">1</span>왜 마크다운인가</h3>
   <p>QMD·RAG·임베딩의 입력 단위는 마크다운. PDF·웹페이지·HWP를 그대로 넣으면 레이아웃 손실·노이즈·표 깨짐. <strong>마크다운으로 균질화</strong>하면 청킹·임베딩·검색이 일관.</p>
 
@@ -1144,15 +1177,28 @@ Register-ScheduledTask -TaskName "qmd-hourly-update" `
   <h3><span class="step-num">3</span>실습 ① | 웹페이지 → 마크다운 (defuddle)</h3>
   <p>본인이 관심 있는 웹페이지 URL 하나 골라서 변환. 외부 자료 → 본인 인덱스 합류의 첫 단계.</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># defuddle 설치 (npm 또는 자연어)
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
+      <pre>"defuddle로 https://example.com/article 본문만
+마크다운으로 추출해서
+%USERPROFILE%\notes\raw\article.md로 저장해줘"
+
+# Copilot이 자동 실행:
+# - defuddle 설치 (없으면)
+# - URL 추출
+# - 파일 저장</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">터미널 직접 (PowerShell)</div>
+      <pre># defuddle 설치 (1회)
 npm install -g defuddle-cli
 
-# 또는 Claude Code/Copilot에 자연어
-"defuddle로 https://example.com/article 본문만 마크다운으로 추출해서
- ~/notes/raw/article.md로 저장해줘"
-
-# CLI 직접
-defuddle https://example.com/article &gt; ~/notes/raw/article.md</pre>
+# URL → 마크다운 파일 저장
+defuddle https://example.com/article `
+  &gt; $env:USERPROFILE\notes\raw\article.md</pre>
+    </div>
+  </div>
 
   <p>출력 예시 (frontmatter + 본문만):</p>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">---
@@ -1165,21 +1211,41 @@ date: "2026-05-14"
   <h3><span class="step-num">4</span>실습 ② | 변환된 파일을 본인 인덱스에 합류</h3>
   <p>9차시에서 만든 QMD 인덱스에 위 파일이 자동 인덱싱되도록 <code class="inline">qmd update</code> 호출.</p>
 
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">cd ~/notes
-qmd update           # 새 파일 (raw/article.md) 자동 감지·인덱싱
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">자연어 요청</div>
+      <pre>"방금 저장한 article.md를
+my-notes 컬렉션에 인덱싱해줘"
 
-qmd stats            # 파일 수 1개 증가 확인</pre>
+# Copilot이 qmd update 자동 실행</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">터미널 직접 (PowerShell)</div>
+      <pre>qmd update               # 새 파일 자동 감지·인덱싱
+qmd status               # 파일 수 1개 증가 확인</pre>
+    </div>
+  </div>
 
   <h3><span class="step-num">5</span>실습 ③ | qmd-search에서 검색 확인 (산출물)</h3>
-  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 키워드 검색
-qmd search "방금 가져온 글의 핵심 키워드" -n 5
 
-# 의미 검색
-qmd query "방금 글이 다룬 주제는?" -n 5
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">자연어 요청</div>
+      <pre>"방금 가져온 article 내용을 my-notes에서 찾아줘"
 
-# 결과에 raw/article.md가 상위에 나오면 → Day 3 산출물 완성</pre>
+# 또는
+"내가 어제 본 X 관련 기사 검색"</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">터미널 직접</div>
+      <pre>qmd search "핵심 키워드" -c my-notes
+qmd query "방금 글이 다룬 주제는?" -c my-notes
 
-  <p><strong>외부 자료가 본인 검색 시스템의 일부가 되는 순간</strong>. PDF·DOCX·YouTube 자막도 같은 패턴 — 도구만 다르고 흐름은 동일 (변환 → raw 폴더 → qmd update → 검색).</p>
+# 결과에 raw/article.md 상위 노출 → 산출물 완성</pre>
+    </div>
+  </div>
+
+  <p><strong>외부 자료가 본인 검색 시스템의 일부가 되는 순간</strong>. PDF · DOCX · YouTube 자막도 같은 패턴 (변환 → raw 폴더 → qmd update → 검색).</p>
 
   <h3><span class="step-num">6</span>Day 3 마무리 | 회사 적용 단계</h3>
   <table style="font-size:13px;">
