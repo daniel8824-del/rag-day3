@@ -973,19 +973,19 @@ qmd --help</pre>
   <div class="dual-track">
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
-      <pre>"내 폴더 C:\Users\내이름\notes 를
-my-notes 컬렉션으로 등록하고 인덱싱해줘"
+      <pre>"내 폴더 [새폴더] 를
+[컬렉션이름] 컬렉션으로 등록하고 인덱싱해줘"
 
 # Copilot이 자동 실행:
-# qmd collection add my-notes <경로>
+# qmd collection add [컬렉션이름] [새폴더]
 # qmd update
 # qmd status</pre>
     </div>
     <div class="track stu">
       <div class="track-h">터미널 직접 (PowerShell)</div>
       <pre># 1. 본인 폴더 컬렉션 등록
-#    (my-notes = 컬렉션 별칭 · 실제 폴더 경로는 뒤)
-qmd collection add my-notes $env:USERPROFILE\notes
+#    ([컬렉션이름]·[새폴더] = 본인 값으로 교체)
+qmd collection add [컬렉션이름] [새폴더]
 
 # 2. 컬렉션 확인
 qmd collection list
@@ -995,9 +995,11 @@ qmd update
 
 # 4. 상태 + 인덱스 파일
 qmd status
-qmd ls my-notes      # my-notes 컬렉션의 인덱스 파일 목록</pre>
+qmd ls [컬렉션이름]   # 해당 컬렉션의 인덱스 파일 목록</pre>
     </div>
   </div>
+
+  <p style="font-size:13px;color:#555;"><strong>[컬렉션이름]</strong> | 본인이 자유롭게 정함 (예: <code class="inline">work-docs</code> · <code class="inline">study</code> · <code class="inline">notes</code>). <strong>[새폴더]</strong> | 본인 마크다운 노트가 들어있는 실제 폴더 경로 (예: <code class="inline">C:\Users\username\Documents\notes</code> · <code class="inline">$env:USERPROFILE\notes</code>).</p>
 
   <h3><span class="step-num">4</span>검색 테스트</h3>
 
@@ -1005,25 +1007,25 @@ qmd ls my-notes      # my-notes 컬렉션의 인덱스 파일 목록</pre>
     <div class="track instr">
       <div class="track-h">자연어 요청 (Copilot CLI · 권장)</div>
       <pre># 의미 기반 (가장 자연스러움)
-"내 노트 중 헤르메스 에이전트 관련 찾아줘"
+"내 노트 중 [검색 주제] 관련 찾아줘"
 
 # 키워드 기반 (정확한 단어가 있는지 확인)
-"my-notes에서 'Hermes' 단어가 들어간 노트 찾아줘"
+"[컬렉션이름]에서 '[정확한 단어]' 들어간 노트 찾아줘"
 
 # 벡터 기반 (의미적으로 비슷한 노트)
-"my-notes에서 '에이전트 자가 개선'과
+"[컬렉션이름]에서 '[표현]'과
 의미가 비슷한 노트 찾아줘"</pre>
     </div>
     <div class="track stu">
       <div class="track-h">터미널 직접</div>
       <pre># 하이브리드 (BM25 + 벡터 + 자동 reranking · 권장)
-qmd query "헤르메스 에이전트 관련?" -c my-notes
+qmd query "[검색 주제] 관련?" -c [컬렉션이름]
 
 # 키워드만 (BM25 · 정확한 단어 매치)
-qmd search "Hermes" -c my-notes
+qmd search "[정확한 단어]" -c [컬렉션이름]
 
 # 벡터만 (의미 유사도 · 정확한 단어 없어도 매칭)
-qmd vsearch "에이전트 자가 개선" -c my-notes</pre>
+qmd vsearch "[표현]" -c [컬렉션이름]</pre>
     </div>
   </div>
 
