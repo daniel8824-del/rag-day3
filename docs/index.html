@@ -32,7 +32,10 @@
     background: var(--bg); color: var(--fg);
     margin: 0; padding: 0;
     line-height: 1.7; font-size: 17px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
+  p, li, td, th, div { text-wrap: pretty; }
   code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
   .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
