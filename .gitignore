@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+node_modules/
+_site/
+.jekyll-cache/
+.sass-cache/

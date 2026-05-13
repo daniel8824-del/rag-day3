@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 교재 | 하네스 5대 요소 + POS 풀스택 5단계</title>
+<meta name="description" content="Day 2 강의 교재 | 강사 Claude Code 시연 + 수강생 GitHub Copilot 매핑 따라하기. 하네스 5대 요소(지시문·스킬·훅·MCP·설정)로 POS 상권분석 풀스택 5단계 완주.">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --accent: #00b4d8;
+    --accent-dark: #0077b6;
+    --accent-soft: #e0f4fa;
+    --border: #e0e0e0;
+    --code-bg: #f7f7f7;
+    --highlight: #fff8d4;
+    --red: #c92a2a;
+    --green: #2d6a4f;
+    --warm-bg: #fff5e6;
+    --warm-border: #d4a373;
+    --fail-bg: #fff5f5;
+    --fail-border: #c92a2a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg); color: var(--fg);
+    margin: 0; padding: 0;
+    line-height: 1.7; font-size: 17px;
+  }
+  code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  nav.topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0; font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    background: white; position: sticky; top: 0; z-index: 100;
+  }
+  nav.topbar .container {
+    display: flex; flex-wrap: nowrap; gap: 2px 10px; align-items: center;
+    justify-content: center;
+    font-size: 11.5px; overflow-x: auto;
+    max-width: 100%; white-space: nowrap;
+  }
+  nav.topbar a { color: var(--accent-dark); text-decoration: none; flex-shrink: 0; }
+  nav.topbar a:hover { text-decoration: underline; }
+  nav.topbar .brand { font-weight: 700; color: var(--fg); margin-right: 8px; flex-shrink: 0; }
+  @media (max-width: 768px) {
+    nav.topbar .container { font-size: 11px; gap: 2px 8px; }
+  }
+
+  .hero { padding: 64px 0 40px; border-bottom: 1px solid var(--border); }
+  .hero .badge {
+    display: inline-block; padding: 5px 14px; border-radius: 20px;
+    background: var(--accent-soft); color: var(--accent-dark);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 44px; font-weight: 800; margin: 0 0 14px;
+    letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .hero h1 .accent { color: var(--accent-dark); }
+  .hero .lead {
+    font-size: 18px; color: var(--fg); margin: 0 0 12px; line-height: 1.6;
+  }
+  .hero .meta-row {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted);
+    margin-top: 18px;
+  }
+  .hero .meta-row span { margin-right: 16px; }
+
+  section { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+  section h2 {
+    font-size: 30px; font-weight: 800; margin: 0 0 6px;
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  section h2 .accent { color: var(--accent-dark); }
+  section .lead {
+    font-size: 17px; color: var(--muted); margin: 0 0 26px; line-height: 1.6;
+  }
+  section .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent-dark);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    display: inline-block; margin-bottom: 10px;
+    padding: 4px 10px; background: var(--accent-soft); border-radius: 4px;
+  }
+  section h3 {
+    font-size: 20px; font-weight: 800; margin: 36px 0 12px;
+    letter-spacing: -0.01em; color: var(--fg);
+  }
+  section h3 .step-num {
+    display: inline-block;
+    width: 32px; height: 32px; line-height: 32px;
+    text-align: center; border-radius: 50%;
+    background: var(--accent-dark); color: white;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800;
+    margin-right: 12px; vertical-align: middle;
+  }
+  section h4 { font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
+  section p { margin: 10px 0 16px; }
+
+  .goal {
+    background: var(--accent-soft);
+    border-left: 5px solid var(--accent-dark);
+    padding: 16px 22px; border-radius: 8px;
+    margin: 16px 0 28px;
+  }
+  .goal .goal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent-dark); font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .goal .goal-text {
+    font-size: 17px; font-weight: 700; color: var(--fg);
+  }
+  .goal .goal-text strong { color: var(--accent-dark); }
+
+  .concept-table {
+    width: 100%; border-collapse: collapse; margin: 16px 0 28px;
+    font-size: 15px;
+  }
+  .concept-table th, .concept-table td {
+    text-align: left; padding: 12px 14px;
+    border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  .concept-table th {
+    font-weight: 800; font-size: 12px; text-transform: uppercase;
+    color: var(--muted); border-bottom: 2px solid var(--fg);
+    background: var(--code-bg);
+    letter-spacing: 0.06em;
+  }
+  .concept-table td:first-child {
+    font-weight: 800; color: var(--accent-dark);
+    white-space: nowrap; width: 180px;
+  }
+  .concept-table .term {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--accent-dark); display: block; font-weight: 700;
+    margin-top: 2px;
+  }
+
+  figure.comic { margin: 24px 0; padding: 0; }
+  figure.comic img {
+    width: 100%; max-width: 100%; display: block;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    margin: 0;
+  }
+  figure.comic figcaption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px; color: var(--muted);
+    text-align: left; margin-top: 10px;
+    letter-spacing: 0.04em;
+  }
+  figure.comic figcaption strong { color: var(--accent-dark); }
+
+  .video-frame {
+    margin: 20px 0; border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  }
+  .video-frame video {
+    width: 100%; aspect-ratio: 16/9; display: block; background: #000;
+  }
+  .video-frame .video-meta {
+    padding: 12px 18px; background: white;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .video-frame .video-meta strong { font-weight: 800; }
+  .video-frame .video-meta .label {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    background: var(--accent-dark); color: white;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; margin-right: 8px;
+  }
+
+  ol.steps {
+    list-style: none; padding: 0; margin: 14px 0 0;
+    counter-reset: step;
+  }
+  ol.steps > li {
+    counter-increment: step;
+    padding: 14px 18px 14px 56px;
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 10px; position: relative;
+    background: white;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute; left: 16px; top: 14px;
+    width: 26px; height: 26px; line-height: 26px;
+    text-align: center; border-radius: 50%;
+    background: var(--accent-dark); color: white;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 800;
+  }
+  ol.steps > li .step-h {
+    font-size: 16px; font-weight: 800; margin-bottom: 4px;
+  }
+  ol.steps > li .step-desc {
+    font-size: 14.5px; color: var(--muted); line-height: 1.55;
+  }
+  ol.steps > li code {
+    background: var(--code-bg); padding: 1px 6px; border-radius: 3px;
+    font-size: 13px; border: 1px solid var(--border);
+  }
+  ol.steps > li pre {
+    background: #1a1a1a; color: #f0f0f0; padding: 12px 14px;
+    border-radius: 6px; margin-top: 8px; font-size: 13px;
+    overflow-x: auto;
+  }
+
+  /* 5도구 그리드 — settings.json 추가 */
+  .five-tools {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin: 14px 0 20px;
+  }
+  .tool-card {
+    background: white; border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .tool-card .tool-icon { font-size: 30px; line-height: 1; margin-bottom: 6px; }
+  .tool-card .tool-name {
+    font-size: 18px; font-weight: 800; color: var(--fg);
+  }
+  .tool-card .tool-name .term {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent-dark);
+    font-weight: 700; margin-left: 4px;
+  }
+  .tool-card .tool-def {
+    font-size: 14px; color: var(--fg); margin-top: 6px; line-height: 1.55;
+  }
+  @media (max-width: 640px) {
+    .five-tools { grid-template-columns: 1fr; }
+  }
+
+  .day-timeline { margin-top: 14px; }
+  .day-row {
+    display: grid; grid-template-columns: 130px 1fr;
+    gap: 18px; padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: baseline;
+  }
+  .day-row:last-child { border-bottom: none; }
+  .day-time {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--accent-soft); color: var(--accent-dark);
+    padding: 4px 10px; border-radius: 4px;
+    font-size: 12px; font-weight: 800;
+    text-align: center; letter-spacing: 0.04em;
+  }
+  .day-info .ttl {
+    font-size: 16px; font-weight: 800; color: var(--fg); margin-bottom: 3px;
+  }
+  .day-info .desc { font-size: 14px; color: var(--muted); }
+  .day-info a { color: var(--accent-dark); text-decoration: none; }
+  .day-info a:hover { text-decoration: underline; }
+
+  ul.dl { list-style: none; padding: 0; margin-top: 14px; }
+  ul.dl li {
+    padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--code-bg); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  ul.dl li:hover { border-color: var(--accent); }
+  ul.dl code {
+    background: white; padding: 5px 10px; border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 700;
+    border: 1px solid var(--border); flex-shrink: 0; min-width: 200px;
+  }
+  ul.dl .dl-desc { font-size: 14px; color: var(--muted); flex: 1; }
+  ul.dl .dl-btn {
+    background: var(--accent-dark); color: white;
+    padding: 6px 14px; border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 800;
+    text-decoration: none; flex-shrink: 0; letter-spacing: 0.04em;
+  }
+  ul.dl .dl-btn:hover { background: var(--accent); }
+
+  .reference {
+    background: var(--code-bg); padding: 14px 18px; border-radius: 8px;
+    border-left: 4px solid var(--border); margin: 16px 0;
+    font-size: 14px;
+  }
+  .reference::before {
+    content: "참고";
+    display: inline-block; font-weight: 800; color: var(--muted);
+    font-size: 11px; letter-spacing: 0.06em; margin-bottom: 4px;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .reference p { margin: 4px 0; }
+
+  .field-case {
+    background: var(--warm-bg);
+    border-left: 5px solid var(--warm-border);
+    padding: 14px 20px; border-radius: 8px;
+    margin: 18px 0; font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .field-case::before {
+    content: "🏢 현장 사례 (POS 운영팀)";
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: #946800; font-weight: 800;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .field-case strong { color: #946800; }
+
+  .hook-use {
+    background: var(--highlight);
+    border-left: 5px solid #f5b800;
+    padding: 14px 20px; border-radius: 8px;
+    margin: 16px 0; font-size: 14.5px;
+  }
+  .hook-use::before {
+    content: "💡 이럴 때 쓰면 좋아요";
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: #946800; font-weight: 800;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .hook-use ul { padding-left: 22px; margin: 6px 0 0; }
+  .hook-use li { margin-bottom: 4px; }
+
+  /* 실패 사례 박스 — 강사 정직 회수 */
+  .failure-case {
+    background: var(--fail-bg);
+    border-left: 5px solid var(--fail-border);
+    padding: 14px 20px; border-radius: 8px;
+    margin: 18px 0; font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .failure-case::before {
+    content: "⚠ 강사 실패 사례 (정직 회수)";
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--red); font-weight: 800;
+    letter-spacing: 0.06em; margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .failure-case strong { color: var(--red); }
+
+  /* 강사/수강생 dual-track 박스 */
+  .dual-track {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin: 16px 0;
+  }
+  .dual-track .track {
+    border: 2px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; background: white;
+    font-size: 14px;
+  }
+  .dual-track .track.instr {
+    border-color: var(--accent-dark);
+    background: var(--accent-soft);
+  }
+  .dual-track .track.stu {
+    border-color: var(--warm-border);
+    background: var(--warm-bg);
+  }
+  .dual-track .track-h {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .dual-track .track.instr .track-h { color: var(--accent-dark); }
+  .dual-track .track.stu .track-h { color: #946800; }
+  .dual-track .track code, .dual-track .track pre {
+    background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 3px;
+    font-size: 12.5px; border: 1px solid rgba(0,0,0,0.08);
+  }
+  .dual-track .track pre {
+    display: block; padding: 8px 10px; margin-top: 6px; overflow-x: auto;
+  }
+  @media (max-width: 640px) {
+    .dual-track { grid-template-columns: 1fr; }
+  }
+
+  /* 강사 사례 카드 */
+  .instructor-cases {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px; margin: 16px 0;
+  }
+  .instructor-cases .ic {
+    background: var(--code-bg); border-radius: 10px;
+    padding: 14px 16px; font-size: 14px;
+    border-top: 4px solid var(--accent-dark);
+  }
+  .instructor-cases .ic-name {
+    font-weight: 800; font-size: 15px; color: var(--accent-dark);
+    margin-bottom: 4px;
+  }
+  .instructor-cases .ic-key {
+    font-size: 13px; color: var(--muted); margin-top: 6px;
+  }
+  @media (max-width: 640px) {
+    .instructor-cases { grid-template-columns: 1fr; }
+  }
+
+  /* 만화 4장 갤러리 (5대 요소) — 세로 1열 풀 너비 */
+  .comic-gallery {
+    display: flex; flex-direction: column;
+    gap: 22px; margin: 18px 0 26px;
+  }
+  .comic-gallery figure.comic { margin: 0; }
+  .comic-gallery figure.comic figcaption {
+    text-align: left; margin-top: 10px;
+  }
+
+  /* 개념 박스 4개 (이미지 정합) */
+  .concept-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin: 16px 0 20px;
+  }
+  .concept-box {
+    background: #f7f9fc;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-dark);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .concept-box .concept-h {
+    font-weight: 800; font-size: 16px;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+  }
+  .concept-box p {
+    font-size: 14px; color: #333;
+    line-height: 1.6; margin: 0;
+  }
+  @media (max-width: 720px) {
+    .concept-grid { grid-template-columns: 1fr; }
+  }
+
+  /* 플러그인 카드 (각 5+ 스킬) */
+  .plugin-card {
+    margin: 16px 0 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: #fafbfc;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  }
+  .plugin-card .plugin-h {
+    display: flex; gap: 14px; align-items: center;
+    padding-bottom: 12px; margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .plugin-card .plugin-icon { font-size: 32px; line-height: 1; }
+  .plugin-card .plugin-name {
+    font-size: 19px; font-weight: 800; color: var(--accent-dark);
+    line-height: 1.2;
+  }
+  .plugin-card .plugin-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    margin-top: 2px; letter-spacing: 0.02em;
+  }
+  .plugin-card table { margin: 0; font-size: 13.5px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  table th, table td {
+    text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top; word-break: break-word; overflow-wrap: anywhere;
+  }
+  table th {
+    font-weight: 800; font-size: 12px; text-transform: uppercase;
+    color: var(--muted); border-bottom: 2px solid var(--fg); background: var(--code-bg);
+  }
+  code.inline {
+    background: var(--code-bg); padding: 1px 6px; border-radius: 2px;
+    font-size: 13px; border: 1px solid var(--border);
+    word-break: break-all;
+  }
+  pre { overflow-x: auto; max-width: 100%; }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    table { font-size: 13px; display: block; overflow-x: auto; white-space: nowrap; }
+    section h2 { font-size: 22px; }
+    .container { padding: 0 16px; }
+    pre { font-size: 12px; }
+    figure.comic img { border-radius: 8px; }
+  }
+
+  footer {
+    padding: 40px 0 60px; border-top: 2px solid var(--fg);
+    font-size: 14px; color: var(--muted);
+  }
+  footer a { color: var(--accent-dark); }
+  footer .muted { font-size: 12px; margin-top: 16px; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 30px; }
+    section h2 { font-size: 24px; }
+    .day-row { grid-template-columns: 1fr; gap: 4px; }
+    ul.dl li { flex-direction: column; align-items: flex-start; gap: 8px; }
+    ul.dl code { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="container">
+    <span class="brand">Day 3 · RAG + 데이터</span>
+    <a href="#flow">흐름</a>
+    <a href="#bridge">보강</a>
+    <a href="#ch9">9차시</a>
+    <a href="#ch10">10차시</a>
+    <a href="#ch11">11차시</a>
+    <a href="#ch12">12차시</a>
+    <a href="#meta">부록</a>
+    <a href="#dl">자료</a>
+    <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="badge">DAY 3 · 5/14(목) 09:00 ~ 12:30</div>
+    <h1>로컬 RAG +<br><span class="accent">QMD · 크론잡 · 마크다운화</span></h1>
+    <p class="lead">
+      임베딩 시스템 + GraphRAG + 크론잡 자동 인덱싱 + 모든 문서 마크다운화. 어제 배운 5요소 환경 위에 <strong>각자 정한 주제</strong>로 gstack을 셋업·테스트합니다.
+    </p>
+    <p class="lead" style="font-size:15px;background:var(--accent-soft);padding:12px 16px;border-radius:8px;margin-top:14px;">
+      <strong>도입부 보강</strong> | Day 2 끝에 각자 정한 주제로 <strong>gstack 47 스킬</strong>(Claude·Copilot 호환)을 설치하고 <strong>본인 주제에 맞는 스킬 셋업·테스트</strong>를 진행합니다. Day 2에서 못 한 <code class="inline">/security-review</code>도 gstack <code class="inline">/cso</code>로 양쪽 환경에서 실습.
+    </p>
+    <div class="meta-row">
+      <span>📅 2026-05-14 (목)</span>
+      <span>⏰ 09:00 ~ 12:30 (30+45+45+45+45 = 210분)</span>
+      <span>👥 아모레퍼시픽 + 도시바코리아 직원 15~20명</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- §0 오늘의 흐름 -->
+<section id="flow">
+  <span class="section-tag">§ 0 · 오늘의 흐름</span>
+  <h2>차시별 진행</h2>
+
+  <div class="day-timeline">
+    <div class="day-row">
+      <span class="day-time">09:00 – 09:30 (30분)</span>
+      <div class="day-info">
+        <div class="ttl">§ 도입 보강 | gstack으로 본인 주제 셋업·테스트</div>
+        <div class="desc">Day 2 끝에 각자 정한 주제에 gstack 47 스킬 적용. 설치(mkdir + git clone) + 보안 감사(<code class="inline">/cso</code>) + QA·브라우저(<code class="inline">/qa</code>·<code class="inline">/browse</code>·<code class="inline">/setup-browser-cookies</code>). <a href="#bridge">이동 →</a></div>
+      </div>
+    </div>
+    <div class="day-row">
+      <span class="day-time">09:30 – 10:15 (45분)</span>
+      <div class="day-info">
+        <div class="ttl">9차시 | 임베딩 시스템 — 로컬에서 직접 구축</div>
+        <div class="desc">300개 문서 로컬 임베딩 운영 경험 · 코드·PDF·DB별 청킹 전략 · 임베딩 품질 검증과 모델 교체 시 재구축 비용. <a href="#ch9">이동 →</a></div>
+      </div>
+    </div>
+    <div class="day-row">
+      <span class="day-time">10:15 – 11:00 (45분)</span>
+      <div class="day-info">
+        <div class="ttl">10차시 | GraphRAG — 지식그래프 기반 검색 엔진</div>
+        <div class="desc">논문 → 텍스트 → 벡터+그래프 → 채팅 플랫폼 · RAG vs GraphRAG 구조 차이와 선택 기준 · 검색 품질·환각·유지보수 한계. <a href="#ch10">이동 →</a></div>
+      </div>
+    </div>
+    <div class="day-row">
+      <span class="day-time">11:00 – 11:45 (45분)</span>
+      <div class="day-info">
+        <div class="ttl">11차시 | 로컬 RAG + QMD + 크론잡 자동 인덱싱</div>
+        <div class="desc">QMD 운영 명령 (update · embed · search · query) + 크론잡 자동 인덱싱 + 옵시디언 없이 로컬 폴더만으로 운영. <a href="#ch11">이동 →</a></div>
+      </div>
+    </div>
+    <div class="day-row">
+      <span class="day-time">11:45 – 12:30 (45분)</span>
+      <div class="day-info">
+        <div class="ttl">12차시 | 모든 문서 → 마크다운 + obsidian-cli · defuddle</div>
+        <div class="desc">PDF·HWP·DOCX·웹페이지 마크다운화 + defuddle(웹 정제) + obsidian-cli + 비LLM 전처리(OCR·텍스트 마이닝). <a href="#ch12">이동 →</a></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- §1 도입 보강 (Day 2 미완료) -->
+<section id="bridge">
+  <span class="section-tag">§ 도입 보강 · 08:00 ~ 08:30 (30분)</span>
+  <h2><span class="accent">gstack</span> 47 스킬 + 보안·QA 실습 (Day 2 미완료)</h2>
+
+  <div class="goal">
+    <div class="goal-label">학습 목표</div>
+    <div class="goal-text">Day 2 8차시에서 <code class="inline">/security-review</code>(Claude Code 전용)로 못 했던 보안·QA 실습을 <strong>gstack</strong>(Claude·Copilot 양쪽 호환)으로 마무리. 47개 스킬 전체 카테고리 정리 + 보안 감사 + 브라우저 QA 시연.</div>
+  </div>
+
+  <h3><span class="step-num">1</span>gstack 설치 — Copilot CLI · Claude Code 양쪽</h3>
+  <p>설치 명령 단 2줄. 환경별 동일:</p>
+
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">Copilot CLI (Linux · macOS · WSL)</div>
+      <pre>mkdir -p ~/.copilot/skills
+git clone https://github.com/garrytan/gstack \
+  ~/.copilot/skills/gstack
+
+# 자동 인식 (재시작 불필요)
+copilot skill gstack /qa</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">Windows 네이티브 (PowerShell)</div>
+      <pre>New-Item -ItemType Directory `
+  -Path "$env:USERPROFILE\.copilot\skills" -Force
+git clone https://github.com/garrytan/gstack `
+  "$env:USERPROFILE\.copilot\skills\gstack"</pre>
+    </div>
+  </div>
+
+  <p>Claude Code에서는 <code class="inline">~/.claude/skills/gstack</code>으로 동일하게 (이미 Day 2 환경에 설치되어 있다면 그대로 사용).</p>
+
+  <div class="reference">
+    <p><strong>호환성</strong> | Claude Code ✅ · Copilot CLI(Claude 선택) ✅ · GPT · Gemini ❌. gstack은 Claude 기반으로 만들어져 다른 모델에선 스킬이 인식되지 않습니다.</p>
+  </div>
+
+  <h3><span class="step-num">2</span>gstack 47 스킬 — 12 카테고리 전체 정리</h3>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">📋</span>
+      <div><div class="plugin-name">기획 / 리뷰 (7)</div><div class="plugin-meta">계획 수립 · 다관점 검토</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">office-hours</code></td><td>회의 형식 멘토링 — 코드/설계 질의응답</td></tr>
+      <tr><td><code class="inline">autoplan</code></td><td>아이디어 → 자동 계획 수립 (4관점 합의)</td></tr>
+      <tr><td><code class="inline">plan-ceo-review</code></td><td>비즈니스 시각 — ROI · 우선순위</td></tr>
+      <tr><td><code class="inline">plan-eng-review</code></td><td>엔지니어 시각 — 실행 가능성 · 위험</td></tr>
+      <tr><td><code class="inline">plan-design-review</code></td><td>디자인 시각 — UX · 일관성</td></tr>
+      <tr><td><code class="inline">plan-devex-review</code></td><td>개발자 경험 시각 — 도구 · 마찰</td></tr>
+      <tr><td><code class="inline">plan-tune</code></td><td>리뷰 결과 반영 계획 조정</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🎨</span>
+      <div><div class="plugin-name">디자인 (4)</div><div class="plugin-meta">UI/UX 설계 · 디자인 시스템</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">design-consultation</code></td><td>디자인 요구사항 인터뷰 → 시안 도출</td></tr>
+      <tr><td><code class="inline">design-shotgun</code></td><td>여러 디자인안 동시 생성 (병렬)</td></tr>
+      <tr><td><code class="inline">design-html</code></td><td>HTML/CSS 디자인 즉시 시안화</td></tr>
+      <tr><td><code class="inline">design-review</code></td><td>디자이너 시선 — 시각적 일관성·계층</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">💻</span>
+      <div><div class="plugin-name">코딩 (6)</div><div class="plugin-meta">실행 · 검토 · 외부 AI 협업</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">review</code></td><td>PR 코드 리뷰 — 변경 사항 종합 검토</td></tr>
+      <tr><td><code class="inline">ship</code></td><td>배포 흐름 자동화 (검증 → 배포)</td></tr>
+      <tr><td><code class="inline">land-and-deploy</code></td><td>머지 + 배포 통합 워크플로우</td></tr>
+      <tr><td><code class="inline">codex</code></td><td>OpenAI Codex 호출 (3 모드 — review/challenge/consult)</td></tr>
+      <tr><td><code class="inline">careful</code></td><td>위험 명령 자동 차단 (rm -rf · DROP · force-push)</td></tr>
+      <tr><td><code class="inline">claude</code></td><td>Claude 내부 호출 (다른 환경에서 Claude 실행)</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🧪</span>
+      <div><div class="plugin-name">QA / 테스트 (5)</div><div class="plugin-meta">기능 검증 · 성능 측정</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">qa</code></td><td>대화형 QA 시나리오 실행 — 발견 시 자동 fix-verify 루프</td></tr>
+      <tr><td><code class="inline">qa-only</code></td><td>QA 보고만 — 코드 수정 없음</td></tr>
+      <tr><td><code class="inline">canary</code></td><td>점진적 배포 검증 (소규모 트래픽 시뮬)</td></tr>
+      <tr><td><code class="inline">benchmark</code></td><td>성능 벤치마크 실행</td></tr>
+      <tr><td><code class="inline">benchmark-models</code></td><td>AI 모델 간 성능 비교</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🌐</span>
+      <div><div class="plugin-name">브라우저 (5)</div><div class="plugin-meta">헤드리스/가시 자동화 · 캡처</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">browse</code></td><td>헤드리스 QA — 자동 클릭 · 폼 입력 · 스크린샷</td></tr>
+      <tr><td><code class="inline">connect-chrome</code></td><td>가시적 Chromium 실행 — 실시간 인터랙션</td></tr>
+      <tr><td><code class="inline">open-gstack-browser</code></td><td>gstack 전용 브라우저 런처</td></tr>
+      <tr><td><code class="inline">setup-browser-cookies</code></td><td>로그인 세션 저장 + 복제 (인증 후 작업 지속)</td></tr>
+      <tr><td><code class="inline">scrape</code></td><td>웹 페이지 데이터 수집 (구조화)</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🔒</span>
+      <div><div class="plugin-name">보안 / 감사 (2)</div><div class="plugin-meta">취약점 점검 · 시스템 건전성</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">cso</code></td><td>보안 감사 — 인증·권한·입력 검증·의존성 CVE 종합</td></tr>
+      <tr><td><code class="inline">health</code></td><td>시스템·repo 건전성 종합 진단</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🚀</span>
+      <div><div class="plugin-name">배포 (3)</div><div class="plugin-meta">릴리스 · 업그레이드 · 문서</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">setup-deploy</code></td><td>배포 환경 초기 세팅 (CI/CD · 호스팅)</td></tr>
+      <tr><td><code class="inline">gstack-upgrade</code></td><td>gstack 자체 버전 업그레이드</td></tr>
+      <tr><td><code class="inline">document-release</code></td><td>릴리스 노트 자동 작성</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🔍</span>
+      <div><div class="plugin-name">디버깅 (2)</div><div class="plugin-meta">버그 추적 · 사고 분석</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">investigate</code></td><td>딥다이브 root cause 추적 (복잡한 버그)</td></tr>
+      <tr><td><code class="inline">landing-report</code></td><td>배포 후 결과 리포트 (이슈·메트릭)</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">📝</span>
+      <div><div class="plugin-name">회고 (2)</div><div class="plugin-meta">학습 누적 · 패턴 추출</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">retro</code></td><td>주간 엔지니어링 회고 + 트렌드 분석</td></tr>
+      <tr><td><code class="inline">learn</code></td><td>실수·교훈 → 1줄 룰로 영구 박지</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🧠</span>
+      <div><div class="plugin-name">저장소 / 컨텍스트 (4)</div><div class="plugin-meta">지식 그래프 · 세션 메모리</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">setup-gbrain</code></td><td>gbrain (개인 지식 그래프) 초기 세팅</td></tr>
+      <tr><td><code class="inline">sync-gbrain</code></td><td>gbrain 동기화 — 새 노트 인덱싱</td></tr>
+      <tr><td><code class="inline">context-save</code></td><td>현재 세션 컨텍스트 저장</td></tr>
+      <tr><td><code class="inline">context-restore</code></td><td>저장된 컨텍스트 복원 — 세션 이어가기</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🚦</span>
+      <div><div class="plugin-name">제어 (3)</div><div class="plugin-meta">작업 범위 · 안전 가드</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">freeze</code></td><td>작업 디렉토리 범위 제한 — 다른 폴더 수정 금지</td></tr>
+      <tr><td><code class="inline">unfreeze</code></td><td>freeze 해제</td></tr>
+      <tr><td><code class="inline">guard</code></td><td>careful + freeze 통합 안전 모드</td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🧰</span>
+      <div><div class="plugin-name">기타 (3)</div><div class="plugin-meta">유틸 · 페어 작업 · 스킬 생성</div></div>
+    </div>
+    <table><thead><tr><th>스킬</th><th>언제 · 무엇</th></tr></thead><tbody>
+      <tr><td><code class="inline">make-pdf</code></td><td>마크다운/HTML → PDF 생성</td></tr>
+      <tr><td><code class="inline">skillify</code></td><td>반복 작업을 새 스킬로 자동 변환</td></tr>
+      <tr><td><code class="inline">pair-agent</code></td><td>두 번째 에이전트와 페어 코딩</td></tr>
+    </tbody></table>
+  </div>
+
+  <h3><span class="step-num">3</span>핵심 실습 ① — 보안 감사 (Day 2 미완료)</h3>
+  <p>Day 2 8차시 <code class="inline">/security-review</code>는 Claude Code 전용이라 Copilot 사용자는 실습 불가했습니다. gstack의 <code class="inline">/cso</code>는 양쪽 환경에서 동등하게 작동:</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /cso
+
+# 또는 자연어
+"gstack cso로 이 코드 보안 감사해줘"
+
+# 자동 검사 항목:
+# - 인증·권한 처리 (JWT · 세션 · ACL)
+# - 입력 검증 (XSS · SQL injection · path traversal)
+# - 의존성 CVE (package.json · requirements.txt)
+# - 시크릿 노출 (env · hardcoded keys)
+# - OWASP Top 10 종합</pre>
+
+  <p>건전성 종합 체크는 <code class="inline">/health</code>:</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /health
+# repo 구조 · 의존성 · CI 상태 · 문서 누락 등 한 번에</pre>
+
+  <h3><span class="step-num">4</span>핵심 실습 ② — 브라우저 QA + 로그인 테스트</h3>
+  <p>3 스킬 조합으로 <strong>로그인이 필요한 페이지까지</strong> 자동 QA 가능:</p>
+
+  <ol style="padding-left:22px;font-size:14.5px;">
+    <li><code class="inline">/setup-browser-cookies</code> — 한 번 로그인해서 세션 저장</li>
+    <li><code class="inline">/browse</code> — 헤드리스로 페이지 이동 · 클릭 · 캡처</li>
+    <li><code class="inline">/qa</code> — 시나리오 기반 종합 검증 (발견 시 자동 수정 + 재검증 루프)</li>
+  </ol>
+
+  <p><strong>실 시연 예시</strong> — Yurisma 학원 SaaS 로그인 (강사 실 운영 사이트):</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">B="$HOME/.copilot/skills/gstack/browse/dist/browse"
+
+# 1. 사이트 이동
+$B goto https://yurisma-school.vercel.app/
+
+# 2. 로그인 폼 요소 자동 탐지
+$B snapshot -i
+
+# 3. 로그인 정보 입력 + 클릭
+$B fill @phone "010-3201-8824"
+$B fill @password "1234"
+$B click @login-btn
+
+# 4. 로그인 후 스크린샷
+$B screenshot /tmp/mypage.png
+
+# 결과: ✅ /login → /mypage 정상 이동
+#       ✅ 이성오님 로그인 + 사용자 정보 정상 로딩</pre>
+
+  <div class="reference">
+    <p><strong>회사 적용</strong> | 사내 시스템 QA·보안 점검에 정합. <strong>주의</strong> — 회사 실 운영 데이터는 사내 git private + 사내 호스팅에서만 실행. 외부 마켓 접근 제한 시 SKILL.md를 <code class="inline">.github/skills/</code> 또는 <code class="inline">.claude/skills/</code>에 직접 복사 가능.</p>
+  </div>
+</section>
+
+<!-- §2 9차시 임베딩 시스템 -->
+<section id="ch9">
+  <span class="section-tag">§ 9차시 · 08:30 ~ 09:30 (60분)</span>
+  <h2><span class="accent">9차시</span> | 임베딩 시스템 — 로컬에서 직접 구축</h2>
+
+  <div class="goal">
+    <div class="goal-label">학습 목표</div>
+    <div class="goal-text"><strong>임베딩의 개념</strong>(의미를 숫자 벡터로) + <strong>로컬 임베딩 vs 클라우드 API</strong> 트레이드오프 + <strong>코드·PDF·DB별 청킹 전략</strong> + <strong>품질 검증·모델 교체 비용</strong>을 강사 300개 문서 실 운영 경험으로 정리.</div>
+  </div>
+
+  <h3><span class="step-num">1</span>임베딩이란? — 의미를 숫자 벡터로</h3>
+  <p>임베딩(Embedding)은 텍스트·이미지·코드를 <strong>고정 길이 숫자 벡터</strong>로 변환하는 모델입니다. 의미가 비슷한 문장은 벡터 공간에서 가까이, 다른 의미는 멀리 위치합니다. RAG의 검색 레이어가 이걸 사용합니다.</p>
+
+  <table>
+    <thead><tr><th>입력</th><th>출력 (예: bge-m3 · 1024차원)</th><th>코사인 유사도</th></tr></thead>
+    <tbody>
+      <tr><td>"POS 거래 이상 탐지"</td><td>[0.023, -0.156, 0.781, ...] (1024개)</td><td>—</td></tr>
+      <tr><td>"매장 결제 이상 패턴"</td><td>[0.041, -0.143, 0.755, ...]</td><td>0.91 (가까움)</td></tr>
+      <tr><td>"오늘 점심 메뉴"</td><td>[-0.412, 0.587, 0.022, ...]</td><td>0.12 (먼)</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>핵심 활용</strong>: 사내 문서 N개를 미리 임베딩 → 사용자 질의도 임베딩 → 가장 가까운 문서 K개 반환 (검색의 근본). LLM 위키·QMD·RAG가 다 이 패턴.</p>
+
+  <h3><span class="step-num">2</span>로컬 임베딩 vs 클라우드 API</h3>
+
+  <table>
+    <thead><tr><th>구분</th><th>로컬 임베딩</th><th>클라우드 API (OpenAI · Cohere 등)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>비용</strong></td><td>0원 (전기·시간만)</td><td>토큰당 과금 (대규모 시 부담)</td></tr>
+      <tr><td><strong>보안</strong></td><td>사내 자료가 외부로 안 나감</td><td>외부 API에 데이터 전송</td></tr>
+      <tr><td><strong>속도</strong></td><td>로컬 GPU/CPU 의존</td><td>네트워크 왕복 (~수백 ms)</td></tr>
+      <tr><td><strong>품질</strong></td><td>오픈모델 (bge-m3 · multilingual-e5 등)</td><td>top-tier 상용 모델</td></tr>
+      <tr><td><strong>다국어</strong></td><td>bge-m3 (한·영·중·일 등) ✓</td><td>모델별 다름</td></tr>
+      <tr><td><strong>업데이트</strong></td><td>모델 교체 시 전체 재임베딩</td><td>API 버전 변경 시 동일 부담</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>회사 환경 권장</strong>: <strong>사내 자료 = 로컬 임베딩</strong> (보안·비용 0). 외부 일반 자료는 클라우드 OK. QMD가 로컬 bge-m3 사용.</p>
+
+  <h3><span class="step-num">3</span>청킹 전략 — 자료 유형별</h3>
+  <p>임베딩의 입력 단위는 <strong>chunk</strong>(조각). 자료 유형별로 최적 청킹 방식이 다릅니다.</p>
+
+  <table>
+    <thead><tr><th>자료 유형</th><th>청킹 전략</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td><strong>마크다운·기획서</strong></td><td>헤더 단위 (## 섹션) + 토큰 한도 (≈500토큰)</td><td>의미 단위 보존</td></tr>
+      <tr><td><strong>코드</strong></td><td>함수·클래스 단위 (AST 기반)</td><td>로직 단위 보존 — 임의 분할 시 의미 깨짐</td></tr>
+      <tr><td><strong>PDF (문서)</strong></td><td>페이지 단위 + 표는 별도 chunk</td><td>레이아웃 보존 · 표 의미 별도 보존</td></tr>
+      <tr><td><strong>DB (테이블)</strong></td><td>행 단위 + 컬럼 메타데이터</td><td>관계형 의미 보존</td></tr>
+      <tr><td><strong>긴 글 (논문·책)</strong></td><td>슬라이딩 윈도우 + 오버랩 (50~100토큰)</td><td>경계 정보 손실 방지</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>겹침(overlap)</strong>: 인접 chunk 끝-시작 50~100토큰 공유 → 경계 질의에서 답이 끊기는 문제 방지. 그러나 인덱싱 비용 1.1~1.3배 증가.</p>
+
+  <h3><span class="step-num">4</span>임베딩 품질 검증</h3>
+  <p>임베딩이 "잘 됐는지" 검증하는 표준 방법:</p>
+
+  <ol style="padding-left:22px;font-size:14.5px;">
+    <li><strong>R@K (Recall at K)</strong> — 정답 문서가 상위 K개 결과 안에 들어오는 비율. 보통 R@5 · R@10 측정.</li>
+    <li><strong>MRR (Mean Reciprocal Rank)</strong> — 정답이 몇 번째에 나왔는지의 역수 평균. 1위에 가까울수록 높음.</li>
+    <li><strong>NDCG (Normalized DCG)</strong> — 순위별 가중 평가. 상위에 좋은 결과가 있으면 점수 ↑.</li>
+    <li><strong>골든셋(Goldset) 구축</strong> — 사내 자료에서 질의-정답 쌍 50~100개 직접 작성 → 모델 비교 기준.</li>
+  </ol>
+
+  <p><strong>실 운영 팁</strong>: 한국어 자료 + 오픈 모델 조합은 영어 벤치마크 수치를 그대로 믿으면 안 됨. <strong>본인 도메인 골든셋</strong>으로 직접 측정. bge-m3는 한국어 강함.</p>
+
+  <h3><span class="step-num">5</span>모델 교체 비용 — 운영 시 가장 큰 함정</h3>
+  <p>임베딩 모델은 한 번 정하면 <strong>전체 인덱스가 그 모델에 lock-in</strong>됩니다. 모델 변경 시:</p>
+
+  <ul style="padding-left:22px;font-size:14.5px;">
+    <li>기존 벡터 DB <strong>전체 재임베딩</strong> 필요 (300개 문서 = 작지만, 30만 개 = 큰 비용)</li>
+    <li>벡터 <strong>차원이 다르면</strong> DB 스키마 변경 (예: 768 → 1024)</li>
+    <li>골든셋 재측정 필요 (성능 비교)</li>
+    <li>임베딩 + chunk 시간 + 검수 = 보통 며칠~몇 주</li>
+  </ul>
+
+  <div class="reference">
+    <p><strong>실 운영 추천</strong> | 초기 PoC는 가벼운 모델 (예: <code class="inline">multilingual-e5-small</code> · 384차원)로 시작 → 패턴 확정 후 본격 모델 (<code class="inline">bge-m3</code> · 1024차원)로 마이그레이션. 한 번에 큰 모델 시작 시 운영 부담 ↑.</p>
+  </div>
+
+  <h3><span class="step-num">6</span>실 운영 예시 — 강사 환경 (300개 문서)</h3>
+
+  <table>
+    <thead><tr><th>항목</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>대상</td><td>강사 사내 위키 + 세션 로그 + 기획서 (300개 마크다운)</td></tr>
+      <tr><td>모델</td><td>bge-m3 (1024차원, multilingual)</td></tr>
+      <tr><td>저장소</td><td>QMD 로컬 인덱스 (SQLite)</td></tr>
+      <tr><td>인덱싱 시간</td><td>증분 인덱싱 — 새 파일만 (~수 초)</td></tr>
+      <tr><td>검색 응답</td><td>~1초 (300개 단위)</td></tr>
+      <tr><td>토큰비</td><td>0원 (로컬 처리)</td></tr>
+      <tr><td>외부 API</td><td>0건 (보안 ✓)</td></tr>
+    </tbody>
+  </table>
+
+  <p>이게 어제 8차시에서 본 <strong>QMD</strong>의 실체. 다음 차시(10차시)는 단순 벡터 검색에 <strong>그래프 구조</strong>를 더한 GraphRAG.</p>
+</section>
+
+<!-- §3 10차시 GraphRAG -->
+<section id="ch10">
+  <span class="section-tag">§ 10차시 · 09:30 ~ 10:30 (60분)</span>
+  <h2><span class="accent">10차시</span> | GraphRAG — 지식그래프 기반 검색 엔진</h2>
+
+  <div class="goal">
+    <div class="goal-label">학습 목표</div>
+    <div class="goal-text"><strong>RAG vs GraphRAG 구조 차이</strong> 이해 + <strong>논문 → 텍스트 → 벡터+그래프 → 채팅 플랫폼</strong> 흐름 + <strong>운영 한계</strong>(검색 품질·환각·유지보수)를 강사 경험으로 안내.</div>
+  </div>
+
+  <h3><span class="step-num">1</span>RAG vs GraphRAG — 구조 차이</h3>
+
+  <table>
+    <thead><tr><th>구분</th><th>일반 RAG</th><th>GraphRAG</th></tr></thead>
+    <tbody>
+      <tr><td><strong>인덱스 단위</strong></td><td>chunk (텍스트 조각)</td><td>chunk + 엔티티·관계 그래프</td></tr>
+      <tr><td><strong>검색 방식</strong></td><td>벡터 유사도 top-K</td><td>벡터 유사도 + 그래프 traversal</td></tr>
+      <tr><td><strong>잘 맞는 질의</strong></td><td>"X가 뭐야?" (사실 조회)</td><td>"X와 Y는 어떻게 연결?" (관계 추론)</td></tr>
+      <tr><td><strong>빌드 비용</strong></td><td>임베딩만 (저비용)</td><td>임베딩 + 엔티티 추출 + 관계 생성 (LLM 호출 다수)</td></tr>
+      <tr><td><strong>저장 크기</strong></td><td>벡터 DB만</td><td>벡터 DB + 그래프 DB (2~3배)</td></tr>
+      <tr><td><strong>유지 보수</strong></td><td>새 문서 추가 = 임베딩만</td><td>새 문서 = 임베딩 + 그래프 재구성</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step-num">2</span>GraphRAG 동작 흐름</h3>
+  <p>논문·기획서 같은 긴 자료가 채팅 인터페이스로 변환되는 4단계:</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:16px 20px;border-radius:8px;font-size:13px;">[1] 원본 자료 (PDF·논문·기획서)
+       ↓
+[2] 텍스트 추출 + 청킹 (페이지·섹션 단위)
+       ↓
+[3] 벡터 임베딩 (의미 검색용)
+    + 엔티티 추출 (사람·개념·도구 등)
+    + 관계 추출 ("A가 B를 사용한다", "C가 D에 영향")
+       ↓
+[4] 채팅 플랫폼 — 질문 시:
+    - 벡터 검색 (의미 가까운 chunk K개)
+    - 그래프 traversal (관련 엔티티 N hop 확장)
+    - 두 결과 합쳐 LLM 답변 생성</pre>
+
+  <h3><span class="step-num">3</span>선택 기준 — 언제 RAG · 언제 GraphRAG</h3>
+
+  <table>
+    <thead><tr><th>상황</th><th>추천</th></tr></thead>
+    <tbody>
+      <tr><td>사내 위키 · FAQ 검색</td><td>일반 RAG (충분)</td></tr>
+      <tr><td>"이 코드와 관련된 문서 다 보여줘"</td><td>일반 RAG</td></tr>
+      <tr><td>"이 인물·개념 주변 맥락 다 펼쳐줘"</td><td>GraphRAG</td></tr>
+      <tr><td>"A와 B가 어떻게 연결되어 있나?"</td><td>GraphRAG</td></tr>
+      <tr><td>"이 시스템 전체 구조 요약"</td><td>GraphRAG (community summary)</td></tr>
+      <tr><td>실시간 업데이트 잦은 자료</td><td>일반 RAG (재구성 비용 ↓)</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>실 운영 가이드</strong>: 대부분 시작은 RAG. 검색 품질이 한계에 부딪힐 때 (관계 질의 빈도 ↑) GraphRAG 도입. 처음부터 GraphRAG는 운영 부담 큼.</p>
+
+  <h3><span class="step-num">4</span>운영 한계 — 실제로 부딪힌 문제</h3>
+
+  <ul style="padding-left:22px;font-size:14.5px;">
+    <li><strong>검색 품질</strong> — 한국어 자료는 영어 벤치마크처럼 안 됨. 골든셋 직접 측정 필수.</li>
+    <li><strong>환각</strong> — GraphRAG가 관계를 잘못 추출하면 LLM이 그걸 사실로 인용. 그래프 lint 필요.</li>
+    <li><strong>유지보수</strong> — 새 자료 추가 시 그래프 재구성 비용 ↑. 증분 업데이트 어려움.</li>
+    <li><strong>LLM 호출 비용</strong> — 그래프 빌드 = 엔티티·관계 추출 LLM 호출 다수. 대규모 코퍼스에서 부담.</li>
+    <li><strong>한국어 엔티티 추출</strong> — 영어 모델은 한국어 엔티티를 자주 놓침. 사전·NER 모델 보정 필요.</li>
+  </ul>
+
+  <h3><span class="step-num">5</span>무료 GraphRAG 도구</h3>
+
+  <table>
+    <thead><tr><th>도구</th><th>특징</th><th>LLM 비용</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Microsoft GraphRAG</strong> (microsoft/graphrag)</td><td>공식 · 가장 성숙. community summary 패턴</td><td>OpenAI API 또는 로컬 모델 (Ollama)</td></tr>
+      <tr><td><strong>LightRAG</strong> (HKUDS/LightRAG)</td><td>경량 RAG + 그래프. 빠른 빌드</td><td>Ollama 로컬 가능</td></tr>
+      <tr><td><strong>cognee</strong> (topoteretes/cognee)</td><td>코드베이스·도메인 지식 그래프 특화</td><td>LLM 호출 필요</td></tr>
+      <tr><td><strong>Kùzu + 자체 빌드</strong></td><td>임베디드 그래프 DB만 — 빌드 직접</td><td>무료 (DB) + LLM 별도</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reference">
+    <p><strong>회사 환경 추천</strong> | <strong>1단계</strong>: 일반 RAG부터 (QMD/임베딩 시스템). <strong>2단계</strong>: 관계 질의 빈도가 많아지면 LightRAG (Ollama 로컬) 시도. <strong>3단계</strong>: 대규모 사내 데이터는 Microsoft GraphRAG. 처음부터 GraphRAG로 시작하지 않기.</p>
+  </div>
+</section>
+
+<!-- §4 11차시 로컬 RAG + QMD + 크론잡 -->
+<section id="ch11">
+  <span class="section-tag">§ 11차시 · 10:30 ~ 11:30 (60분)</span>
+  <h2><span class="accent">11차시</span> | 로컬 RAG + QMD + 크론잡 자동 인덱싱</h2>
+
+  <div class="goal">
+    <div class="goal-label">학습 목표</div>
+    <div class="goal-text"><strong>로컬 RAG 운영의 실제</strong> — 마크다운 폴더 + 임베딩 + 인덱스를 묶어 사내 자료 검색 시스템을 만들고, <strong>크론잡으로 자동 업데이트·임베딩</strong>까지 무인 운영. 외부 의존성 0, 토큰비 0.</div>
+  </div>
+
+  <h3><span class="step-num">1</span>로컬 RAG 전체 흐름</h3>
+  <p>9차시(임베딩) + 어제 5요소(특히 Memory + Skills)를 결합한 무인 운영 패턴:</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:16px 20px;border-radius:8px;font-size:13px;">[1] 자료 모음 (로컬 폴더 — 옵시디언 X 가능)
+    ├ wiki/        사내 위키 마크다운
+    ├ sessions/    Claude/Copilot 세션 로그
+    ├ designs/     기획서 · 설계 문서
+    └ raw/         원본 (PDF → MD 변환된 것)
+        ↓
+[2] QMD 인덱스 (SQLite + bge-m3 임베딩)
+    └ qmd update — 새/변경 파일만 증분 인덱싱
+        ↓
+[3] 검색
+    └ qmd search "쿼리"        키워드 (BM25)
+    └ qmd query  "쿼리"        의미 (cosine)
+    └ qmd get qmd://path       전문 조회
+        ↓
+[4] AI 활용
+    └ replay-learnings 스킬이 세션 시작 시 자동 회상
+    └ 새 작업 시 사내 자료 1차 검색 → 외부 2차</pre>
+
+  <h3><span class="step-num">2</span>QMD 운영 명령</h3>
+
+  <table>
+    <thead><tr><th>명령</th><th>역할</th></tr></thead>
+    <tbody>
+      <tr><td><code class="inline">qmd update</code></td><td>새/변경 파일만 증분 인덱싱 (전체 재계산 X)</td></tr>
+      <tr><td><code class="inline">qmd embed</code></td><td>임베딩만 재계산 (BM25 인덱스는 유지)</td></tr>
+      <tr><td><code class="inline">qmd search "쿼리" -n 5</code></td><td>키워드 검색 (BM25) — 상위 N개</td></tr>
+      <tr><td><code class="inline">qmd query "쿼리" -n 5</code></td><td>의미 검색 (cosine similarity) — 벡터 기반</td></tr>
+      <tr><td><code class="inline">qmd get qmd://path</code></td><td>특정 파일 전문 조회</td></tr>
+      <tr><td><code class="inline">qmd stats</code></td><td>인덱스 통계 (파일 수 · 임베딩 수 · 크기)</td></tr>
+    </tbody>
+  </table>
+
+  <p>실 예시 — 강사 환경에서 어제 세션 회상:</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">$ qmd search "POS 이상 탐지 elif chain" -n 3
+qmd://obsidian/30_Claude/01_Sessions/2026-05-13-pos-day2-handoff.md  0.93
+qmd://obsidian/30_Claude/02_Learnings/2026-05-12-day2-강의안-절대-규칙.md  0.78
+qmd://obsidian/30_Claude/04_Plans/plan-2026-05-10-rag-strategy.md   0.61</pre>
+
+  <h3><span class="step-num">3</span>크론잡 — 자동 업데이트 + 임베딩</h3>
+  <p>QMD를 무인 운영하는 핵심: <strong>크론잡</strong>으로 정기 자동 인덱싱.</p>
+
+  <div class="dual-track">
+    <div class="track instr">
+      <div class="track-h">Linux · macOS · WSL — crontab</div>
+      <pre># 매시간 새 파일 자동 인덱싱
+0 * * * * cd ~/notes && qmd update
+
+# 매일 새벽 3시 전체 임베딩 재계산
+0 3 * * * cd ~/notes && qmd embed --full
+
+# 매주 일요일 인덱스 통계 로그
+0 9 * * 0 qmd stats &gt;&gt; ~/qmd-weekly.log</pre>
+    </div>
+    <div class="track stu">
+      <div class="track-h">Windows — 작업 스케줄러</div>
+      <pre># PowerShell — 매시간 작업 등록
+$action = New-ScheduledTaskAction `
+  -Execute "qmd" -Argument "update" `
+  -WorkingDirectory "$env:USERPROFILE\notes"
+$trigger = New-ScheduledTaskTrigger `
+  -Once -At (Get-Date) `
+  -RepetitionInterval (New-TimeSpan -Hours 1)
+Register-ScheduledTask -TaskName "qmd-hourly-update" `
+  -Action $action -Trigger $trigger</pre>
+    </div>
+  </div>
+
+  <h4 style="margin-top:20px;">임베딩 조건 — 언제·무엇을</h4>
+  <ul style="padding-left:22px;font-size:14.5px;">
+    <li><strong>매시간</strong> — 새 파일 증분 인덱싱 (저비용 · 거의 즉시)</li>
+    <li><strong>매일</strong> — 변경된 파일의 임베딩 재계산 (자료 수정분 반영)</li>
+    <li><strong>매주</strong> — 전체 임베딩 재계산 (모델 업그레이드 후 또는 lint 후)</li>
+    <li><strong>이벤트 기반</strong> — git push hook으로 즉시 인덱싱 (CI 통합)</li>
+  </ul>
+
+  <div class="reference">
+    <p><strong>실 운영 예시</strong> | 강사 환경 — 옵시디언 볼트 988개 마크다운 파일을 시간당 크론잡으로 자동 인덱싱. 새 세션 시작 시 <code class="inline">replay-learnings</code> 스킬이 QMD에서 자동 회상. 토큰비 0원 · 외부 API 호출 0건.</p>
+  </div>
+
+  <h3><span class="step-num">4</span>옵시디언 없이 — 로컬 폴더만으로</h3>
+  <p>옵시디언을 안 써도 QMD는 그냥 마크다운 폴더 위에서 작동합니다. 환경변수만 본인 폴더로 지정:</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 본인 로컬 폴더 구조 (옵시디언 X)
+~/notes/
+├ wiki/         사내 위키
+├ sessions/     세션 로그
+├ designs/      기획서
+└ raw/          원본 자료
+
+# QMD가 이 폴더 전체를 인덱싱
+cd ~/notes
+qmd update
+qmd search "키워드" -n 5</pre>
+
+  <p>세션 메모 자동 저장은 <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank"><strong>claude-session-memory-kit</strong></a> (4 스킬 — session-handoff · replay-learnings · learn-rule · retro). <code class="inline">SESSION_MEMORY_PATH</code> 환경변수로 본인 로컬 폴더 지정.</p>
+</section>
+
+<!-- §5 12차시 모든 문서 마크다운화 + obsidian-cli + defuddle -->
+<section id="ch12">
+  <span class="section-tag">§ 12차시 · 11:30 ~ 12:30 (60분)</span>
+  <h2><span class="accent">12차시</span> | 모든 문서 → 마크다운 + obsidian-cli · defuddle</h2>
+
+  <div class="goal">
+    <div class="goal-label">학습 목표</div>
+    <div class="goal-text"><strong>PDF · HWP · DOCX · 웹페이지 등 모든 자료를 마크다운</strong>으로 변환해 RAG·임베딩의 균질한 입력 단위로 만드는 방법. <strong>obsidian-cli</strong> + <strong>defuddle</strong> + 비LLM AI 전처리 (OCR · 텍스트 마이닝) 조합.</div>
+  </div>
+
+  <h3><span class="step-num">1</span>왜 모든 문서를 마크다운으로?</h3>
+  <p>RAG·LLM 위키·QMD의 입력 단위는 마크다운입니다. 균질한 형식이어야 청킹·임베딩·검색이 일관됩니다.</p>
+
+  <table>
+    <thead><tr><th>원본</th><th>그대로 RAG에 넣으면</th><th>마크다운으로 변환하면</th></tr></thead>
+    <tbody>
+      <tr><td>PDF</td><td>레이아웃 정보 손실 + 표 깨짐</td><td>헤더·표·코드 블록 보존</td></tr>
+      <tr><td>웹페이지</td><td>광고·메뉴·푸터 노이즈</td><td>본문만 깨끗하게 추출 (defuddle)</td></tr>
+      <tr><td>HWP/DOCX</td><td>전용 파서 필요</td><td>표준 도구 체인 사용 가능</td></tr>
+      <tr><td>이미지·스캔본</td><td>임베딩 불가</td><td>OCR → 텍스트 → 마크다운</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step-num">2</span>자료 유형 → 마크다운 도구 매트릭스</h3>
+
+  <table>
+    <thead><tr><th>원본 유형</th><th>도구</th><th>출력 품질</th></tr></thead>
+    <tbody>
+      <tr><td><strong>웹페이지</strong></td><td><code class="inline">defuddle</code> (CLI · MCP) — 광고·메뉴 제거</td><td>★★★★★ 본문만 깔끔</td></tr>
+      <tr><td><strong>PDF (텍스트)</strong></td><td><code class="inline">marker</code> · <code class="inline">pdfminer</code> · <code class="inline">pymupdf4llm</code></td><td>★★★★ 표·코드 블록 보존</td></tr>
+      <tr><td><strong>PDF (스캔 이미지)</strong></td><td>OCR — Tesseract · PaddleOCR · Surya</td><td>★★★ 한국어는 PaddleOCR/Surya</td></tr>
+      <tr><td><strong>HWP / HWPX</strong></td><td><code class="inline">hwp-analyzer</code> · <code class="inline">pyhwp</code></td><td>★★★ 한국어 공문서</td></tr>
+      <tr><td><strong>DOCX / PPTX / XLSX</strong></td><td><code class="inline">pandoc</code> · <code class="inline">python-docx</code></td><td>★★★★ 표준 변환</td></tr>
+      <tr><td><strong>YouTube</strong></td><td><code class="inline">youtube-collector</code> — 자막·자동 transcript</td><td>★★★★</td></tr>
+      <tr><td><strong>이미지 (다이어그램)</strong></td><td>Claude Vision · GPT-4V → 마크다운 설명</td><td>★★★ LLM 전처리</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step-num">3</span>defuddle — 웹페이지 정제의 결정판</h3>
+  <p>URL을 던지면 광고·메뉴·푸터를 제거하고 <strong>본문만 깨끗한 마크다운</strong>으로 추출. WebFetch 대비 토큰 절약 효과 큼.</p>
+
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># CLI 직접 호출
+defuddle https://example.com/article
+
+# 또는 Claude Code MCP 스킬로
+"defuddle로 https://example.com/article 본문만 가져와줘"
+
+# 출력 예시
+---
+title: "기사 제목"
+author: "작성자"
+date: "2026-05-14"
+---
+본문 마크다운만... (메뉴·광고·푸터 제거)</pre>
+
+  <p><strong>활용 패턴</strong>: 외부 자료 리서치 시 defuddle로 본문 추출 → 로컬 <code class="inline">raw/</code> 폴더 저장 → QMD가 자동 인덱싱. 사내 자료처럼 검색 가능해짐.</p>
+
+  <h3><span class="step-num">4</span>obsidian-cli — 옵시디언 볼트 자동 조작</h3>
+  <p>옵시디언을 GUI 없이 CLI/AI로 조작. 자료 임포트 + 메타데이터 관리에 강함.</p>
+
+  <table>
+    <thead><tr><th>명령</th><th>역할</th></tr></thead>
+    <tbody>
+      <tr><td><code class="inline">obsidian-cli vault list</code></td><td>등록된 볼트 목록</td></tr>
+      <tr><td><code class="inline">obsidian-cli note create</code></td><td>새 노트 생성 (frontmatter 포함)</td></tr>
+      <tr><td><code class="inline">obsidian-cli note search</code></td><td>볼트 내 노트 검색</td></tr>
+      <tr><td><code class="inline">obsidian-cli tag</code></td><td>태그 관리 (추가·삭제·rename)</td></tr>
+      <tr><td><code class="inline">obsidian-cli link</code></td><td>위키 링크 자동 정합</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>defuddle + obsidian-cli 콤보</strong> — 외부 자료 자동 수집·저장 파이프라인:</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;"># 1. 웹페이지 본문 추출
+defuddle https://example.com/article &gt; /tmp/article.md
+
+# 2. 옵시디언 볼트에 저장 (frontmatter + 태그)
+obsidian-cli note create \
+  --vault MyVault \
+  --folder "10_Raw/01_Articles" \
+  --tags "AI,교육소재" \
+  --content-file /tmp/article.md
+
+# 3. QMD 인덱싱 (다음 크론잡에서 자동)
+# → 새 세션에서 qmd search로 회상</pre>
+
+  <h3><span class="step-num">5</span>비LLM AI 전처리 — OCR · 텍스트 마이닝</h3>
+  <p>마크다운화 전 단계 보조 도구. LLM 호출 없이 빠르게 전처리:</p>
+
+  <ul style="padding-left:22px;font-size:14.5px;">
+    <li><strong>OCR</strong> — Tesseract(영문) · PaddleOCR(한국어 강) · Surya(레이아웃 보존) · Donut(end-to-end)</li>
+    <li><strong>표·차트 추출</strong> — Camelot · Tabula · Microsoft Table Transformer</li>
+    <li><strong>수식 추출</strong> — pix2tex · MathPix (LaTeX 변환)</li>
+    <li><strong>텍스트 마이닝</strong> — KoNLPy(한국어 형태소) · spaCy · keyBERT(키워드) · BERTopic(토픽)</li>
+    <li><strong>감성 분석</strong> — KoBERT · 한국어 sentiment model (huggingface)</li>
+  </ul>
+
+  <p><strong>조합 패턴</strong> — 비LLM 전처리 + LLM 후처리:</p>
+  <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">[원본 PDF (스캔본)]
+   ↓ PaddleOCR (비LLM)
+[텍스트 + 레이아웃]
+   ↓ Camelot (비LLM)
+[표 데이터 별도 추출]
+   ↓ LLM 후처리 (구조화 · 요약)
+[깔끔한 마크다운] → 임베딩 → QMD</pre>
+
+  <div class="reference">
+    <p><strong>왜 비LLM 전처리?</strong> 토큰비 0 · 빠름 · 결정적 (deterministic). LLM은 마지막 요약·구조화 단계에만 쓰면 비용 효율 ↑. 회사 환경처럼 대량 자료 처리 시 필수 패턴.</p>
+  </div>
+
+  <h3><span class="step-num">6</span>Day 3 마무리 — 회사 적용 단계</h3>
+  <table>
+    <thead><tr><th>단계</th><th>액션</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1주차</strong></td><td>QMD 설치 + 본인 노트 폴더 인덱싱 시작</td></tr>
+      <tr><td><strong>2주차</strong></td><td>defuddle로 외부 자료 → 로컬 raw 폴더 자동 저장</td></tr>
+      <tr><td><strong>3주차</strong></td><td>크론잡 등록 — 매시간 자동 업데이트</td></tr>
+      <tr><td><strong>4주차</strong></td><td>session-memory-kit 4 스킬 추가 — 세션 자동 회상</td></tr>
+      <tr><td><strong>2개월</strong></td><td>PDF·HWP·DOCX 변환 파이프라인 + 비LLM 전처리</td></tr>
+      <tr><td><strong>3개월</strong></td><td>로컬 RAG → GraphRAG 단계적 도입 (필요 시)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="field-case">
+    오늘 만든 사이트는 라이브로 남아 있습니다. <strong>회사 적용 1단계는 QMD 설치 + 본인 노트 폴더 인덱싱</strong>부터. 옵시디언 없이도 일반 마크다운 폴더만 있으면 됩니다. Day 1~3 자료가 시간이 지나도 검색 가능한 자기 자산이 됩니다.
+  </div>
+</section>
+
+<!-- §부록 메타 — 도구함 -->
+<section id="meta">
+  <span class="section-tag">§ 부록 · 추가 도구함</span>
+  <h2>로컬 RAG · 메모리 · 자율 반복 — <span class="accent">참고 도구함</span></h2>
+  <p class="lead">강의 본 흐름 외 참고 도구. 본인 환경에 하나씩 도입해 보세요. 모두 오픈소스 · 무료.</p>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🌀</span>
+      <div><div class="plugin-name">Ouroboros (우로보로스)</div><div class="plugin-meta">Q00/ouroboros · Agent OS — 자기-진화 루프</div></div>
+    </div>
+    <p><strong>Interview → Seed → Execute → Evaluate → 진화 루프</strong>. 매 사이클이 다음 사이클의 입력이 되어 시스템이 본인이 만드는 걸 점점 정확히 이해. Socratic Clarity (모호함 ≤ 0.2까지 질문) · Ontological Precision (증상 X · 근본 문제). MCP 서버 자동 발견 (<code class="inline">~/.ouroboros/mcp_servers.yaml</code>). 한국어 README 제공.</p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">📚</span>
+      <div><div class="plugin-name">OpenKB</div><div class="plugin-meta">VectifyAI/OpenKB · Karpathy LLM Wiki CLI 구현 (★ 1.2k)</div></div>
+    </div>
+    <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">mkdir my-kb && cd my-kb
+openkb init
+openkb add paper.pdf
+openkb add ~/papers/    # 폴더 전체 추가
+openkb query "내 노트 중 X 관련?"</pre>
+    <p style="font-size:13px;color:#555;margin-top:8px;">Apache-2.0 · Python · Karpathy의 "LLM Wiki" 트윗을 CLI로 구현. 옵시디언 없이 그냥 폴더 + CLI 만으로 LLM Wiki 운영.</p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🪨</span>
+      <div><div class="plugin-name">Caveman</div><div class="plugin-meta">JuliusBrussee/caveman · 토큰 65~75% 절감 (Claude Code 스킬)</div></div>
+    </div>
+    <p>"동굴인처럼 말하기" — AI 출력을 짧고 핵심만으로 강제. 같은 기술적 정확도 유지하면서 토큰 비용 ↓. <strong>Levels</strong>: lite (필러만 제거) · full (기본 caveman) · ultra (전보 스타일) · wenyan (고전 한문 — 가장 짧음).</p>
+    <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;">npx skills add JuliusBrussee/caveman</pre>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">✨</span>
+      <div><div class="plugin-name">Impeccable</div><div class="plugin-meta">pbakaus/impeccable · AI 하네스를 더 좋은 디자이너로</div></div>
+    </div>
+    <p>AI가 생성한 디자인의 품질을 lint 보고서로 평가. AI 슬롭 패턴 자동 감지 — 일관성·계층·간격 등. <a href="https://github.com/pbakaus/impeccable" target="_blank">impeccable on GitHub</a>.</p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🧠</span>
+      <div><div class="plugin-name">agentmemory</div><div class="plugin-meta">rohitg00/agentmemory · 4-tier 메모리 + 12 hooks + 51 MCP tools</div></div>
+    </div>
+    <p>인간 뇌 처리 영감 (Working · Episodic · Semantic · Procedural) + BM25 + 벡터 + 그래프 RRF 검색. <strong>95.2% R@5 (LongMemEval-S)</strong>.</p>
+    <table style="font-size:13px;">
+      <thead><tr><th>환경</th><th>호환성</th><th>설치 난이도</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Code · Cursor · Gemini CLI</td><td>✅ 직접 지원</td><td>쉬움 — <code class="inline">npx @agentmemory/agentmemory</code></td></tr>
+        <tr><td>Copilot CLI</td><td>❌ 직접 X · REST API 우회</td><td>어려움 — <code class="inline">curl POST /agentmemory/observe</code></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;color:#555;">→ <strong>Copilot 사용자는 우로보로스 + OpenKB 조합 대안 권장</strong>. 본격 메모리는 Claude Code 환경.</p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">💾</span>
+      <div><div class="plugin-name">claude-session-memory-kit</div><div class="plugin-meta">daniel8824-del · 4 스킬 — 옵시디언 없이 로컬 폴더</div></div>
+    </div>
+    <p><strong>session-handoff · replay-learnings · learn-rule · retro</strong> — Claude Code 세션을 가로질러 저장하고 이어가는 핵심 도구.</p>
+    <pre style="background:#1a1a1a;color:#f0f0f0;padding:12px 16px;border-radius:6px;font-size:13px;"># 환경변수만 본인 로컬 폴더로 (옵시디언 X)
+export SESSION_MEMORY_PATH="$HOME/.claude/memory"
+
+# 폴더 구조 (자동 생성)
+$SESSION_MEMORY_PATH/
+├ sessions/    ← session-handoff 저장
+├ learnings/   ← learn-rule 저장
+└ retros/      ← retro 저장</pre>
+    <p style="font-size:13px;color:#555;"><a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank">github.com/daniel8824-del/claude-session-memory-kit</a></p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">♻️</span>
+      <div><div class="plugin-name">autoresearch</div><div class="plugin-meta">Karpathy 패턴 · 자율 반복 프로토콜</div></div>
+    </div>
+    <p><strong>modify → verify → keep/discard → repeat</strong> (bounded). 측정 가능한 메트릭이 있는 모든 작업에 적용 가능. 자율 버그 헌팅 · 다중 라운드 최적화에 강함.</p>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-h"><span class="plugin-icon">🤝</span>
+      <div><div class="plugin-name">pro-workflow (LAYER 6 — Memory 보정)</div><div class="plugin-meta">rohitg00/pro-workflow · ★ 2K</div></div>
+    </div>
+    <p><strong>session-handoff · replay-learnings · learn-rule · vault-save</strong> — 세션 간 학습·교훈 누적 패턴. claude-session-memory-kit이 이 패턴의 로컬 폴더 버전.</p>
+  </div>
+
+  <div class="reference">
+    <p><strong>Day 1~3 강의 자료 허브</strong><br>
+      • <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 — 하네스 카탈로그</a><br>
+      • <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 — 하네스 5요소 + Superpowers</a><br>
+      • <a href="https://daniel8824-del.github.io/claude-skill-catalog/" target="_blank">claude-skill-catalog — 134 스킬</a><br>
+      • <a href="https://daniel8824-del.github.io/claude-wiki-verbs/" target="_blank">claude-wiki-verbs — 9-verb 위키 패턴</a></p>
+  </div>
+</section>
+
+<!-- §7 실습 자료 -->
+<section id="dl">
+  <span class="section-tag">§ 실습 자료</span>
+  <h2>다운로드</h2>
+  <p class="lead">Day 3은 별도 데이터 파일 없이 본인 노트·문서로 진행합니다. Day 2 자료는 <a href="https://daniel8824-del.github.io/pos-day2/#dl" target="_blank">Day 2 사이트</a>에서.</p>
+
+  <div class="reference">
+    <p><strong>본인 환경 준비</strong> | 본인 마크다운 노트 폴더 (옵시디언이든 일반 폴더든) · Claude Code 또는 Copilot CLI · gstack (어제 설치) · Codex CLI (선택).</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>
+      <strong>Day 3 교재 | 로컬 RAG + QMD + 크론잡 + 마크다운화 + obsidian-cli/defuddle</strong> · 2026-05-14<br>
+      4차시 30+45+45+45+45 = 210분 (09:00 ~ 12:30).
+    </p>
+    <p class="muted">
+      Repo: <a href="https://github.com/daniel8824-del/rag-day3" target="_blank">github.com/daniel8824-del/rag-day3</a> ·
+      어제: <a href="https://daniel8824-del.github.io/pos-day2/" target="_blank">Day 2 — 하네스 5요소 + Superpowers</a> ·
+      그제: <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">Day 1 — 하네스 카탈로그</a><br>
+      외부 출처: <a href="https://github.com/garrytan/gstack" target="_blank">gstack</a> · <a href="https://github.com/Q00/ouroboros" target="_blank">Q00/ouroboros</a> · <a href="https://github.com/VectifyAI/OpenKB" target="_blank">VectifyAI/OpenKB</a> · <a href="https://github.com/JuliusBrussee/caveman" target="_blank">JuliusBrussee/caveman</a> · <a href="https://github.com/pbakaus/impeccable" target="_blank">pbakaus/impeccable</a> · <a href="https://github.com/rohitg00/agentmemory" target="_blank">rohitg00/agentmemory</a> · <a href="https://github.com/daniel8824-del/claude-session-memory-kit" target="_blank">claude-session-memory-kit</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

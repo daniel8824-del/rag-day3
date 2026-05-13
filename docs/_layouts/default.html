@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} · Day 2</title>
+<meta name="description" content="강사 본인 운영 중인 하네스 시스템 — Day 2 풀스택 5단계 + POS 상권분석">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666;
+    --accent: #00b4d8;
+    --accent-dark: #0077b6;
+    --accent-soft: #e0f4fa;
+    --border: #e0e0e0;
+    --code-bg: #f7f7f7;
+    --highlight: #fff8d4;
+    --red: #c92a2a;
+    --green: #2d6a4f;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0; padding: 0;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  code, pre { font-family: 'JetBrains Mono', 'Consolas', monospace; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  nav.topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    background: white;
+    position: sticky; top: 0; z-index: 100;
+  }
+  nav.topbar .container {
+    display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center;
+    max-width: 1320px; font-size: 12.5px;
+  }
+  nav.topbar a { color: var(--accent-dark); text-decoration: none; }
+  nav.topbar a:hover { text-decoration: underline; }
+  nav.topbar .brand { font-weight: 700; color: var(--fg); margin-right: 10px; }
+
+  .page-header {
+    padding: 50px 0 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header .crumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent-dark);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px;
+  }
+  .page-header .crumb a { color: var(--accent-dark); text-decoration: none; }
+  .page-header h1 {
+    font-size: 38px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em;
+  }
+
+  .markdown-body { padding: 32px 0 80px; }
+  .markdown-body > h1:first-child { display: none; }
+  .markdown-body h2 {
+    font-size: 24px; font-weight: 700; margin: 40px 0 14px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border); letter-spacing: -0.01em;
+  }
+  .markdown-body h3 { font-size: 18px; font-weight: 700; margin: 28px 0 10px; }
+  .markdown-body p { margin: 0 0 14px; }
+  .markdown-body code {
+    background: var(--code-bg); padding: 1px 6px; border-radius: 2px;
+    font-size: 13px; border: 1px solid var(--border);
+  }
+  .markdown-body pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    padding: 14px 18px; border-radius: 3px; overflow-x: auto;
+    font-size: 13px; line-height: 1.55; margin: 16px 0;
+  }
+  .markdown-body pre code { background: none; padding: 0; border: none; font-size: 13px; }
+  .markdown-body table {
+    width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;
+  }
+  .markdown-body table th, .markdown-body table td {
+    text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  .markdown-body table th {
+    font-weight: 700; font-size: 12px; text-transform: uppercase;
+    color: var(--muted); border-bottom: 2px solid var(--fg); background: var(--code-bg);
+  }
+  .markdown-body ul, .markdown-body ol { padding-left: 22px; margin: 8px 0 16px; }
+  .markdown-body ul li, .markdown-body ol li { margin-bottom: 5px; }
+  .markdown-body blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 10px 16px; margin: 16px 0;
+    background: var(--code-bg); color: var(--muted);
+  }
+  .markdown-body blockquote p { margin: 0; }
+  .markdown-body a {
+    color: var(--accent-dark); text-decoration: underline; text-underline-offset: 2px;
+  }
+  .markdown-body strong { font-weight: 700; color: var(--fg); }
+
+  footer {
+    padding: 40px 0 60px; border-top: 2px solid var(--fg);
+    font-size: 14px; color: var(--muted); margin-top: 40px;
+  }
+  footer a { color: var(--accent-dark); }
+  footer .muted { font-size: 12px; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="container">
+    <span class="brand"><a href="./" style="color: var(--fg); text-decoration: none;">Day 2 · POS 풀스택</a></span>
+    <a href="./#video">영상</a>
+    <a href="./#comics">만화</a>
+    <a href="./#timeline">강의 흐름</a>
+    <a href="./#practice">실습 자료</a>
+    <a href="./#tools">도구</a>
+    <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">하네스 카탈로그</a>
+    <a href="https://github.com/daniel8824-del/claude-pos-fullstack-day2" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="page-header">
+    <p class="crumb">
+      <a href="./">Day 2 · POS 풀스택</a> / {{ page.title }}
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}<p style="font-size: 16px; color: var(--muted); margin-top: 8px;">{{ page.subtitle }}</p>{% endif %}
+  </header>
+
+  <article class="markdown-body">
+    {{ content }}
+  </article>
+</div>
+
+<footer>
+  <div class="container">
+    <p>
+      <strong>Day 2 — 풀스택 5단계 + POS 상권분석</strong> · 2026-05-13<br>
+      만화 8컷 + 영상 2개 + 실습 7종 — 270분 강의 자료.
+    </p>
+    <p class="muted">
+      Repo: <a href="https://github.com/daniel8824-del/claude-pos-fullstack-day2" target="_blank">github.com/daniel8824-del/claude-pos-fullstack-day2</a> · 어제 자료: <a href="https://daniel8824-del.github.io/claude-harness-catalog/" target="_blank">claude-harness-catalog</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

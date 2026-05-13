@@ -1,0 +1,17 @@
+title: Day 2 — 풀스택 5단계 + POS 상권분석
+description: 강사 본인 운영 중인 하네스 시스템 — Day 2 실습 자료, 만화 8컷, 영상 2개
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: /:basename
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+exclude:
+  - README.md
+  - "*.gemspec"
+  - "Gemfile*"
