@@ -793,26 +793,42 @@ git clone https://github.com/garrytan/gstack `
 
   <p style="font-size:13px;color:#555;">각 단계 ~3분. 본인 주제가 작아도 OK — 카테고리 흐름을 한 사이클 체험하는 게 목적. 깊이는 다음 차시부터.</p>
 
-  <h4 style="margin-top:20px;">실 시연 — 공개 데모 사이트로 ④ QA 단계 (the-internet 표준 QA 데모)</h4>
-  <p style="font-size:13px;color:#555;">QA 테스트 표준 공개 데모. 가짜 자격증명 제공(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>). 본인 회사 사이트로 바꾸려면 URL과 폼 셀렉터만 교체.</p>
+  <h4 style="margin-top:20px;">도구 작동 시연 — <code class="inline">browse</code> 명령이 어떻게 흘러가는지 (QA 표준 데모 사이트)</h4>
+  <p style="font-size:13px;color:#555;"><strong>이건 실습 주제가 아니라 도구 작동 학습용입니다.</strong> 공개 QA 표준 데모(<a href="https://the-internet.herokuapp.com/login" target="_blank">the-internet.herokuapp.com</a>) + 가짜 자격증명(<code class="inline">tomsmith</code> / <code class="inline">SuperSecretPassword!</code>)으로 <code class="inline">browse</code> 5단계 흐름이 어떻게 작동하는지 한 번 따라보세요. 나중에 본인 주제(또는 회사 사이트)에 적용 시 URL과 셀렉터만 교체.</p>
+
+  <p><strong>5단계 흐름</strong> — 각 명령이 하는 일:</p>
+  <ul style="padding-left:22px;font-size:14.5px;">
+    <li><code class="inline">goto URL</code> — 헤드리스 브라우저로 페이지 이동</li>
+    <li><code class="inline">snapshot -i</code> — 페이지의 모든 인터랙티브 요소를 <code class="inline">@e1</code>, <code class="inline">@e2</code>... 식별자로 자동 탐지·매핑</li>
+    <li><code class="inline">fill @id "값"</code> — 식별자에 해당하는 input·textarea에 값 입력</li>
+    <li><code class="inline">click @id</code> — 버튼·링크 클릭 + 페이지 전환 자동 대기</li>
+    <li><code class="inline">screenshot path</code> — 현재 화면 캡처 (검증·증거 보존)</li>
+  </ul>
+
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">B="$HOME/.copilot/skills/gstack/browse/dist/browse"
 
-# 1. 사이트 이동
+# 1. 사이트 이동 — 헤드리스 브라우저 페이지 로드
 $B goto https://the-internet.herokuapp.com/login
 
-# 2. 로그인 폼 요소 자동 탐지
+# 2. 페이지 스냅샷 — 로그인 폼 요소 자동 탐지 (@username · @password · @submit 매핑)
 $B snapshot -i
 
-# 3. 로그인 정보 입력 + 클릭
+# 3. 폼 입력 — 식별자로 input에 값 채우기
 $B fill @username "tomsmith"
 $B fill @password "SuperSecretPassword!"
+
+# 4. 버튼 클릭 — 페이지 전환 자동 대기 (네트워크 idle까지)
 $B click @submit
 
-# 4. 로그인 후 스크린샷
+# 5. 캡처 — 결과 페이지 스크린샷 (검증 증거)
 $B screenshot /tmp/login-success.png
 
 # 결과: ✅ /login → /secure 정상 이동
 #       ✅ "You logged into a secure area!" 메시지 확인</pre>
+
+  <div class="reference">
+    <p><strong>본인 주제에 적용 시</strong> — 위 5단계 흐름은 그대로 두고 URL(<code class="inline">goto ...</code>) + 셀렉터 이름(<code class="inline">@username</code> 등)만 본인 환경에 맞게 교체. <code class="inline">snapshot -i</code>는 어떤 사이트에서든 자동으로 식별자를 만들어주니, 처음 한 번 출력 확인해서 어떤 id가 어떤 요소인지 파악하면 됩니다.</p>
+  </div>
 
   <h4 style="margin-top:18px;">실 시연 — ⑤ 보안 감사 (Day 2 미완료)</h4>
   <pre style="background:#1a1a1a;color:#f0f0f0;padding:14px 18px;border-radius:8px;font-size:13px;">copilot skill gstack /cso
