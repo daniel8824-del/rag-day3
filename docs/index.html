@@ -620,16 +620,19 @@
       <div class="step-label">① 스킬 폴더 생성</div>
       <pre>mkdir -p ~/.copilot/skills</pre>
       <div class="step-label">② gstack clone</div>
-      <pre>git clone https://github.com/garrytan/gstack ~/.copilot/skills/gstack</pre>
+      <pre>git clone https://github.com/garrytan/gstack \
+  ~/.copilot/skills/gstack</pre>
       <div class="step-label">③ 자동 인식 확인 (재시작 불필요)</div>
       <pre>copilot skill gstack /qa</pre>
     </div>
     <div class="track stu">
       <div class="track-h">Windows 네이티브 (PowerShell)</div>
       <div class="step-label">① 스킬 폴더 생성</div>
-      <pre>New-Item -ItemType Directory -Path "$env:USERPROFILE\.copilot\skills" -Force</pre>
+      <pre>New-Item -ItemType Directory `
+  -Path "$env:USERPROFILE\.copilot\skills" -Force</pre>
       <div class="step-label">② gstack clone</div>
-      <pre>git clone https://github.com/garrytan/gstack "$env:USERPROFILE\.copilot\skills\gstack"</pre>
+      <pre>git clone https://github.com/garrytan/gstack `
+  "$env:USERPROFILE\.copilot\skills\gstack"</pre>
     </div>
   </div>
 
