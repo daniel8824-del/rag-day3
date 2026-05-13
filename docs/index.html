@@ -940,7 +940,8 @@ cp -r ~/tmp/csmk/{session-handoff,learn-rule} ~/.copilot/skills/</pre>
     <div class="track stu">
       <div class="track-h">터미널 직접 (Windows PowerShell)</div>
       <pre># 한 줄 설치 (관리자 권장)
-irm https://raw.githubusercontent.com/doraemonkeys/qmd-windows/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/doraemonkeys/qmd-windows/main/install.ps1 `
+  | iex
 
 # 확인
 qmd --version
