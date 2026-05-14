@@ -1342,6 +1342,79 @@ qmd query "방금 글이 다룬 주제는?" -c my-notes
   </div>
 </section>
 
+
+<!-- §8 강의 보강 — QMD 로컬 RAG 리포트 + 영상 -->
+<section id="local-rag-report">
+  <span class="section-tag">§ 강의 보강 · 2026-05-14</span>
+  <h2><span class="accent">QMD를 활용한 로컬 RAG의 장점</span> | 리포트 + 영상</h2>
+  <p class="lead">강의 라이브 시연으로 만든 보강 자료. QMD · GBrain · Graphify 3-Layer 직교 협력 + 강사 vault 실측 케이스 + 외부 RAG 대비 연 ~$870 비용 절감 근거.</p>
+
+  <div class="video-frame">
+    <video controls preload="metadata">
+      <source src="videos/video5-qmd-local-rag-1min.mp4" type="video/mp4">
+      브라우저가 영상을 지원하지 않습니다.
+    </video>
+    <div class="video-meta">
+      <span class="label">영상 ⑤ · 60초</span>
+      <strong>QMD 로컬 RAG — 본인 PC에서 0원 + 데이터 로컬 보존</strong>
+    </div>
+  </div>
+
+  <h3><span class="step-num">1</span>핵심 5점 요약</h3>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:30%;"><col style="width:70%;"></colgroup>
+    <thead><tr><th>장점</th><th>한 줄</th></tr></thead>
+    <tbody>
+      <tr><td><strong>① 0원 · 0 토큰</strong></td><td>외부 API 0건, 로컬 SQLite + bge-m3 임베딩</td></tr>
+      <tr><td><strong>② 다국어 무료</strong></td><td>bge-m3 (한·영·일·중) 기본 내장 → cross-lingual 검색</td></tr>
+      <tr><td><strong>③ 1줄 시작</strong></td><td><code class="inline">qmd query "..."</code> 한 줄로 BM25 + 벡터 + reranker 통합</td></tr>
+      <tr><td><strong>④ 데이터 로컬 보존</strong></td><td>회사 노트 · 고객 정보 외부 유출 0건 (보안 감사 통과 쉬움)</td></tr>
+      <tr><td><strong>⑤ 3-Layer 협력</strong></td><td>QMD (default 무료) → GBrain (한글 보강) → Graphify (community · god nodes · ~$0.5/월)</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step-num">2</span>강사 vault 실측 (2026-05-14)</h3>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:34%;"><col style="width:33%;"><col style="width:33%;"></colgroup>
+    <thead><tr><th>지표</th><th>값</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td><strong>QMD 인덱싱 파일</strong></td><td>2,215 (.md)</td><td>obsidian 컬렉션</td></tr>
+      <tr><td><strong>임베딩 chunks</strong></td><td>239 신규</td><td>본 세션 갱신</td></tr>
+      <tr><td><strong>임베딩 시간</strong></td><td><strong>1분 47초</strong></td><td>embeddinggemma-300M-Q8 (1024차원, 로컬 추론)</td></tr>
+      <tr><td><strong>외부 API 호출</strong></td><td><strong>0건</strong></td><td>전부 로컬</td></tr>
+      <tr><td><strong>Graphify 그래프</strong></td><td>4,511 nodes / 6,952 edges / 189 communities</td><td>EXTRACTED 88% · INFERRED 12%</td></tr>
+      <tr><td><strong>God nodes 상위</strong></td><td>Claude Code 83 · Harness 80 · Hermes 74 · QMD 43 · Graphify 46</td><td>운영 도메인 정렬 검증</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="step-num">3</span>외부 RAG vs 로컬 QMD 비용 비교 (1년)</h3>
+  <table style="font-size:13px;">
+    <colgroup><col style="width:34%;"><col style="width:33%;"><col style="width:33%;"></colgroup>
+    <thead><tr><th>항목</th><th>외부 RAG</th><th>로컬 QMD (+ Graphify)</th></tr></thead>
+    <tbody>
+      <tr><td>임베딩 호출비</td><td>$2.5 초기 + $0.25/월</td><td>0원</td></tr>
+      <tr><td>벡터 DB 호스팅</td><td>$70/월 (Pinecone Starter)</td><td>0원 (SQLite)</td></tr>
+      <tr><td>Reranker API</td><td>$2/월 (Cohere)</td><td>0원 (qmd 내장)</td></tr>
+      <tr><td>Graphify LLM 빌드</td><td>–</td><td>~$0.5/월</td></tr>
+      <tr><td><strong>연 합산</strong></td><td><strong>~$870</strong></td><td><strong>~$6 (혹은 0원)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px;color:#555;">→ 본인 노트가 100 ~ 5만 파일 사이라면 QMD를 1차로, 보강이 필요할 때만 GBrain·Graphify를 얹는 것이 <strong>최소 비용·최대 자율</strong>의 운영 안. 5만 파일 이상이면 Pinecone 등 외부 인프라 검토.</p>
+
+  <ul class="dl" style="margin-top:24px;">
+    <li>
+      <code>qmd-local-rag-advantages-report.md</code>
+      <span class="dl-desc">11KB · 8 섹션 · 한·영 혼합 | QMD 7장점 + 3-Layer 협력 + 강사 vault 실측 + 비용 비교 + 한계·보완</span>
+      <a class="dl-btn" href="downloads/qmd-local-rag-advantages-report.md" download>전체 리포트 다운로드</a>
+    </li>
+  </ul>
+
+  <div class="reference">
+    <p><strong>출처</strong> | 강사 본인 vault QMD 인덱싱 (obsidian 컬렉션) + Graphify graph_stats (4511 nodes) + 선행 설계 문서 <code class="inline">design-2026-04-28-knowledge-system-chain.md</code> (3 backend 직교 layer) + tobi/qmd 원본 + bge-m3 (BAAI · Apache 2.0). 리포트 본문에 전체 출처 9건 명시.</p>
+  </div>
+</section>
+
 </div>
 
 <footer>
